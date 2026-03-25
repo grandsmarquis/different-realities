@@ -10,7 +10,7 @@ export const personas = [
   { id: "fourYearOldBoy", loadKey: "fourYearOldBoy", label: "4-Year-Old Boy", emoji: "🦖", description: "Playroom HQ: trains, block towers, and super important letters" },
   { id: "onPsychedelics", loadKey: "onPsychedelics", label: "On psychedelics", emoji: "🌈", description: "Maximum synesthesia: scanlines, vortex, marquee chaos, and inbox as cosmic joke." },
   { id: "popupChaos", loadKey: "popupChaos", label: "Popup apocalypse mode", emoji: "🪟", description: "Blinking chrome, marquees, and a swarm of windows — same inbox, weather, news, and stocks underneath the noise." },
-  { id: "grandmother", loadKey: "grandmother", label: "Grandmother", emoji: "👵", description: "Warm, cozy, like receiving a letter" },
+  { id: "grandmother", loadKey: "grandmother", label: "Grand-mère", emoji: "👵", description: "Warm, cozy, like receiving a letter" },
   { id: "firstIpodBrowser", loadKey: "firstIpodBrowser", label: "First-gen iPod “Web”", emoji: "🎧", description: "160×128 monochrome dreams. The whole internet, one wheel click at a time." },
   { id: "wii", loadKey: "wii", label: "Wii Menu", emoji: "📺", description: "Grab a remote. Your mail is a channel." },
   { id: "sixteenBoy", loadKey: "sixteenBoy", label: "You're 16 (boy era)", emoji: "🎮", description: "Neon basement HQ · quest inbox · lobby weather · side-quest news · stonks speedrun" },
@@ -169,6 +169,7 @@ export const personas = [
   { id: "instagramWeb", loadKey: "instagramWeb", label: "Photo app (parody)", emoji: "📸", description: "Parody social feed: stories for weather & headlines, feed & reels for news & stonks, DMs are your inbox." },
   { id: "fmBroadcaster", loadKey: "fmBroadcaster", label: "FM broadcaster", emoji: "📻", description: "Studio deck: ON AIR lamp, VU meters, RDS-style mail, dial stocks, news top-of-hour." },
   { id: "developer", loadKey: "developer", label: "Developer", emoji: "💻", description: "IDE workspace: file-tree inbox, TS editor, weather.json, package quotes, RSS panel, terminal." },
+  { id: "soonReplacedByAiDev", loadKey: "soonReplacedByAiDev", label: "Soon replaced by AI (dev)", emoji: "🤖", description: "Deprecation HUD: ticket inbox, streaming “AI summary,” WEATHER.runtime, CHANGELOG news, and positions-you-still-grok stonks — with amber panic chrome." },
   { id: "right-in-733tc0d3", loadKey: "rightIn733tc0d3", label: "Right in 733tc0d3", emoji: "🧡", description: "C0mp3titiv3-c0ding grind: pr0b73ms as inb0x, judg3 c7ust3r w3ath3r, discuss n3ws, b3nchmark tick3rs." },
   { id: "emacsMail", loadKey: "emacsMail", label: "Emacs mail", emoji: "🐃", description: "Gnus-style splits, *scratch* weather as Lisp, compilation stocks, RSS buffer — M-x butterfly included." },
   { id: "bobMarleyInbox", loadKey: "bobMarleyInbox", label: "Bob Marley inbox", emoji: "🎸", description: "Rasta stripes, vinyl vibe, irie weather & riddim stocks, world-a-reggae news (parody)." },
@@ -206,6 +207,7 @@ export const personas = [
   { id: "athlete", loadKey: "athlete", label: "Athlete", emoji: "🏃", description: "Training camp: track lanes, coach mail, outdoor session weather, sponsor tickers, wire news." },
   { id: "americanPatriot", loadKey: "americanPatriot", label: "American Patriot", emoji: "🦅", description: "Liberty, inbox, and the pursuit of notifications." },
   { id: "ukPatriot", loadKey: "ukPatriot", label: "UK patriot", emoji: "🇬🇧", description: "Proper post, proper weather chat, queue for the FTSE (metaphorically)." },
+  { id: "ukPrimeMinister", loadKey: "ukPrimeMinister", label: "UK Prime Minister", emoji: "🏛️", description: "No. 10 energy: red-box mail, division bells, lobby headlines & Treasury tickers — same data, full theatre." },
   { id: "amsterdamCoffeeshop", loadKey: "amsterdamCoffeeshop", label: "Amsterdam coffeeshop owner", emoji: "🌿", description: "Neon grachten-nacht, prijsbord-stocks, terrasweer & café-tv nieuws (parody)." },
   { id: "panicAttack", loadKey: "panicAttack", label: "Mid-panic grounding mode", emoji: "🫀", description: "Wobbly UI, square breathing, and your inbox — nothing here can hurt you." },
   { id: "lateForWork", loadKey: "lateForWork", label: "Late for work", emoji: "🏃", description: "Sprint-mode HUD, countdown panic, coffee physics, news ticker blur." },
@@ -224,7 +226,14 @@ export const personas = [
   { id: "ninetiesTvWeb", loadKey: "ninetiesTvWeb", label: "90s TV browser", emoji: "📺", description: "WebTV on a fuzzy CRT from the couch. Change the channel for mail, weather, news, and stocks." },
   { id: "year2000", loadKey: "year2000", label: "Year 2000 millennium", emoji: "✨", description: "Y2K chrome portal: IE window, bubble mesh, stock ticker, HotMail vibes, and a spinning “Y2K OK” seal." },
   { id: "elonMusk", loadKey: "elonMusk", label: "Elon Musk · mission control", emoji: "🚀", description: "Multiplanetary dashboard: rocket HUD, meme stocks, neural inbox, global sim feed." },
-  { id: "sourceCodeNet", loadKey: "sourceCodeNet", label: "Net as source code", emoji: "👁️‍🗨️", description: "The web decompiled: inbox as TS packets, weather as .env, news as XML, markets as Rust — matrix rain & recompile flashes." }
+  { id: "sourceCodeNet", loadKey: "sourceCodeNet", label: "Net as source code", emoji: "👁️‍🗨️", description: "The web decompiled: inbox as TS packets, weather as .env, news as XML, markets as Rust — matrix rain & recompile flashes." },
+  { id: "deathMetalLover", loadKey: "deathMetalLover", label: "Death metal lover", emoji: "🤘", description: "Infernal gig-poster HQ: lightning, setlist mail, corpse tickers & blasphemous headlines — same data, louder." },
+  { id: "yakuzaBoss", loadKey: "yakuzaBoss", label: "Yakuza boss (kumicho HQ)", emoji: "🐉", description: "Neon-noir family office parody: hanko mail, rainy harbor sky, CRT telop news, and turf tickers — same inbox, weather, news & stocks." },
+  { id: "startupFounder", loadKey: "startupFounder", label: "You are a startup founder", emoji: "🦄", description: "Pitch-deck war room: runway glow, hockey-stick charts, “deal flow” inbox, offsite weather & signal ticker — same data, founder brain." },
+  { id: "youAreARobot", loadKey: "youAreARobot", label: "You are a robot", emoji: "🤖", description: "Servo inbox, sensor weather, headline parsing, and stonks as torque curves — beep boop, mission nominal." },
+  { id: "aiChatbot", loadKey: "aiChatbot", label: "You are an AI chatbot", emoji: "💬", description: "ChatOS cockpit: prompts as inbox, tool calls for weather & stonks, RAG-flavored news — orb mascot, token sparkles, and optimistic lies." },
+  { id: "interpolWanted", loadKey: "interpolWanted", label: "Interpol wanted (parody)", emoji: "🌍", description: "Red-notice war room: radar mail, extraction weather, wire-tap news & frozen-asset tickers — same inbox, international drama." },
+  { id: "farmer", loadKey: "farmer", label: "Farmer", emoji: "🚜", description: "Homestead HQ: fence-post mail, sky & field weather, co-op radio news, and commodity-shed tickers — same data, dirt under the nails." },
 ]
 
 export const personaMap = Object.fromEntries(personas.map((p) => [p.id, p]))

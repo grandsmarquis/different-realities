@@ -1968,6 +1968,136 @@ body {
   animation: punkStripeDrift 6s linear infinite;
 }
 
+/* Death metal lover layout */
+@keyframes dmLightningFlash {
+  0%,
+  96%,
+  100% {
+    opacity: 0;
+  }
+  96.4% {
+    opacity: 0.55;
+  }
+  96.7% {
+    opacity: 0.12;
+  }
+  97.1% {
+    opacity: 0.35;
+  }
+}
+@keyframes dmFogShift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-2%, 1%, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+@keyframes dmEmberPulse {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translate3d(3%, 2%, 0) scale(1.08);
+  }
+}
+@keyframes dmPentagramDrift {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes dmSkullHeadbang {
+  0%,
+  100% {
+    transform: rotate(-8deg) translateY(0);
+  }
+  50% {
+    transform: rotate(8deg) translateY(2px);
+  }
+}
+@keyframes dmTitleShake {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(-1px, 0.5px, 0);
+  }
+  75% {
+    transform: translate3d(1px, -0.5px, 0);
+  }
+}
+@keyframes dmEqBar {
+  0%,
+  100% {
+    transform: scaleY(0.28);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes dmPickSpin {
+  from {
+    transform: rotate(-6deg);
+  }
+  to {
+    transform: rotate(6deg);
+  }
+}
+@keyframes dmSetlistGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--blood, #c41e1e) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 14px 0 color-mix(in srgb, var(--blood, #c41e1e) 28%, transparent);
+  }
+}
+.dm-lightning-flash {
+  animation: dmLightningFlash 7.5s ease-in-out infinite;
+}
+.dm-fog-shift {
+  animation: dmFogShift 22s ease-in-out infinite;
+}
+.dm-ember-pulse {
+  animation: dmEmberPulse 14s ease-in-out infinite;
+}
+.dm-pentagram-drift {
+  animation: dmPentagramDrift 140s linear infinite;
+}
+.dm-skull-headbang {
+  animation: dmSkullHeadbang 0.35s ease-in-out infinite;
+}
+.dm-title-shake {
+  animation: dmTitleShake 2.8s ease-in-out infinite;
+}
+.dm-eq-bar {
+  height: 100%;
+  transform-origin: bottom;
+  animation: dmEqBar 0.42s ease-in-out infinite;
+}
+.dm-pick-spin {
+  animation: dmPickSpin 1.2s ease-in-out infinite alternate;
+}
+.dm-setlist-glow:not(.dm-setlist-active) {
+  animation: dmSetlistGlow 4s ease-in-out infinite;
+}
+.dm-scroll-lyrics {
+  scrollbar-color: color-mix(in srgb, var(--sulfur, #e8c547) 45%, transparent) var(--pit, #1a0a12);
+}
+.dm-lyrics-rail {
+  scrollbar-gutter: stable;
+}
+
 /* Altered state layout */
 @keyframes alteredHue {
   0% {
@@ -5196,6 +5326,173 @@ button.tetris-row:hover:not([aria-current="true"]) {
 }
 .uk-patriot-modal-rise {
   animation: ukPatriotModalRise 0.35s ease-out both;
+}
+
+/* UK Prime Minister — No. 10 door, division lamps, dispatch drama */
+@keyframes ukPmDoorSheen {
+  0%,
+  100% {
+    opacity: 0.88;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.06);
+  }
+}
+.uk-pm-door-glow {
+  animation: ukPmDoorSheen 5s ease-in-out infinite;
+}
+@keyframes ukPmKnockerSway {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+.uk-pm-knocker {
+  animation: ukPmKnockerSway 2.8s ease-in-out infinite;
+  transform-origin: top center;
+}
+@keyframes ukPmMotesDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-8%, -12%, 0);
+  }
+}
+.uk-pm-bg-motes {
+  background-image: radial-gradient(circle at 20% 30%, rgba(251, 191, 36, 0.12) 0, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(34, 197, 94, 0.08) 0, transparent 35%),
+    radial-gradient(circle at 50% 80%, rgba(248, 113, 113, 0.06) 0, transparent 30%);
+  background-size: 120% 120%;
+  animation: ukPmMotesDrift 18s linear infinite alternate;
+}
+@keyframes ukPmDivisionPulse {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.65;
+    filter: brightness(1.35);
+  }
+}
+.uk-pm-division-lamp {
+  animation: ukPmDivisionPulse 1.8s ease-in-out infinite;
+}
+.uk-pm-division-lamp-delay {
+  animation-delay: 0.35s;
+}
+@keyframes ukPmTickerScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.uk-pm-ticker {
+  animation: ukPmTickerScroll 32s linear infinite;
+}
+@keyframes ukPmMaceTilt {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+.uk-pm-mace {
+  animation: ukPmMaceTilt 4s ease-in-out infinite;
+}
+@keyframes ukPmStampNudge {
+  0%,
+  100% {
+    transform: rotate(-2deg) scale(1);
+  }
+  50% {
+    transform: rotate(2deg) scale(1.03);
+  }
+}
+.uk-pm-stamp {
+  animation: ukPmStampNudge 3.2s ease-in-out infinite;
+}
+@keyframes ukPmCloudBob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.08);
+  }
+}
+.uk-pm-weather-cloud {
+  animation: ukPmCloudBob 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.35));
+}
+@keyframes ukPmGavelTap {
+  0%,
+  88%,
+  100% {
+    transform: rotate(0deg);
+  }
+  90% {
+    transform: rotate(-14deg);
+  }
+  92% {
+    transform: rotate(6deg);
+  }
+}
+.uk-pm-news-gavel {
+  display: inline-block;
+  animation: ukPmGavelTap 4s ease-in-out infinite;
+  transform-origin: 70% 90%;
+}
+@keyframes ukPmTerminalBlink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.35;
+  }
+}
+.uk-pm-terminal-blink {
+  animation: ukPmTerminalBlink 1.4s step-end infinite;
+}
+@keyframes ukPmModalRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.uk-pm-modal-rise {
+  animation: ukPmModalRise 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes ukPmBriefPulse {
+  0%,
+  100% {
+    opacity: 1;
+    letter-spacing: 0.28em;
+  }
+  50% {
+    opacity: 0.55;
+    letter-spacing: 0.38em;
+  }
+}
+.uk-pm-brief-pulse {
+  animation: ukPmBriefPulse 2.8s ease-in-out infinite;
 }
 
 /* Dyslexia-friendly focus stripe */
@@ -9000,6 +9297,163 @@ button.tetris-row:hover:not([aria-current="true"]) {
   animation: jpPatriotFujiShimmer 8s ease-in-out infinite;
 }
 
+/* Yakuza boss layout (kumicho HQ parody) */
+@keyframes yakuzaBossFog {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02) translate(1%, -0.5%);
+  }
+}
+.yakuza-boss-fog {
+  background:
+    radial-gradient(ellipse 85% 55% at 25% 100%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 52%),
+    radial-gradient(ellipse 70% 45% at 75% 95%, color-mix(in srgb, var(--accent3) 10%, transparent), transparent 48%),
+    radial-gradient(ellipse 50% 35% at 50% 0%, color-mix(in srgb, var(--accent2) 12%, transparent), transparent 55%);
+  animation: yakuzaBossFog 22s ease-in-out infinite;
+}
+
+@keyframes yakuzaBossRainFall {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 14px 120px;
+  }
+}
+.yakuza-boss-rain {
+  background-image:
+    repeating-linear-gradient(
+      100deg,
+      transparent,
+      transparent 3px,
+      color-mix(in srgb, var(--text) 6%, transparent) 3px,
+      color-mix(in srgb, var(--text) 6%, transparent) 4px
+    ),
+    repeating-linear-gradient(
+      105deg,
+      transparent,
+      transparent 8px,
+      color-mix(in srgb, var(--accent) 4%, transparent) 8px,
+      color-mix(in srgb, var(--accent) 4%, transparent) 9px
+    );
+  animation: yakuzaBossRainFall 0.65s linear infinite;
+}
+
+@keyframes yakuzaBossScan {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+.yakuza-boss-scanlines {
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.28) 2px, rgba(0, 0, 0, 0.28) 3px);
+  animation: yakuzaBossScan 6s linear infinite;
+}
+
+@keyframes yakuzaBossNeon {
+  0%,
+  100% {
+    text-shadow:
+      0 0 10px color-mix(in srgb, var(--accent3) 75%, transparent),
+      0 0 28px color-mix(in srgb, var(--accent) 35%, transparent);
+    filter: brightness(1);
+  }
+  45% {
+    text-shadow:
+      0 0 6px color-mix(in srgb, var(--accent3) 45%, transparent),
+      0 0 16px color-mix(in srgb, var(--accent) 22%, transparent);
+    filter: brightness(0.96);
+  }
+  52% {
+    text-shadow:
+      0 0 14px color-mix(in srgb, var(--accent3) 90%, transparent),
+      0 0 32px color-mix(in srgb, var(--accent) 45%, transparent);
+    filter: brightness(1.05);
+  }
+}
+.yakuza-boss-neon {
+  animation: yakuzaBossNeon 3.4s ease-in-out infinite;
+}
+
+@keyframes yakuzaBossTelopScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.yakuza-boss-telop-track {
+  display: flex;
+  width: max-content;
+  animation: yakuzaBossTelopScroll 48s linear infinite;
+}
+
+@keyframes yakuzaBossHanko {
+  0%,
+  100% {
+    transform: scale(1) rotate(-4deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+}
+.yakuza-boss-hanko {
+  animation: yakuzaBossHanko 3.5s ease-in-out infinite;
+}
+
+@keyframes yakuzaBossDragonDraw {
+  0%,
+  100% {
+    stroke-dashoffset: 340;
+    opacity: 0.35;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 0.7;
+  }
+}
+.yakuza-boss-dragon-path {
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: yakuzaBossDragonDraw 10s ease-in-out infinite;
+}
+
+@keyframes yakuzaBossWeatherGlow {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent2) 30%, transparent);
+  }
+  50% {
+    box-shadow: inset 0 0 24px color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+}
+.yakuza-boss-weather {
+  animation: yakuzaBossWeatherGlow 5s ease-in-out infinite;
+}
+
+@keyframes yakuzaBossStockPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.04);
+  }
+}
+.yakuza-boss-stock-row {
+  animation: yakuzaBossStockPulse 3.2s ease-in-out infinite;
+}
+
 /* North Korean patriot layout (parody broadcast terminal) */
 @keyframes nkPatriotStarSpin {
   from {
@@ -9150,6 +9604,15 @@ button.tetris-row:hover:not([aria-current="true"]) {
   .punk-skull-spin,
   .punk-flyer-wobble,
   .punk-stripe-drift,
+  .dm-lightning-flash,
+  .dm-fog-shift,
+  .dm-ember-pulse,
+  .dm-pentagram-drift,
+  .dm-skull-headbang,
+  .dm-title-shake,
+  .dm-eq-bar,
+  .dm-pick-spin,
+  .dm-setlist-glow,
   .altered-hue-slow,
   .altered-tunnel,
   .altered-jitter,
@@ -9364,6 +9827,18 @@ button.tetris-row:hover:not([aria-current="true"]) {
   .uk-patriot-weather-emoji,
   .uk-patriot-ceefax-blink,
   .uk-patriot-modal-rise,
+  .uk-pm-door-glow,
+  .uk-pm-knocker,
+  .uk-pm-bg-motes,
+  .uk-pm-division-lamp,
+  .uk-pm-ticker,
+  .uk-pm-mace,
+  .uk-pm-stamp,
+  .uk-pm-weather-cloud,
+  .uk-pm-news-gavel,
+  .uk-pm-terminal-blink,
+  .uk-pm-modal-rise,
+  .uk-pm-brief-pulse,
   .meditation-breath-orb,
   .meditation-fade-stagger,
   .apoc-crt-flicker,
@@ -10014,6 +10489,18 @@ button.tetris-row:hover:not([aria-current="true"]) {
   .uk-patriot-weather-emoji,
   .uk-patriot-ceefax-blink,
   .uk-patriot-modal-rise,
+  .uk-pm-door-glow,
+  .uk-pm-knocker,
+  .uk-pm-bg-motes,
+  .uk-pm-division-lamp,
+  .uk-pm-ticker,
+  .uk-pm-mace,
+  .uk-pm-stamp,
+  .uk-pm-weather-cloud,
+  .uk-pm-news-gavel,
+  .uk-pm-terminal-blink,
+  .uk-pm-modal-rise,
+  .uk-pm-brief-pulse,
   .clown-balloon,
   .clown-rainbow-text,
   .clown-honk-pop,
@@ -12336,6 +12823,241 @@ button.tetris-row:hover:not([aria-current="true"]) {
   }
   .boy16-xp-bar {
     background-size: 100% 100%;
+  }
+}
+
+/* Interpol wanted (parody) layout */
+@keyframes interpol-police-flash {
+  0%,
+  100% {
+    opacity: 0.85;
+    box-shadow: 0 0 24px rgba(220, 38, 38, 0.55);
+    background: linear-gradient(90deg, #dc2626, #b91c1c);
+  }
+  50% {
+    opacity: 0.9;
+    box-shadow: 0 0 24px rgba(37, 99, 235, 0.55);
+    background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  }
+}
+
+.interpol-police-bar {
+  animation: interpol-police-flash 1.4s ease-in-out infinite;
+}
+
+.interpol-police-bar-delay {
+  animation-delay: 0.7s;
+}
+
+.interpol-vignette {
+  background: radial-gradient(ellipse at 50% 35%, transparent 0%, rgba(3, 7, 18, 0.4) 55%, rgba(3, 7, 18, 0.92) 100%);
+}
+
+.interpol-scanlines {
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
+}
+
+@keyframes interpol-marquee-track {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.interpol-marquee-track {
+  width: max-content;
+  animation: interpol-marquee-track 32s linear infinite;
+}
+
+.interpol-badge-pulse {
+  animation: interpol-police-flash 2.2s ease-in-out infinite;
+}
+
+.interpol-clock {
+  animation: interpol-police-flash 3s ease-in-out infinite;
+  animation-direction: alternate;
+}
+
+@keyframes interpol-radar-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.interpol-radar {
+  animation: interpol-radar-spin 24s linear infinite;
+}
+
+.interpol-radar-slow {
+  animation-duration: 48s;
+  animation-direction: reverse;
+}
+
+@keyframes interpol-globe-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.5));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(220, 38, 38, 0.45));
+  }
+}
+
+.interpol-globe-ring {
+  animation: interpol-globe-pulse 3s ease-in-out infinite;
+}
+
+@keyframes interpol-core-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.interpol-globe-core {
+  animation: interpol-core-blink 1.2s ease-in-out infinite;
+}
+
+@keyframes interpol-wanted-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.3deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.3deg);
+  }
+}
+
+.interpol-wanted-card {
+  animation: interpol-wanted-float 7s ease-in-out infinite;
+}
+
+@keyframes interpol-scan-move {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.interpol-scan-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 28%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--accent2, #2563eb) 25%, transparent),
+    transparent
+  );
+  animation: interpol-scan-move 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes interpol-stamp-wobble {
+  0%,
+  100% {
+    transform: rotate(12deg) scale(1);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.03);
+  }
+}
+
+.interpol-stamp {
+  animation: interpol-stamp-wobble 2.8s ease-in-out infinite;
+}
+
+.interpol-mail-tap:active {
+  transform: scale(0.98);
+}
+
+@keyframes interpol-ticker-glint {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.interpol-ticker-row {
+  background: linear-gradient(90deg, transparent 40%, rgba(255, 255, 255, 0.04) 50%, transparent 60%);
+  background-size: 200% 100%;
+  animation: interpol-ticker-glint 5s ease infinite;
+}
+
+@keyframes interpol-news-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  48% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.88;
+  }
+  52% {
+    opacity: 1;
+  }
+}
+
+.interpol-news-blip {
+  animation: interpol-news-flicker 6s ease-in-out infinite;
+}
+
+.interpol-news-blip:nth-child(2n) {
+  animation-delay: 0.8s;
+}
+
+.interpol-news-blip:nth-child(3n) {
+  animation-delay: 1.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interpol-police-bar,
+  .interpol-police-bar-delay,
+  .interpol-marquee-track,
+  .interpol-badge-pulse,
+  .interpol-clock,
+  .interpol-radar,
+  .interpol-radar-slow,
+  .interpol-globe-ring,
+  .interpol-globe-core,
+  .interpol-wanted-card,
+  .interpol-scan-beam,
+  .interpol-stamp,
+  .interpol-ticker-row,
+  .interpol-news-blip {
+    animation: none !important;
+  }
+  .interpol-marquee-track {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
   }
 }
 

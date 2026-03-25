@@ -823,6 +823,11 @@ const personaColors = {
     accent: '#569cd6',
     text: '#d4d4d4',
   },
+  soonReplacedByAiDev: {
+    bg: 'radial-gradient(ellipse 90% 60% at 90% 0%, rgba(251, 191, 36, 0.22), transparent), linear-gradient(165deg, #0f1419 0%, #151c24 50%, #0c1014 100%)',
+    accent: '#fbbf24',
+    text: '#e2e8f0',
+  },
   'right-in-733tc0d3': {
     bg: 'linear-gradient(165deg, #050810 0%, #0a0e14 40%, #0d1117 100%)',
     accent: '#ffa116',
@@ -947,6 +952,11 @@ const personaColors = {
     bg: 'linear-gradient(165deg, #0c0a09 0%, #292524 50%, #1c1917 100%)',
     accent: '#d4af37',
     text: '#fafaf9',
+  },
+  youAreARobot: {
+    bg: 'linear-gradient(145deg, #0a0e14 0%, #0f1620 45%, #121a24 100%)',
+    accent: '#00e5ff',
+    text: '#c8e6ff',
   },
   doctor: {
     bg: 'linear-gradient(165deg, #ecfdf5 0%, #ccfbf1 50%, #e2e8f0 100%)',
@@ -1200,6 +1210,7 @@ const personaFonts = {
   sourceCodeNet: "'Fira Code', monospace",
   fmBroadcaster: "'Bebas Neue', sans-serif",
   developer: "'JetBrains Mono', monospace",
+  soonReplacedByAiDev: "'Space Grotesk', 'JetBrains Mono', monospace",
   'right-in-733tc0d3': "'JetBrains Mono', monospace",
   emacsMail: "'IBM Plex Mono', monospace",
   bobMarleyInbox: "'Lilita One', cursive",
@@ -1225,6 +1236,7 @@ const personaFonts = {
   youAreHangover: "'Instrument Serif', serif",
   youArePoor: "'Courier Prime', monospace",
   youAreRich: "'Playfair Display', serif",
+  youAreARobot: "'Orbitron', sans-serif",
   doctor: "'Libre Baskerville', serif",
   brokeStudent: "'Outfit', sans-serif",
   islandLost: "'Gelasio', serif",
