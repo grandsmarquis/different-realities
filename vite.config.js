@@ -4,4 +4,16 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    // Keep default code-splitting for personas; isolate heavy shared deps for cache hits
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          if (id.includes('recharts')) return 'recharts'
+          if (id.includes('react-dom') || id.includes('react-router')) return 'react-vendor'
+        },
+      },
+    },
+  },
 })

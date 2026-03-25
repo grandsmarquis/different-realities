@@ -1,0 +1,24 @@
+# Dependencies & outputs (reinstalled / rebuilt in image)
+node_modules
+dist
+
+# Git & editor
+.git
+.gitignore
+.cursor
+*.md
+
+# Logs & local env
+npm-debug.log*
+.env
+.env.*
+!.env.example
+
+# Tests & tooling (not needed for static build)
+coverage
+*.test.*
+*.spec.*
+
+# OS
+.DS_Store
+Thumbs.db
