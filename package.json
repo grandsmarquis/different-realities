@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate:personas": "node scripts/generate-persona-list.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
