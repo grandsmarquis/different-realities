@@ -45,8 +45,10 @@ function PersonaRoute() {
   }
 
   return (
-    <div className="persona-transition relative min-h-dvh">
-      <Layout onSwitchPersona={() => navigate('/')} />
+    <div className="persona-transition relative flex h-dvh max-h-dvh flex-col overflow-hidden">
+      <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pb-11 [scrollbar-gutter:stable]">
+        <Layout onSwitchPersona={() => navigate('/')} />
+      </div>
       <footer className="pointer-events-none fixed bottom-0 left-0 right-0 z-[100] flex w-full flex-row flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-base-content/10 bg-base-300/90 px-3 py-1.5 text-base-content backdrop-blur-sm min-h-0">
         <div className="flex items-center gap-0.5 pointer-events-auto">
           <button

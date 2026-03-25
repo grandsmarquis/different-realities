@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
 import { emails } from '../data/emails'
 import { weather } from '../data/weather'
@@ -11,6 +11,8 @@ const channel = t =>
 export default function Xbox360Layout({ onSwitchPersona }) {
   const { selectedEmail, setSelectedEmail } = useContext(PersonaContext)
   const [reducedMotion, setReducedMotion] = useState(false)
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0 })
+  const mainRef = useRef(null)
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -21,6 +23,19 @@ export default function Xbox360Layout({ onSwitchPersona }) {
   }, [])
 
   const readPct = Math.round((emails.filter(e => e.read).length / emails.length) * 100)
+
+  const onMainMove = useCallback(
+    e => {
+      if (reducedMotion || !mainRef.current) return
+      const r = mainRef.current.getBoundingClientRect()
+      const px = (e.clientX - r.left) / r.width - 0.5
+      const py = (e.clientY - r.top) / r.height - 0.5
+      setTilt({ rx: py * -7, ry: px * 9 })
+    },
+    [reducedMotion],
+  )
+
+  const onMainLeave = useCallback(() => setTilt({ rx: 0, ry: 0 }), [])
 
   const tickerText = useMemo(
     () =>
@@ -40,8 +55,16 @@ export default function Xbox360Layout({ onSwitchPersona }) {
         fontFamily: 'var(--font-main)',
       }}
     >
-      <div className="xbox2-bg-grid pointer-events-none fixed inset-0 z-0" aria-hidden />
-      <div className="xbox2-bg-sweep pointer-events-none fixed inset-0 z-0" aria-hidden />
+      <div className="xbox2-bg-layers pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+        <div className={`xbox2-bg-grid ${reducedMotion ? '' : 'xbox2-bg-grid-drift'}`} />
+        {!reducedMotion && (
+          <>
+            <div className="xbox2-bg-aurora" />
+            <div className="xbox2-bg-halo" />
+          </>
+        )}
+        <div className={`xbox2-bg-sweep ${reducedMotion ? 'xbox2-bg-sweep-static' : ''}`} />
+      </div>
 
       <header className="relative z-20 shrink-0 border-b-2 px-3 py-2.5 md:px-5 xbox2-topbar">
         <div className="flex flex-wrap items-center justify-between gap-3 max-w-[1600px] mx-auto">
@@ -135,37 +158,64 @@ export default function Xbox360Layout({ onSwitchPersona }) {
           </ul>
         </nav>
 
-        <main className="flex-1 flex flex-col min-w-0 min-h-0 p-3 md:p-5">
+        <main
+          ref={mainRef}
+          className="xbox2-main-stage flex-1 flex flex-col min-w-0 min-h-0 p-3 md:p-5"
+          style={{ perspective: reducedMotion ? 'none' : '1200px' }}
+          onMouseMove={onMainMove}
+          onMouseLeave={onMainLeave}
+        >
           {selectedEmail ? (
-            <article className="xbox2-reader flex flex-col flex-1 min-h-0 border-2 shadow-lg overflow-hidden" style={{ borderColor: 'color-mix(in srgb, var(--accent) 35%, transparent)' }}>
-              <div className={`xbox2-reader-chrome h-1 shrink-0 ${reducedMotion ? '' : 'xbox2-chrome-shimmer'}`} aria-hidden />
-              <div className="px-4 py-3 flex flex-wrap gap-3 items-start border-b border-base-content/10 bg-base-300/25">
-                <span className="text-4xl">{selectedEmail.from.avatar}</span>
-                <div className="flex-1 min-w-0">
-                  <h2 className="text-xl md:text-2xl font-bold leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
-                    {selectedEmail.subject}
-                  </h2>
-                  <p className="text-xs opacity-50 mt-1">
-                    {selectedEmail.from.name} · {selectedEmail.date}
-                  </p>
+            <div
+              className="xbox2-reader-3d flex flex-col flex-1 min-h-0"
+              style={{
+                transformStyle: 'preserve-3d',
+                transform: reducedMotion ? undefined : `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) translateZ(0)`,
+                transition: reducedMotion ? undefined : 'transform 0.1s ease-out',
+              }}
+            >
+              <article
+                className="xbox2-reader flex flex-col flex-1 min-h-0 border-2 shadow-lg overflow-hidden xbox2-reader-depth"
+                style={{ borderColor: 'color-mix(in srgb, var(--accent) 35%, transparent)' }}
+              >
+                <div className={`xbox2-reader-chrome h-1 shrink-0 ${reducedMotion ? '' : 'xbox2-chrome-shimmer'}`} aria-hidden />
+                <div className="px-4 py-3 flex flex-wrap gap-3 items-start border-b border-base-content/10 bg-base-300/25">
+                  <span className="text-4xl">{selectedEmail.from.avatar}</span>
+                  <div className="flex-1 min-w-0">
+                    <h2 className="text-xl md:text-2xl font-bold leading-tight" style={{ fontFamily: 'var(--font-display)' }}>
+                      {selectedEmail.subject}
+                    </h2>
+                    <p className="text-xs opacity-50 mt-1">
+                      {selectedEmail.from.name} · {selectedEmail.date}
+                    </p>
+                  </div>
+                  <span className="badge badge-outline badge-sm font-mono" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+                    {channel(selectedEmail.tag)}
+                  </span>
                 </div>
-                <span className="badge badge-outline badge-sm font-mono" style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}>
-                  {channel(selectedEmail.tag)}
-                </span>
-              </div>
-              <div className="flex-1 overflow-y-auto p-4 md:p-6 text-sm md:text-base leading-relaxed whitespace-pre-wrap opacity-90">
-                {selectedEmail.body}
-              </div>
-            </article>
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 text-sm md:text-base leading-relaxed whitespace-pre-wrap opacity-90">
+                  {selectedEmail.body}
+                </div>
+              </article>
+            </div>
           ) : (
-            <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-10 border-2 border-dashed border-base-content/15 rounded-sm xbox2-empty">
-              <p className="text-5xl mb-3 opacity-30" aria-hidden>
-                ⬆
-              </p>
-              <p className="text-base font-bold opacity-50" style={{ fontFamily: 'var(--font-display)' }}>
-                Select a message
-              </p>
-              <p className="text-xs opacity-35 mt-2 max-w-xs">{emails.length} items in your queue</p>
+            <div
+              className="xbox2-reader-3d flex flex-col flex-1 min-h-0 items-center justify-center"
+              style={{
+                transformStyle: 'preserve-3d',
+                transform: reducedMotion ? undefined : `rotateX(${tilt.rx * 0.6}deg) rotateY(${tilt.ry * 0.6}deg)`,
+                transition: reducedMotion ? undefined : 'transform 0.1s ease-out',
+              }}
+            >
+              <div className="flex flex-col items-center justify-center text-center px-6 py-10 border-2 border-dashed border-base-content/15 rounded-sm xbox2-empty xbox2-reader-depth w-full max-w-md">
+                <p className="text-5xl mb-3 opacity-30" aria-hidden>
+                  ⬆
+                </p>
+                <p className="text-base font-bold opacity-50" style={{ fontFamily: 'var(--font-display)' }}>
+                  Select a message
+                </p>
+                <p className="text-xs opacity-35 mt-2 max-w-xs">{emails.length} items in your queue</p>
+              </div>
             </div>
           )}
         </main>

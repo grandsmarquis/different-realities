@@ -1,3 +1,10 @@
+import indianRestaurant from './indianRestaurant'
+import bollywood from './bollywood'
+import plumber from './plumber'
+import magician from './magician'
+import fisherman from './fisherman'
+import surfer from './surfer'
+import gladiator from './gladiator'
 import grandmother from './grandmother'
 import teenager from './teenager'
 import office from './office'
@@ -42,6 +49,86 @@ import luxuryRealtor from './luxuryRealtor'
 import homeless from './homeless'
 import asmr from './asmr'
 import hypebeast from './hypebeast'
+import ness from './ness'
+import mushroomKingdom from './mushroomKingdom'
+import germanSoccerFan from './germanSoccerFan'
+import queenEngland from './queenEngland'
+import trump from './trump'
+import punk from './punk'
+import alteredState from './alteredState'
+import shibuyaHell from './shibuyaHell'
+import ebayMail from './ebayMail'
+import rainforestMail from './rainforestMail'
+import scammer from './scammer'
+import pizzaLover from './pizzaLover'
+import baby from './baby'
+import grandfather from './grandfather'
+import tetrisPlayer from './tetrisPlayer'
+import smurfFan from './smurfFan'
+import princess from './princess'
+import god from './god'
+import cowboy from './cowboy'
+import hobbit from './hobbit'
+import darthVador from './darthVador'
+import dubaiEmirate from './dubaiEmirate'
+import japaneseSakura from './japaneseSakura'
+import flowerLover from './flowerLover'
+import hystericKareen from './hystericKareen'
+import roadrager from './roadrager'
+import sexworker from './sexworker'
+import bankRobber from './bankRobber'
+import nftCollector from './nftCollector'
+import dealHunter from './dealHunter'
+import shyIntrovert from './shyIntrovert'
+import nostalgicElder from './nostalgicElder'
+import firstInternet from './firstInternet'
+import insomnia3am from './insomnia3am'
+import expertMode from './expertMode'
+import elderA11y from './elderA11y'
+import dyslexiaFriendly from './dyslexiaFriendly'
+import meditation from './meditation'
+import postApocalypse from './postApocalypse'
+import celebration from './celebration'
+import oneHandedMobile from './oneHandedMobile'
+import waitingRoomBoredom from './waitingRoomBoredom'
+import printedPaperMode from './printedPaperMode'
+import sixtySecondChallenge from './sixtySecondChallenge'
+import bossWalksBy from './bossWalksBy'
+import remindTomorrowMonths from './remindTomorrowMonths'
+import inboxZeroFantasy from './inboxZeroFantasy'
+import mexicanSombrero from './mexicanSombrero'
+import cowgirl from './cowgirl'
+import dominatrix from './dominatrix'
+import pineapplePizza from './pineapplePizza'
+import dogLover from './dogLover'
+import catLover from './catLover'
+import catReadingInbox from './catReadingInbox'
+import dogReadingInbox from './dogReadingInbox'
+import dinosaursStillAlive from './dinosaursStillAlive'
+import donaldDuckInbox from './donaldDuckInbox'
+import swissCheeseLover from './swissCheeseLover'
+import trader from './trader'
+import fmBroadcaster from './fmBroadcaster'
+import developer from './developer'
+import bobMarleyInbox from './bobMarleyInbox'
+import gasPricesRising from './gasPricesRising'
+import bitcoinCrashing from './bitcoinCrashing'
+import bitcoinMooning from './bitcoinMooning'
+import sectGuruInbox from './sectGuruInbox'
+import chineseRestaurantOwner from './chineseRestaurantOwner'
+import nflProPlayer from './nflProPlayer'
+import oldschoolInternet from './oldschoolInternet'
+import myspaceCom from './myspaceCom'
+import earlyFacebook from './earlyFacebook'
+import pixelArt from './pixelArt'
+import blackAndWhite from './blackAndWhite'
+import redAndBlue from './redAndBlue'
+import itsTheWeekend from './itsTheWeekend'
+import ohShitItsMonday from './ohShitItsMonday'
+import youAreDrunk from './youAreDrunk'
+import youAreHangover from './youAreHangover'
+import youArePoor from './youArePoor'
+import youAreRich from './youAreRich'
 
 export const personas = [
   grandmother, teenager, office, hipster, french,
@@ -52,6 +139,21 @@ export const personas = [
   mythology, vinyl, bonsai, sumo, alien, productivity, pilot,
   yacht, tattoo, barista, submarine, futureAi, alienGuide, scuba,
   luxuryRealtor, homeless, asmr, hypebeast,
+  ness, mushroomKingdom, germanSoccerFan,   queenEngland, trump,
+  punk, alteredState, shibuyaHell, ebayMail, rainforestMail,
+  scammer, pizzaLover, baby, grandfather,
+  tetrisPlayer, smurfFan, princess, god, cowboy, hobbit, darthVador,
+  dubaiEmirate, japaneseSakura, flowerLover, hystericKareen, roadrager, sexworker, bankRobber, nftCollector,
+  dealHunter, shyIntrovert, nostalgicElder, firstInternet, insomnia3am,
+  expertMode, elderA11y, dyslexiaFriendly,   meditation, postApocalypse, celebration,
+  oneHandedMobile, waitingRoomBoredom, printedPaperMode, sixtySecondChallenge,
+  bossWalksBy, remindTomorrowMonths, inboxZeroFantasy,
+  indianRestaurant, bollywood, plumber, magician, fisherman, surfer, gladiator,
+  mexicanSombrero, cowgirl, dominatrix, pineapplePizza, dogLover, catLover, catReadingInbox, dogReadingInbox,
+  dinosaursStillAlive, donaldDuckInbox, swissCheeseLover, trader, fmBroadcaster, developer, bobMarleyInbox,
+  gasPricesRising, bitcoinCrashing, bitcoinMooning,   sectGuruInbox, chineseRestaurantOwner, nflProPlayer,
+  oldschoolInternet, myspaceCom, earlyFacebook, pixelArt, blackAndWhite, redAndBlue,
+  itsTheWeekend, ohShitItsMonday, youAreDrunk, youAreHangover, youArePoor, youAreRich,
 ]
 
 export const personaMap = Object.fromEntries(personas.map(p => [p.id, p]))

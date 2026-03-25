@@ -389,12 +389,81 @@ body {
 }
 
 /* Xbox 360–inspired layout (v2) */
+.xbox2-bg-grid,
+.xbox2-bg-aurora,
+.xbox2-bg-sweep {
+  position: absolute;
+  inset: 0;
+}
+
 .xbox2-bg-grid {
-  opacity: 0.05;
+  opacity: 0.06;
   background-image:
     linear-gradient(90deg, var(--accent) 1px, transparent 1px),
     linear-gradient(var(--accent) 1px, transparent 1px);
   background-size: 36px 36px;
+}
+
+@keyframes xbox2GridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 36px 36px, 36px 36px;
+  }
+}
+.xbox2-bg-grid-drift {
+  animation: xbox2GridDrift 28s linear infinite;
+}
+
+@keyframes xbox2Aurora {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1) translate(0, 0);
+  }
+  33% {
+    opacity: 0.55;
+    transform: scale(1.08) translate(4%, -3%);
+  }
+  66% {
+    opacity: 0.42;
+    transform: scale(1.04) translate(-3%, 4%);
+  }
+}
+.xbox2-bg-aurora {
+  background:
+    radial-gradient(ellipse 55% 45% at 18% 28%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 62%),
+    radial-gradient(ellipse 50% 55% at 88% 72%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 58%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
+  animation: xbox2Aurora 18s ease-in-out infinite;
+}
+
+.xbox2-bg-halo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200vmax;
+  height: 200vmax;
+  margin: -100vmax 0 0 -100vmax;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    color-mix(in srgb, var(--accent) 9%, transparent) 55deg,
+    transparent 110deg,
+    transparent 180deg,
+    color-mix(in srgb, var(--accent) 6%, transparent) 235deg,
+    transparent 300deg,
+    transparent 360deg
+  );
+  opacity: 0.55;
+  animation: xbox2HaloSpin 56s linear infinite;
+}
+
+@keyframes xbox2HaloSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes xbox2Sweep {
@@ -411,10 +480,14 @@ body {
   background: linear-gradient(
     115deg,
     transparent 0%,
-    color-mix(in srgb, var(--accent) 7%, transparent) 42%,
+    color-mix(in srgb, var(--accent) 8%, transparent) 42%,
     transparent 68%
   );
   animation: xbox2Sweep 22s ease-in-out infinite alternate;
+}
+.xbox2-bg-sweep-static {
+  animation: none;
+  opacity: 0.75;
 }
 
 .xbox2-topbar {
@@ -433,6 +506,18 @@ body {
 
 .xbox2-reader {
   background: linear-gradient(185deg, color-mix(in srgb, var(--card) 92%, var(--accent)) 0%, var(--card) 28%);
+}
+
+.xbox2-reader-depth {
+  transform: translateZ(14px);
+  box-shadow:
+    0 28px 56px -16px rgba(0, 0, 0, 0.55),
+    0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 0 40px -8px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.xbox2-main-stage {
+  transform-style: preserve-3d;
 }
 
 .xbox2-reader-chrome {
@@ -570,7 +655,2577 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
+/* Ness / PK kid (EarthBound-inspired) */
+@keyframes nessPsych {
+  0%,
+  100% {
+    filter: hue-rotate(0deg) saturate(1);
+  }
+  50% {
+    filter: hue-rotate(12deg) saturate(1.12);
+  }
+}
+.ness-psych-bg {
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 30%, rgba(255, 107, 157, 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 85% 70%, rgba(124, 255, 106, 0.1), transparent 50%),
+    linear-gradient(165deg, var(--bg2) 0%, var(--bg) 50%, var(--bg2) 100%);
+  animation: nessPsych 10s ease-in-out infinite;
+}
+.ness-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 3px
+  );
+}
+@keyframes nessHpShimmer {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.88;
+  }
+}
+.ness-hp-fill {
+  animation: nessHpShimmer 2.4s ease-in-out infinite;
+}
+@keyframes nessMenuPulse {
+  0%,
+  100% {
+    box-shadow: 4px 4px 0 var(--bg2);
+  }
+  50% {
+    box-shadow: 2px 2px 0 var(--accent);
+  }
+}
+.ness-menu-active {
+  animation: nessMenuPulse 2s ease-in-out infinite;
+}
+@keyframes nessSmash {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+.ness-smash-badge {
+  animation: nessSmash 0.9s ease-in-out infinite;
+}
+@keyframes nessBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.ness-blink-cursor {
+  animation: nessBlink 1.1s step-end infinite;
+}
+@keyframes nessType {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.ness-typewriter {
+  animation: nessType 0.5s ease-out;
+}
+
+/* Mushroom Kingdom (platformer parody) */
+.mk-sky {
+  background: linear-gradient(185deg, #87ceeb 0%, var(--bg) 45%, var(--bg2) 100%);
+}
+@keyframes mkCloudDrift {
+  from {
+    transform: translateX(-2%);
+  }
+  to {
+    transform: translateX(2%);
+  }
+}
+.mk-clouds {
+  background:
+    radial-gradient(ellipse 70% 40% at 15% 18%, rgba(255, 255, 255, 0.9), transparent 55%),
+    radial-gradient(ellipse 55% 35% at 70% 12%, rgba(255, 255, 255, 0.85), transparent 52%),
+    radial-gradient(ellipse 50% 32% at 45% 8%, rgba(255, 255, 255, 0.8), transparent 48%);
+  animation: mkCloudDrift 28s ease-in-out infinite alternate;
+}
+.mk-hills {
+  background: linear-gradient(180deg, transparent 0%, rgba(56, 142, 60, 0.35) 100%);
+  border-radius: 50% 50% 0 0 / 100% 40% 0 0;
+}
+.mk-brick-strip {
+  background-color: #c84c0c;
+  background-image:
+    linear-gradient(335deg, #b83808 12px, transparent 12px),
+    linear-gradient(155deg, #b83808 12px, transparent 12px),
+    linear-gradient(335deg, rgba(0, 0, 0, 0.12) 14px, transparent 14px),
+    linear-gradient(155deg, rgba(0, 0, 0, 0.12) 14px, transparent 14px);
+  background-size: 24px 24px;
+  background-position:
+    0 0,
+    12px 0,
+    0 12px,
+    12px 12px;
+}
+@keyframes mkCoinPop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.08);
+  }
+  60% {
+    transform: scale(1.02);
+  }
+}
+.mk-coin-pop {
+  animation: mkCoinPop 2.8s ease-in-out infinite;
+}
+.mk-star {
+  animation: wiiTwinkle 3s ease-in-out infinite;
+}
+
+/* German soccer fan */
+.german-floodlights {
+  background:
+    radial-gradient(ellipse 120% 100% at 50% 0%, rgba(255, 255, 255, 0.22), transparent 58%),
+    repeating-linear-gradient(90deg, transparent, transparent 18%, rgba(255, 204, 0, 0.06) 18%, rgba(255, 204, 0, 0.06) 19%);
+}
+@keyframes germanWave {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 48px 24px;
+  }
+}
+.german-wave-overlay {
+  background-image: repeating-linear-gradient(
+    -8deg,
+    transparent,
+    transparent 14px,
+    rgba(221, 0, 0, 0.04) 14px,
+    rgba(221, 0, 0, 0.04) 28px
+  );
+  background-size: 48px 48px;
+  animation: germanWave 22s linear infinite;
+}
+.german-scarf {
+  background: repeating-linear-gradient(
+    90deg,
+    #000 0px,
+    #000 12px,
+    #dd0000 12px,
+    #dd0000 24px,
+    #ffcc00 24px,
+    #ffcc00 36px
+  );
+}
+@keyframes germanMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.german-marquee-inner {
+  animation: germanMarquee 28s linear infinite;
+}
+@keyframes germanTor {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px 2px rgba(255, 204, 0, 0.35);
+  }
+}
+.german-tor-badge {
+  animation: germanTor 1.4s ease-in-out infinite;
+  background: linear-gradient(180deg, #ffcc00, #e6b800);
+  color: #000;
+}
+@keyframes germanBall {
+  0%,
+  100% {
+    transform: rotate(-6deg) translateY(0);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-10px);
+  }
+}
+.german-ball-sway {
+  animation: germanBall 3s ease-in-out infinite;
+}
+
+/* Royal correspondence */
+.queen-paper {
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+}
+.queen-filigree {
+  background-image:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--accent2) 25%, transparent) 0, transparent 42%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--accent) 14%, transparent) 0, transparent 45%);
+}
+.queen-ornate-frame {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent2) 55%, transparent),
+    0 8px 28px rgba(28, 20, 40, 0.08);
+}
+@keyframes queenCrown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.queen-crown-float {
+  animation: queenCrown 4s ease-in-out infinite;
+}
+.queen-parchment {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    color-mix(in srgb, var(--accent2) 6%, transparent) 28px,
+    color-mix(in srgb, var(--accent2) 6%, transparent) 29px
+  );
+}
+@keyframes queenWax {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.03);
+    filter: brightness(1.08);
+  }
+}
+.queen-wax-seal {
+  animation: queenWax 3s ease-in-out infinite;
+}
+.queen-seal-hover:hover .queen-wax-seal {
+  animation: queenWax 0.8s ease-in-out infinite;
+}
+
+/* Trump inbox / gold desk parody */
+.exec-marble {
+  background:
+    radial-gradient(ellipse 90% 60% at 20% 20%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 85% 75%, color-mix(in srgb, var(--accent2) 10%, transparent), transparent 50%),
+    linear-gradient(165deg, var(--bg) 0%, var(--bg2) 100%);
+}
+@keyframes execShineMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.exec-shine {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.07) 45%,
+    transparent 75%
+  );
+  background-size: 200% 200%;
+  animation: execShineMove 8s ease-in-out infinite alternate;
+}
+.exec-flag-stripe {
+  background: repeating-linear-gradient(
+    180deg,
+    var(--accent3) 0px,
+    var(--accent3) 9px,
+    var(--card) 9px,
+    var(--card) 18px,
+    var(--accent2) 18px,
+    var(--accent2) 27px,
+    var(--card) 27px,
+    var(--card) 36px
+  );
+}
+@keyframes execStamp {
+  0% {
+    transform: rotate(-12deg);
+  }
+  100% {
+    transform: rotate(12deg);
+  }
+}
+.exec-stamp-rotate {
+  animation: execStamp 5s ease-in-out infinite alternate;
+}
+.exec-gold-frame {
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent),
+    0 4px 20px rgba(0, 0, 0, 0.25);
+}
+@keyframes execGlowPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent),
+      0 0 18px -4px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--accent) 65%, transparent),
+      0 0 28px 0 color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+}
+.exec-gold-glow {
+  animation: execGlowPulse 2.8s ease-in-out infinite;
+}
+.exec-corner-triangles {
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 40%),
+    linear-gradient(-135deg, color-mix(in srgb, var(--accent2) 10%, transparent) 0%, transparent 35%);
+}
+@keyframes execWobble {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+.exec-wobble {
+  animation: execWobble 2.5s ease-in-out infinite;
+}
+@keyframes execTieBlink {
+  0%,
+  90%,
+  100% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0.35;
+  }
+}
+.exec-blink-tie {
+  animation: execTieBlink 4s step-end infinite;
+}
+
+/* Punk layout */
+@keyframes punkSkullSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes punkFlyerWobble {
+  0%,
+  100% {
+    transform: rotate(var(--punk-tilt, 0deg)) translateY(0);
+  }
+  50% {
+    transform: rotate(calc(var(--punk-tilt, 0deg) + 1.2deg)) translateY(-2px);
+  }
+}
+@keyframes punkStripeDrift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+.punk-skull-spin {
+  animation: punkSkullSpin 22s linear infinite;
+}
+.punk-flyer-wobble {
+  animation: punkFlyerWobble 3.2s ease-in-out infinite;
+}
+.punk-stripe-drift {
+  animation: punkStripeDrift 6s linear infinite;
+}
+
+/* Altered state layout */
+@keyframes alteredHue {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+@keyframes alteredTunnelPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.04);
+  }
+}
+@keyframes alteredMicroJitter {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(0.5px, -0.5px);
+  }
+  50% {
+    transform: translate(-0.5px, 0.5px);
+  }
+  75% {
+    transform: translate(0.3px, 0.3px);
+  }
+}
+.altered-hue-slow {
+  animation: alteredHue 48s linear infinite;
+}
+.altered-tunnel {
+  animation: alteredTunnelPulse 5s ease-in-out infinite;
+}
+.altered-jitter {
+  animation: alteredMicroJitter 0.35s steps(2) infinite;
+}
+
+/* Shibuya ad hell */
+@keyframes shibuyaMarqueeUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+@keyframes shibuyaAdTilt {
+  0%,
+  100% {
+    transform: rotate(-2deg) scale(1);
+  }
+  50% {
+    transform: rotate(2deg) scale(1.02);
+  }
+}
+@keyframes shibuyaFlash {
+  0%,
+  92%,
+  100% {
+    opacity: 1;
+  }
+  94% {
+    opacity: 0.65;
+  }
+  96% {
+    opacity: 1;
+  }
+}
+.shibuya-marquee-up {
+  animation: shibuyaMarqueeUp 18s linear infinite;
+}
+.shibuya-ad-tilt {
+  animation: shibuyaAdTilt 2.8s ease-in-out infinite;
+}
+.shibuya-flash {
+  animation: shibuyaFlash 4s ease-in-out infinite;
+}
+@keyframes shibuyaMarqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.shibuya-marquee-left {
+  animation: shibuyaMarqueeLeft 28s linear infinite;
+}
+@keyframes shibuyaPopupBlink {
+  0%,
+  40% {
+    opacity: 1;
+    filter: brightness(1.15) saturate(1.2);
+  }
+  50%,
+  90% {
+    opacity: 0.25;
+    filter: brightness(0.7) saturate(0.8);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1.15) saturate(1.2);
+  }
+}
+.shibuya-popup-blink {
+  animation: shibuyaPopupBlink var(--shibuya-blink-dur, 0.55s) steps(1, end) infinite;
+}
+
+/* eBay layout */
+@keyframes ebayUrgent {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.88;
+    transform: scale(1.03);
+  }
+}
+.ebay-urgent {
+  animation: ebayUrgent 1.2s ease-in-out infinite;
+}
+
+/* Amazon parody layout */
+@keyframes amazonTape {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 120px 0;
+  }
+}
+@keyframes amazonPrimeGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 16px 2px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+}
+.amazon-tape-move {
+  animation: amazonTape 8s linear infinite;
+}
+.amazon-prime-glow {
+  animation: amazonPrimeGlow 2.5s ease-in-out infinite;
+}
+@keyframes amazonSmileBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+.amazon-smile-bounce {
+  animation: amazonSmileBounce 2.4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Scammer layout */
+@keyframes scammerBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.scammer-blink {
+  animation: scammerBlink 0.9s step-end infinite;
+}
+@keyframes scammerShimmerBtn {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+.scammer-shimmer-btn {
+  background: linear-gradient(90deg, #00ff66, #ffe066, #00ff66);
+  background-size: 200% 100%;
+  animation: scammerShimmerBtn 1.4s linear infinite;
+}
+.scammer-shimmer-text {
+  background: linear-gradient(90deg, var(--accent), #fff8a8, var(--accent));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: scammerShimmerBtn 2s linear infinite;
+}
+@keyframes scammerPopupWiggle {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+.scammer-popup-wiggle {
+  animation: scammerPopupWiggle 2.6s ease-in-out infinite;
+}
+@keyframes scammerMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.scammer-marquee {
+  animation: scammerMarquee 18s linear infinite;
+}
+.scammer-matrix-bg {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    color-mix(in srgb, var(--accent) 8%, transparent) 2px,
+    color-mix(in srgb, var(--accent) 8%, transparent) 3px
+  );
+}
+@keyframes scammerMatrixFall {
+  0% {
+    transform: translateY(-12%);
+  }
+  100% {
+    transform: translateY(12%);
+  }
+}
+.scammer-matrix-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: center;
+  color: var(--accent);
+  animation: scammerMatrixFall 6s linear infinite;
+}
+.scammer-card-hover:hover {
+  box-shadow: 0 0 0 1px var(--accent2), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* Pizza lover layout */
+@keyframes pizzaSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.pizza-spin {
+  animation: pizzaSpin 48s linear infinite;
+}
+.pizza-spin-reverse {
+  animation: pizzaSpin 64s linear infinite reverse;
+}
+@keyframes pizzaCheeseShimmer {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+.pizza-cheese-shimmer {
+  background: radial-gradient(circle at 40% 35%, rgba(255, 255, 255, 0.5), transparent 55%);
+  animation: pizzaCheeseShimmer 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes pizzaToppingBob {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.1);
+  }
+}
+.pizza-topping-bob {
+  animation: pizzaToppingBob 2.8s ease-in-out infinite;
+}
+@keyframes pizzaOvenGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 24px 2px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+}
+.pizza-oven-glow {
+  animation: pizzaOvenGlow 3s ease-in-out infinite;
+}
+@keyframes pizzaHeatBar {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+}
+.pizza-heat-bar {
+  background: linear-gradient(90deg, #f97316, #fbbf24, #ef4444);
+  animation: pizzaHeatBar 1.2s ease-in-out infinite;
+}
+@keyframes pizzaOvenDoor {
+  0%,
+  100% {
+    transform: perspective(520px) rotateX(0deg);
+  }
+  50% {
+    transform: perspective(520px) rotateX(1.2deg);
+  }
+}
+.pizza-oven-door {
+  animation: pizzaOvenDoor 5s ease-in-out infinite;
+  transform-origin: 50% 0%;
+}
+@keyframes pizzaSteam {
+  0% {
+    opacity: 0.25;
+    transform: translateY(8px) scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scaleX(1.08);
+  }
+}
+.pizza-steam-layer {
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255, 255, 255, 0.08), transparent 62%);
+}
+.pizza-steam-layer::before,
+.pizza-steam-layer::after {
+  content: '';
+  position: absolute;
+  left: 20%;
+  bottom: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12), transparent 70%);
+  animation: pizzaSteam 3.2s ease-out infinite;
+}
+.pizza-steam-layer::after {
+  left: 55%;
+  animation-delay: 1.1s;
+  width: 64px;
+}
+@keyframes pizzaBarRise {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.06);
+  }
+}
+.pizza-bar-rise {
+  transform-origin: bottom center;
+  animation: pizzaBarRise 2.4s ease-in-out infinite;
+}
+
+/* Baby layout */
+@keyframes babyMobileSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.baby-mobile-spin {
+  animation: babyMobileSpin 22s linear infinite;
+}
+@keyframes babyCloudDrift {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(18px);
+  }
+}
+.baby-cloud-1 {
+  animation: babyCloudDrift 14s ease-in-out infinite;
+}
+.baby-cloud-2 {
+  animation: babyCloudDrift 18s ease-in-out infinite reverse;
+}
+.baby-cloud-3 {
+  animation: babyCloudDrift 20s ease-in-out infinite;
+}
+@keyframes babyWobbleCard {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  33% {
+    transform: rotate(0.35deg);
+  }
+  66% {
+    transform: rotate(-0.35deg);
+  }
+}
+.baby-wobble-card {
+  animation: babyWobbleCard 7s ease-in-out infinite;
+}
+@keyframes babyBounceEmoji {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.baby-bounce-emoji {
+  animation: babyBounceEmoji 2.2s ease-in-out infinite;
+}
+@keyframes babyStarTwinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.04);
+  }
+}
+.baby-star-twinkle {
+  animation: babyStarTwinkle 2.8s ease-in-out infinite;
+}
+@keyframes babyBlockStack {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+.baby-block-stack {
+  animation: babyBlockStack 2.6s ease-in-out infinite;
+}
+
+/* Grandfather layout */
+.grand-paper-texture {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 31px,
+    color-mix(in srgb, var(--accent) 5%, transparent) 31px,
+    color-mix(in srgb, var(--accent) 5%, transparent) 32px
+  );
+}
+.grand-newspaper-columns {
+  column-count: 1;
+}
+@media (min-width: 768px) {
+  .grand-newspaper-columns {
+    column-count: 2;
+    column-gap: 2rem;
+  }
+}
+@keyframes grandArticleDrift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+.grand-article-drift {
+  animation: grandArticleDrift 8s ease-in-out infinite;
+}
+@keyframes grandWoodShine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.grand-wood-shine {
+  background-size: 200% 100%;
+  animation: grandWoodShine 12s ease-in-out infinite alternate;
+}
+@keyframes grandMasthead {
+  0%,
+  100% {
+    box-shadow: 0 4px 14px rgba(44, 36, 24, 0.08);
+  }
+  50% {
+    box-shadow: 0 8px 22px rgba(44, 36, 24, 0.12);
+  }
+}
+.grand-masthead {
+  animation: grandMasthead 6s ease-in-out infinite;
+}
+.grand-clock-hand {
+  transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.grand-clock-second {
+  transition: transform 0.08s linear;
+}
+
+/* Tetris player layout */
+.tetris-grid-bg {
+  background-color: var(--bg);
+  background-image: linear-gradient(color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 12%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+@keyframes tetrisGridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 24px 24px, 24px 24px;
+  }
+}
+.tetris-grid-drift {
+  animation: tetrisGridDrift 4s linear infinite;
+}
+@keyframes tetrisFall {
+  0% {
+    transform: translateY(-110vh) translateX(0) rotate(0deg);
+    opacity: 0.95;
+  }
+  35% {
+    transform: translateY(5vh) translateX(14px) rotate(200deg);
+    opacity: 1;
+  }
+  65% {
+    transform: translateY(55vh) translateX(-12px) rotate(480deg);
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(125vh) translateX(6px) rotate(720deg);
+    opacity: 0.2;
+  }
+}
+.tetris-fall {
+  animation: tetrisFall 14s linear infinite;
+}
+.tetris-fall-1 {
+  animation-duration: 11s;
+}
+.tetris-fall-2 {
+  animation-duration: 15s;
+}
+.tetris-fall-3 {
+  animation-duration: 19s;
+}
+.tetris-fall-4 {
+  animation-duration: 13s;
+}
+.tetris-fall-5 {
+  animation-duration: 17s;
+}
+@keyframes tetrisHeaderPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 36px color-mix(in srgb, var(--accent) 55%, transparent), 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+  }
+}
+.tetris-header-pulse {
+  animation: tetrisHeaderPulse 2.5s ease-in-out infinite;
+}
+@keyframes tetrisPlayScan {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(12px);
+  }
+}
+.tetris-playfield-anim {
+  position: relative;
+}
+.tetris-playfield-anim::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 11px,
+    color-mix(in srgb, var(--accent) 8%, transparent) 11px,
+    color-mix(in srgb, var(--accent) 8%, transparent) 12px
+  );
+  animation: tetrisPlayScan 2.8s linear infinite;
+}
+.tetris-playfield-anim > * {
+  position: relative;
+  z-index: 1;
+}
+@keyframes tetrisLineBurst {
+  0%,
+  86%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0.2);
+  }
+  87% {
+    opacity: 0.9;
+    transform: scaleY(1);
+  }
+  88.5% {
+    opacity: 0;
+    transform: scaleY(0.5);
+  }
+}
+.tetris-playfield-anim::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 42%;
+  height: 6px;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  box-shadow: 0 0 24px var(--accent), 0 0 48px color-mix(in srgb, var(--accent) 50%, transparent);
+  animation: tetrisLineBurst 6.5s ease-in-out infinite;
+  opacity: 0;
+}
+@keyframes tetrisWellPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+}
+.tetris-mini-well-inner {
+  animation: tetrisWellPulse 3s ease-in-out infinite;
+}
+@keyframes tetrisWellRow {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.02);
+  }
+}
+.tetris-well-row {
+  animation: tetrisWellRow 2.4s ease-in-out infinite;
+}
+@keyframes tetrisWellClear {
+  0%,
+  78%,
+  100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  80% {
+    opacity: 1;
+    filter: brightness(3);
+    box-shadow: 0 0 20px white;
+  }
+  82% {
+    opacity: 0.4;
+    filter: brightness(1);
+  }
+  84% {
+    opacity: 1;
+  }
+}
+.tetris-well-rows {
+  animation: tetrisWellClear 8s ease-in-out infinite;
+}
+@keyframes tetrisHudPop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+.tetris-hud-pop {
+  animation: tetrisHudPop 2s ease-in-out infinite;
+}
+@keyframes tetrisEmptyBob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+.tetris-empty-block {
+  display: inline-block;
+  animation: tetrisEmptyBob 0.9s ease-in-out infinite;
+}
+@keyframes tetrisRowNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+}
+button.tetris-row:hover:not([aria-current="true"]) {
+  animation: tetrisRowNudge 0.6s ease-in-out infinite;
+}
+.tetris-row-active {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  box-shadow: inset 0 0 20px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+@keyframes tetrisLock {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 24px 2px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+}
+.tetris-piece-lock {
+  animation: tetrisLock 2.8s ease-in-out infinite;
+}
+@keyframes tetrisNextGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 16px color-mix(in srgb, var(--accent2) 45%, transparent);
+  }
+}
+.tetris-next-glow {
+  animation: tetrisNextGlow 2s ease-in-out infinite;
+}
+@keyframes tetrisMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.tetris-marquee {
+  animation: tetrisMarquee 28s linear infinite;
+}
+
+/* Smurf fan layout */
+.smurf-sky {
+  background: radial-gradient(ellipse 120% 80% at 50% -20%, #64b5f6 0%, transparent 55%),
+    linear-gradient(180deg, #1565c0 0%, #0d47a1 45%, #01579b 100%);
+}
+@keyframes smurfSpore {
+  0% {
+    transform: translateY(100vh) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+    opacity: 0;
+  }
+}
+.smurf-spores::before,
+.smurf-spores::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0 2px, transparent 3px),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.12) 0 1.5px, transparent 2.5px);
+  animation: smurfSpore 18s linear infinite;
+  pointer-events: none;
+}
+.smurf-spores::after {
+  animation-delay: 9s;
+  opacity: 0.7;
+}
+@keyframes smurfFloatEmoji {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(6deg);
+  }
+}
+.smurf-float-emoji {
+  animation: smurfFloatEmoji 4s ease-in-out infinite;
+}
+.smurf-letter-picked {
+  animation: smurfFloatEmoji 3s ease-in-out infinite;
+}
+
+/* Princess layout */
+.princess-aurora {
+  background: radial-gradient(ellipse 100% 60% at 50% 0%, rgba(233, 30, 140, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 50% at 80% 20%, rgba(184, 134, 11, 0.12) 0%, transparent 45%),
+    linear-gradient(180deg, #fff5f8 0%, #ffe4f0 100%);
+}
+@keyframes princessSparkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.2);
+  }
+}
+.princess-sparkle {
+  animation: princessSparkle 2.5s ease-in-out infinite;
+}
+@keyframes princessCrown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.princess-crown-bob {
+  animation: princessCrown 3s ease-in-out infinite;
+}
+@keyframes princessScrollGlow {
+  0%,
+  100% {
+    box-shadow: 0 4px 20px rgba(233, 30, 140, 0.15);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(184, 134, 11, 0.25);
+  }
+}
+.princess-scroll-glow {
+  animation: princessScrollGlow 3s ease-in-out infinite;
+}
+
+/* God layout */
+.god-light-rays {
+  background: radial-gradient(circle at 50% -10%, rgba(255, 215, 0, 0.35) 0%, transparent 42%),
+    linear-gradient(180deg, #2d2640 0%, #1a1530 60%, #0f0a18 100%);
+}
+.god-clouds {
+  background: radial-gradient(ellipse 60% 25% at 20% 70%, rgba(255, 255, 255, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 20% at 75% 85%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+}
+@keyframes godGlowText {
+  0%,
+  100% {
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.35);
+  }
+  50% {
+    text-shadow: 0 0 24px rgba(255, 248, 220, 0.5);
+  }
+}
+.god-glow-text {
+  animation: godGlowText 4s ease-in-out infinite;
+}
+@keyframes godHalo {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.god-halo-spin {
+  animation: godHalo 48s linear infinite;
+}
+
+/* Cowboy layout */
+.cowboy-sky {
+  background: linear-gradient(180deg, #87ceeb 0%, #f4a460 38%, #daa520 62%, #c9a66b 100%);
+}
+@keyframes cowboySun {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 40px rgba(255, 200, 80, 0.6);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 56px rgba(255, 220, 120, 0.75);
+  }
+}
+.cowboy-sun {
+  background: radial-gradient(circle, #fff8dc 0%, #ffb347 50%, #ff8c00 100%);
+}
+.cowboy-sun-pulse {
+  animation: cowboySun 4s ease-in-out infinite;
+}
+@keyframes cowboyDust {
+  0% {
+    transform: translateX(0);
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateX(-40px);
+    opacity: 0.08;
+  }
+}
+.cowboy-dust {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 80px,
+    rgba(139, 90, 43, 0.08) 80px,
+    rgba(139, 90, 43, 0.08) 82px
+  );
+  animation: cowboyDust 12s linear infinite;
+}
+.cowboy-wanted-active {
+  box-shadow: 6px 6px 0 var(--accent);
+}
+
+/* Hobbit layout */
+.hobbit-hill {
+  background: radial-gradient(ellipse 140% 70% at 50% 100%, #33691e 0%, #558b2f 35%, #7cb342 100%);
+}
+@keyframes hobbitDoor {
+  0%,
+  100% {
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 213, 79, 0.15);
+  }
+  50% {
+    box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.45), 0 0 36px rgba(255, 213, 79, 0.35);
+  }
+}
+.hobbit-door-glow {
+  animation: hobbitDoor 4s ease-in-out infinite;
+}
+@keyframes hobbitSmoke {
+  0% {
+    transform: translate(-50%, 0) scale(0.6);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-50%, -48px) scale(1.4);
+    opacity: 0;
+  }
+}
+.hobbit-smoke::before {
+  content: "";
+  position: absolute;
+  left: 55%;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 200, 200, 0.35) 0%, transparent 70%);
+  animation: hobbitSmoke 3.5s ease-out infinite;
+}
+@keyframes hobbitEnvelope {
+  0%,
+  100% {
+    transform: rotate(-0.5deg);
+  }
+  50% {
+    transform: rotate(0.5deg);
+  }
+}
+.hobbit-envelope-open {
+  animation: hobbitEnvelope 4s ease-in-out infinite;
+}
+
+/* Darth vador layout */
+.vador-stars {
+  background-image: radial-gradient(1px 1px at 10% 20%, white, transparent), radial-gradient(1px 1px at 90% 40%, white, transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(255, 255, 255, 0.8), transparent), radial-gradient(1px 1px at 70% 10%, white, transparent),
+    radial-gradient(1px 1px at 30% 50%, rgba(255, 255, 255, 0.6), transparent);
+  background-size: 100% 100%;
+}
+@keyframes vadorBreathe {
+  0%,
+  100% {
+    background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 42, 42, 0.22) 0%, transparent 55%);
+    opacity: 1;
+  }
+  50% {
+    background: radial-gradient(ellipse 90% 55% at 50% 100%, rgba(255, 42, 42, 0.38) 0%, transparent 58%);
+    opacity: 0.95;
+  }
+}
+.vador-breathe {
+  animation: vadorBreathe 5.2s ease-in-out infinite;
+}
+.vador-scanlines {
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.25) 2px, rgba(0, 0, 0, 0.25) 3px);
+  pointer-events: none;
+}
+@keyframes vadorHelmet {
+  0%,
+  100% {
+    box-shadow: 0 0 12px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 28px color-mix(in srgb, var(--accent) 65%, transparent);
+  }
+}
+.vador-helmet-ring {
+  animation: vadorHelmet 5.2s ease-in-out infinite;
+}
+.vador-row-active {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* Dubai Emirate layout */
+@keyframes dubaiGoldDrift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.dubai-gold-sky {
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -15%, rgba(245, 230, 168, 0.2), transparent 52%),
+    radial-gradient(ellipse 50% 40% at 85% 30%, rgba(232, 197, 71, 0.14), transparent 50%),
+    linear-gradient(
+      125deg,
+      color-mix(in srgb, var(--accent) 28%, transparent) 0%,
+      transparent 32%,
+      color-mix(in srgb, var(--accent2) 18%, transparent) 52%,
+      transparent 65%,
+      color-mix(in srgb, var(--accent) 22%, transparent) 100%
+    );
+  background-size: 100% 100%, 100% 100%, 200% 200%;
+  animation: dubaiGoldDrift 14s ease-in-out infinite alternate;
+}
+@keyframes dubaiPalmSway {
+  0%, 100% { transform: rotate(-0.4deg) translateY(0); }
+  50% { transform: rotate(0.35deg) translateY(-4px); }
+}
+.dubai-palm-sway {
+  animation: dubaiPalmSway 8s ease-in-out infinite;
+}
+@keyframes dubaiSparkle {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+.dubai-sparkle {
+  animation: dubaiSparkle 2.8s ease-in-out infinite;
+}
+@keyframes dubaiTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.dubai-ticker-inner {
+  white-space: nowrap;
+  animation: dubaiTicker 28s linear infinite;
+}
+
+/* Japanese sakura layout */
+@keyframes sakuraFall {
+  0% { transform: translateY(-12vh) translateX(0) rotate(0deg); opacity: 0; }
+  8% { opacity: 0.85; }
+  100% { transform: translateY(110vh) translateX(var(--sakura-drift, 24px)) rotate(320deg); opacity: 0; }
+}
+.sakura-petal {
+  position: fixed;
+  font-size: clamp(0.9rem, 2vw, 1.25rem);
+  pointer-events: none;
+  z-index: 0;
+  animation: sakuraFall var(--sakura-dur, 14s) linear infinite;
+  animation-delay: var(--sakura-delay, 0s);
+  opacity: 0.75;
+}
+.sakura-petal--pastel {
+  opacity: 0.42;
+  filter: saturate(0.88) drop-shadow(0 1px 2px rgba(200, 160, 180, 0.25));
+}
+@keyframes sakuraRiver {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.sakura-river-flow {
+  animation: sakuraRiver 42s linear infinite;
+}
+
+/* Flower lover layout */
+@keyframes flowerBob {
+  0%, 100% { transform: translateY(0) rotate(var(--fl-tilt, 0deg)); }
+  50% { transform: translateY(-6px) rotate(calc(var(--fl-tilt, 0deg) + 2deg)); }
+}
+.flower-bob {
+  animation: flowerBob 3.6s ease-in-out infinite;
+}
+@keyframes flowerPollen {
+  0% { transform: translate(0, 0) scale(0.6); opacity: 0.5; }
+  100% { transform: translate(var(--px, 8px), -36px) scale(1); opacity: 0; }
+}
+.flower-pollen {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent2) 55%, transparent);
+  animation: flowerPollen 3.2s ease-out infinite;
+}
+
+/* Hysteric Kareen layout */
+@keyframes karenShake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 2px); }
+}
+.karen-shake-soft {
+  animation: karenShake 0.28s ease-in-out infinite;
+}
+@keyframes karenSiren {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+  50% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent); }
+}
+.karen-siren-ring {
+  animation: karenSiren 1.1s ease-in-out infinite;
+}
+@keyframes karenMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.karen-marquee {
+  animation: karenMarquee 16s linear infinite;
+}
+
+/* Roadrager layout */
+@keyframes roadStripe {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 48px; }
+}
+.road-stripe-scroll {
+  background: repeating-linear-gradient(
+    180deg,
+    #fbbf24 0px,
+    #fbbf24 22px,
+    #1a1a1a 22px,
+    #1a1a1a 44px
+  );
+  animation: roadStripe 0.55s linear infinite;
+}
+@keyframes roadHudPulse {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.92; filter: brightness(1.12); }
+}
+.road-hud-pulse {
+  animation: roadHudPulse 0.45s ease-in-out infinite;
+}
+@keyframes roadRumble {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(0.5px, -0.5px); }
+  50% { transform: translate(-0.5px, 0.5px); }
+  75% { transform: translate(0.3px, 0.4px); }
+}
+.road-rumble {
+  animation: roadRumble 0.12s linear infinite;
+}
+
+/* Velvet lounge / night desk layout */
+@keyframes velvetShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.velvet-shimmer {
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent2) 22%, transparent) 45%,
+    transparent 80%
+  );
+  background-size: 220% 100%;
+  animation: velvetShimmer 9s ease-in-out infinite alternate;
+}
+@keyframes champagneBubble {
+  0% { transform: translateY(0) scale(0.7); opacity: 0.4; }
+  100% { transform: translateY(-52px) scale(1); opacity: 0; }
+}
+.champagne-bubble {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
+  animation: champagneBubble 4s ease-in infinite;
+}
+
+/* Bank robber layout */
+@keyframes vaultSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.vault-dial-teeth {
+  animation: vaultSpin 72s linear infinite;
+}
+@keyframes laserSweep {
+  0% { transform: translateX(-120%); opacity: 0; }
+  15% { opacity: 0.85; }
+  85% { opacity: 0.85; }
+  100% { transform: translateX(120%); opacity: 0; }
+}
+.bank-laser {
+  position: absolute;
+  top: 38%;
+  left: 0;
+  width: 40%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  box-shadow: 0 0 12px #ef4444;
+  animation: laserSweep 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes cashStack {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.cash-stack-bob {
+  animation: cashStack 2s ease-in-out infinite;
+}
+
+/* NFT collector layout */
+@keyframes nftSpin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+.nft-spin-slow {
+  animation: nftSpin 22s linear infinite;
+  transform-style: preserve-3d;
+}
+@keyframes nftGlitch {
+  0%, 92%, 100% { transform: translate(0); filter: hue-rotate(0deg); }
+  93% { transform: translate(-2px, 1px); filter: hue-rotate(12deg); }
+  95% { transform: translate(2px, -1px); filter: hue-rotate(-8deg); }
+  97% { transform: translate(0); filter: hue-rotate(0deg); }
+}
+.nft-glitch-hover:hover {
+  animation: nftGlitch 3s step-end infinite;
+}
+@keyframes nftFloorMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.nft-floor-marquee {
+  animation: nftFloorMarquee 20s linear infinite;
+}
+@keyframes nftHexPulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+  50% { box-shadow: 0 0 20px 2px color-mix(in srgb, var(--accent) 35%, transparent); }
+}
+.nft-hex-pulse {
+  animation: nftHexPulse 2.4s ease-in-out infinite;
+}
+
+/* Budget-conscious deal hunter */
+@keyframes dealTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.deal-ticker-inner {
+  animation: dealTicker 22s linear infinite;
+}
+@keyframes dealPricePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.35); }
+  50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+}
+.deal-price-flash:hover {
+  animation: dealPricePulse 1.2s ease-out infinite;
+}
+@keyframes dealModalPop {
+  from { opacity: 0; transform: scale(0.94) rotate(-1deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.deal-modal-pop {
+  animation: dealModalPop 0.35s ease-out;
+}
+
+/* Shy introvert */
+@keyframes shyFloatSlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(10px, -14px); }
+}
+.shy-float-slow {
+  animation: shyFloatSlow 14s ease-in-out infinite;
+}
+@keyframes shyFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.shy-fade-in {
+  animation: shyFadeUp 0.9s ease forwards;
+  opacity: 0;
+}
+.shy-fade-in-delay-1 { animation-delay: 0.12s; }
+.shy-fade-in-delay-2 { animation-delay: 0.24s; }
+.shy-fade-in-delay-3 { animation-delay: 0.38s; }
+.shy-fade-in-delay-4 { animation-delay: 0.5s; }
+@keyframes shyModalRise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.shy-modal-rise {
+  animation: shyModalRise 0.45s ease-out;
+}
+
+/* Nostalgic elder */
+.elder-film-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+@keyframes elderDialGlow {
+  0%, 100% { box-shadow: inset 0 0 20px rgba(201, 162, 39, 0.15); }
+  50% { box-shadow: inset 0 0 32px rgba(201, 162, 39, 0.28); }
+}
+.elder-dial-glow {
+  animation: elderDialGlow 5s ease-in-out infinite;
+}
+@keyframes elderVinyl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.elder-vinyl-spin {
+  animation: elderVinyl 24s linear infinite;
+}
+@keyframes elderNewsScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-12%); }
+}
+.elder-news-scroll {
+  animation: elderNewsScroll 18s ease-in-out infinite alternate;
+}
+
+/* First day on the internet */
+@keyframes firstBlink {
+  0%, 49%, 100% { opacity: 1; }
+  50% { opacity: 0.92; }
+}
+.first-net-blink {
+  animation: firstBlink 2.8s step-end infinite;
+}
+@keyframes firstGuestbook {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.first-guestbook-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: firstGuestbook 20s linear infinite;
+}
+
+/* 3 AM insomnia */
+@keyframes insomniaTwinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.35; }
+}
+.insomnia-twinkle {
+  background-image: radial-gradient(1px 1px at 10% 20%, rgba(253, 230, 138, 0.5), transparent),
+    radial-gradient(1px 1px at 80% 40%, rgba(165, 180, 252, 0.45), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(253, 230, 138, 0.4), transparent);
+  background-size: 100% 100%;
+  animation: insomniaTwinkle 4s ease-in-out infinite;
+}
+@keyframes insomniaRowDrift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+.insomnia-row-drift {
+  animation: insomniaRowDrift 7s ease-in-out infinite;
+}
+@keyframes insomniaGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.12); }
+  50% { box-shadow: 0 0 40px 2px rgba(251, 191, 36, 0.08); }
+}
+.insomnia-modal-glow {
+  animation: insomniaGlow 5s ease-in-out infinite;
+}
+@keyframes insomniaUiFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.insomnia-float-ui {
+  animation: insomniaUiFloat 10s ease-in-out infinite;
+}
+
+/* Dyslexia-friendly focus stripe */
+.dyslexia-ruler-bg {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2.4rem,
+    rgba(13, 148, 136, 0.06) 2.4rem,
+    rgba(13, 148, 136, 0.06) 2.55rem
+  );
+}
+
+/* Meditation breathing */
+@keyframes meditationBreath {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50% { transform: scale(1.18); opacity: 1; }
+}
+.meditation-breath-orb {
+  animation: meditationBreath 8s ease-in-out infinite;
+}
+@keyframes meditationFadeStagger {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.meditation-fade-stagger {
+  animation: meditationFadeStagger 0.8s ease forwards;
+  opacity: 0;
+}
+
+/* Post-apocalyptic CRT */
+@keyframes apocFlicker {
+  0%, 100% { opacity: 1; }
+  48% { opacity: 1; }
+  50% { opacity: 0.97; }
+  52% { opacity: 1; }
+}
+.apoc-crt-flicker {
+  animation: apocFlicker 4.5s ease-in-out infinite;
+}
+.apoc-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(74, 222, 128, 0.04) 2px,
+    rgba(74, 222, 128, 0.04) 3px
+  );
+}
+@keyframes apocBlink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0.35; }
+}
+.apoc-blink {
+  animation: apocBlink 1.1s step-end infinite;
+}
+@keyframes apocGlitchBorder {
+  0%, 100% { border-color: rgba(74, 222, 128, 0.85); }
+  33% { border-color: rgba(34, 197, 94, 0.5); }
+  66% { border-color: rgba(134, 239, 172, 0.7); }
+}
+.apoc-glitch-border {
+  animation: apocGlitchBorder 3.2s ease-in-out infinite;
+}
+
+/* Celebration / confetti */
+@keyframes celebrationFall {
+  0% { transform: translateY(-12vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0.85; }
+}
+.celebration-confetti-piece {
+  animation-name: celebrationFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes celebrationBanner {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.celebration-bounce-banner {
+  animation: celebrationBanner 2.4s ease-in-out infinite;
+}
+@keyframes celebrationCardPop {
+  from { opacity: 0; transform: translateY(12px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.celebration-card-pop {
+  animation: celebrationCardPop 0.5s ease-out both;
+}
+@keyframes celebrationWiggle {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+.celebration-wiggle {
+  animation: celebrationWiggle 1.8s ease-in-out infinite;
+}
+@keyframes celebrationModal {
+  from { opacity: 0; transform: scale(0.9) rotate(-2deg); }
+  to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.celebration-modal-pop {
+  animation: celebrationModal 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* One-handed mobile */
+@keyframes ohThumbGlow {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.03); }
+}
+.oh-thumb-glow {
+  background: radial-gradient(ellipse at 100% 100%, rgba(56, 189, 248, 0.35) 0%, transparent 65%);
+  animation: ohThumbGlow 5s ease-in-out infinite;
+}
+@keyframes ohCardNudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-3px); }
+}
+.oh-card-nudge {
+  animation: ohCardNudge 6s ease-in-out infinite;
+}
+@keyframes ohFabPulse {
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  50% { transform: scale(1.05); opacity: 0.55; }
+}
+.oh-fab-ring {
+  animation: ohFabPulse 3.5s ease-in-out infinite;
+}
+@keyframes ohModalSlide {
+  from { opacity: 0; transform: translateY(100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.oh-modal-slide {
+  animation: ohModalSlide 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Waiting room */
+.wr-ceiling-tiles {
+  background-image: linear-gradient(90deg, transparent 49%, rgba(107, 101, 96, 0.08) 49%, rgba(107, 101, 96, 0.08) 51%, transparent 51%);
+  background-size: 64px 100%;
+}
+@keyframes wrTicketFlip {
+  0%, 90% { transform: rotateY(0deg); }
+  95% { transform: rotateY(180deg); }
+  100% { transform: rotateY(360deg); }
+}
+.wr-ticket-flip {
+  animation: wrTicketFlip 12s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+@keyframes wrClockSway {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+.wr-clock-sway {
+  animation: wrClockSway 4s ease-in-out infinite;
+}
+@keyframes wrMagTilt {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+.wr-mag-tilt {
+  animation: wrMagTilt 5s ease-in-out infinite;
+}
+@keyframes wrRowFade {
+  from { opacity: 0.65; }
+  to { opacity: 1; }
+}
+.wr-row-fade {
+  animation: wrRowFade 4s ease-in-out infinite alternate;
+}
+
+/* Printed paper */
+@keyframes paperCurl {
+  0%, 100% { transform: perspective(800px) rotateX(0.6deg); }
+  50% { transform: perspective(800px) rotateX(-0.4deg); }
+}
+.paper-curl {
+  animation: paperCurl 8s ease-in-out infinite;
+}
+.paper-margin-holes {
+  background: radial-gradient(circle at 50% 12%, #78716c 3px, transparent 3px),
+    radial-gradient(circle at 50% 38%, #78716c 3px, transparent 3px),
+    radial-gradient(circle at 50% 62%, #78716c 3px, transparent 3px),
+    radial-gradient(circle at 50% 88%, #78716c 3px, transparent 3px);
+  background-size: 100% 25%;
+  opacity: 0.35;
+}
+.paper-fiber-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+}
+.paper-toner-stripe {
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(120, 53, 15, 0.25) 0px,
+    rgba(120, 53, 15, 0.25) 2px,
+    rgba(250, 248, 243, 0.4) 2px,
+    rgba(250, 248, 243, 0.4) 4px
+  );
+}
+@keyframes paperInk {
+  from { opacity: 0.88; }
+  to { opacity: 1; }
+}
+.paper-ink-settle {
+  animation: paperInk 3s ease-in-out infinite alternate;
+}
+@keyframes paperModalFlip {
+  from { opacity: 0; transform: rotateX(-8deg) scale(0.96); }
+  to { opacity: 1; transform: rotateX(0) scale(1); }
+}
+.paper-modal-flip {
+  animation: paperModalFlip 0.45s ease-out both;
+}
+
+/* 60-second challenge */
+@keyframes challengePulseBg {
+  0%, 100% { filter: saturate(1); }
+  50% { filter: saturate(1.15); }
+}
+.challenge-pulse-bg {
+  animation: challengePulseBg 2s ease-in-out infinite;
+}
+@keyframes challengeDigit {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+.challenge-digit-shake {
+  animation: challengeDigit 0.5s ease-in-out infinite;
+}
+@keyframes challengeRowPop {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.challenge-row-pop {
+  animation: challengeRowPop 0.4s ease-out both;
+}
+@keyframes challengeModal {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(1px, -1px); }
+  66% { transform: translate(-1px, 1px); }
+}
+.challenge-modal-shake {
+  animation: challengeModal 0.25s ease-in-out infinite;
+}
+
+/* Boss proximity radar */
+@keyframes bossRadar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.boss-radar-sweep::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 50%;
+  height: 2px;
+  margin-top: -1px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.9), transparent);
+  animation: bossRadar 3s linear infinite;
+}
+
+/* Snooze stack */
+@keyframes snoozeBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.snooze-card-bob {
+  animation: snoozeBob 3.5s ease-in-out infinite;
+}
+@keyframes snoozeWiggle {
+  0%, 100% { transform: rotate(-0.5deg); }
+  50% { transform: rotate(0.5deg); }
+}
+.snooze-modal-wiggle {
+  animation: snoozeWiggle 2.8s ease-in-out infinite;
+}
+
+/* Inbox zero fantasy */
+@keyframes zeroConfetti {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+  100% { transform: translateY(110vh) rotate(540deg); opacity: 0.4; }
+}
+.zero-confetti {
+  animation: zeroConfetti linear infinite;
+  animation-duration: 14s;
+}
+@keyframes zeroGlow {
+  0%, 100% { box-shadow: 0 0 40px rgba(192, 38, 211, 0.2); }
+  50% { box-shadow: 0 0 70px rgba(232, 121, 249, 0.35); }
+}
+.zero-glow-ring {
+  animation: zeroGlow 3s ease-in-out infinite;
+}
+@keyframes zeroSparkle {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.92; filter: brightness(1.08); }
+}
+.zero-row-sparkle {
+  animation: zeroSparkle 2.8s ease-in-out infinite;
+}
+@keyframes zeroModal {
+  from { opacity: 0; transform: scale(0.94) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.zero-modal-rise {
+  animation: zeroModal 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Mexican fiesta / sombrero */
+@keyframes sombreroPapelDrift {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.sombrero-papel-drift {
+  animation: sombreroPapelDrift 22s linear infinite;
+}
+@keyframes sombreroMaraca {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
+}
+.sombrero-maraca {
+  animation: sombreroMaraca 0.9s ease-in-out infinite;
+  transform-origin: 50% 80%;
+}
+
+/* Cowgirl lasso */
+@keyframes cowgirlLasso {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.cowgirl-lasso-spin {
+  animation: cowgirlLasso 14s linear infinite;
+}
+@keyframes cowgirlBootTap {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-4px) rotate(2deg); }
+}
+.cowgirl-boot-tap {
+  animation: cowgirlBootTap 2.4s ease-in-out infinite;
+}
+
+/* Dominatrix — subtle pulse (tasteful lounge) */
+@keyframes domStudGlint {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.85; }
+}
+.dom-stud-glint {
+  animation: domStudGlint 3.2s ease-in-out infinite;
+}
+@keyframes domChainShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+.dom-chain-shimmer {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent2) 18%, transparent) 45%,
+    transparent 80%
+  );
+  background-size: 200% 100%;
+  animation: domChainShimmer 8s ease-in-out infinite alternate;
+}
+
+/* Pineapple pizza controversy */
+@keyframes pineappleBob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-10px) rotate(4deg); }
+}
+.pineapple-bob {
+  animation: pineappleBob 2.2s ease-in-out infinite;
+}
+@keyframes pineappleSplitPulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.08); }
+}
+.pineapple-split-pulse {
+  animation: pineappleSplitPulse 4s ease-in-out infinite;
+}
+
+/* Dog lover */
+@keyframes dogTailWag {
+  0%, 100% { transform: rotate(-18deg); }
+  50% { transform: rotate(18deg); }
+}
+.dog-tail-wag {
+  animation: dogTailWag 0.35s ease-in-out infinite;
+  transform-origin: 20% 50%;
+}
+@keyframes dogBallBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.dog-ball-bounce {
+  animation: dogBallBounce 1.1s ease-in-out infinite;
+}
+
+/* Cat lover */
+@keyframes catYarnSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.cat-yarn-spin {
+  animation: catYarnSpin 24s linear infinite;
+}
+@keyframes catPawKnead {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+.cat-paw-knead {
+  animation: catPawKnead 2.8s ease-in-out infinite;
+}
+
+/* Pet POV readers */
+@keyframes petReadingBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.pet-reading-bob {
+  animation: petReadingBob 3s ease-in-out infinite;
+}
+@keyframes dogSniff {
+  0%, 100% { transform: translateX(0); }
+  33% { transform: translateX(2px); }
+  66% { transform: translateX(-1px); }
+}
+.dog-sniff-line {
+  animation: dogSniff 0.4s ease-in-out infinite;
+}
+
+/* Dinosaurs still alive */
+@keyframes dinoMeteor {
+  0% { opacity: 0; transform: translate(20%, -10%) rotate(215deg); }
+  15% { opacity: 0.9; }
+  100% { opacity: 0; transform: translate(-120%, 80%) rotate(215deg); }
+}
+.dino-meteor {
+  animation: dinoMeteor 14s ease-in-out infinite;
+}
+@keyframes dinoLeafSway {
+  0%, 100% { transform: rotate(-6deg) translateY(0); }
+  50% { transform: rotate(6deg) translateY(-4px); }
+}
+.dino-leaf-sway {
+  animation: dinoLeafSway 5s ease-in-out infinite;
+}
+@keyframes dinoAmberGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(251, 191, 36, 0.25); }
+  50% { text-shadow: 0 0 32px rgba(251, 191, 36, 0.45); }
+}
+.dino-amber-glow {
+  animation: dinoAmberGlow 4s ease-in-out infinite;
+}
+@keyframes dinoStomp {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+.dino-stomp-card:hover {
+  animation: dinoStomp 0.35s ease-in-out;
+}
+
+/* Donald Duck inbox (parody) */
+@keyframes duckSpeechPop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+}
+.duck-speech-pop {
+  animation: duckSpeechPop 3.5s ease-in-out infinite;
+}
+.duck-comic-panel {
+  transition: transform 0.2s ease;
+}
+.duck-comic-panel:hover {
+  transform: rotate(-0.5deg);
+}
+@keyframes duckTantrum {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-0.8deg); }
+  75% { transform: rotate(0.8deg); }
+}
+.duck-tantrum {
+  animation: duckTantrum 0.5s ease-in-out infinite;
+}
+
+/* Swiss cheese lover */
+@keyframes swissAlpineFloat {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+}
+.swiss-alpine-float {
+  background-size: 120% 120%;
+  animation: swissAlpineFloat 20s ease-in-out infinite;
+}
+@keyframes swissHoleFloat {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(3px, -2px); }
+}
+.swiss-hole {
+  animation: swissHoleFloat 6s ease-in-out infinite;
+}
+.swiss-hole:nth-child(2) { animation-delay: -2s; }
+.swiss-hole:nth-child(3) { animation-delay: -4s; }
+@keyframes swissEmmentalShimmer {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.06); }
+}
+.swiss-emmental-shimmer {
+  animation: swissEmmentalShimmer 5s ease-in-out infinite;
+}
+
+/* Trader */
+@keyframes traderFlash {
+  0%, 100% { box-shadow: 0 0 0 transparent; }
+  50% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.35); }
+}
+.trader-flash-pulse {
+  animation: traderFlash 2.8s ease-in-out infinite;
+}
+@keyframes traderTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.trader-ticker-inner {
+  animation: traderTicker 42s linear infinite;
+}
+.trader-ticker-wrap:hover .trader-ticker-inner {
+  animation-play-state: paused;
+}
+
+/* FM broadcaster */
+.fm-wave-overlay {
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 40px,
+    rgba(251, 191, 36, 0.04) 40px,
+    rgba(251, 191, 36, 0.04) 41px
+  );
+  animation: fmWaveDrift 12s linear infinite;
+}
+@keyframes fmWaveDrift {
+  from { background-position: 0 0; }
+  to { background-position: 80px 0; }
+}
+@keyframes fmVuSeg {
+  0%, 100% { transform: scaleY(0.2); opacity: 0.6; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+.fm-vu-segment {
+  transform-origin: bottom;
+  animation: fmVuSeg 0.55s ease-in-out infinite;
+}
+@keyframes fmOnAir {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.92; filter: brightness(1.15); }
+}
+.fm-on-air-badge {
+  animation: fmOnAir 1.2s ease-in-out infinite;
+}
+@keyframes fmDeckReel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.fm-deck-reel {
+  animation: fmDeckReel 8s linear infinite;
+}
+.fm-segment-card {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Developer IDE */
+@keyframes devBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.dev-cursor-blink {
+  animation: devBlink 1s step-end infinite;
+}
+@keyframes devBranchPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(0.85); }
+}
+.dev-branch-pulse {
+  animation: devBranchPulse 1.4s ease-in-out infinite;
+}
+
+/* Bob Marley inbox (parody) */
+@keyframes marleyVinylSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.marley-vinyl {
+  animation: marleyVinylSpin 24s linear infinite;
+}
+@keyframes marleyCardRise {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.marley-card-rise {
+  animation: marleyCardRise 5s ease-in-out infinite;
+}
+@keyframes marleyBobSoft {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(-4deg); }
+}
+.marley-bob-soft {
+  animation: marleyBobSoft 3.5s ease-in-out infinite;
+}
+@keyframes marleyEq {
+  0%, 100% { transform: scaleY(0.35); opacity: 0.7; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+.marley-eq-bar {
+  transform-origin: bottom;
+  animation: marleyEq 0.7s ease-in-out infinite;
+}
+
+/* Oldschool internet · Myspace · Early FB · Pixel · B&W · Red/blue · Weekend · Monday · Drunk · Hangover · Poor · Rich */
+@keyframes oldschoolMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.oldschool-geocities-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: oldschoolMarquee 28s linear infinite;
+}
+@keyframes myspaceGlitter {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.myspace-glitter-bg {
+  background: linear-gradient(110deg, #ff1493 0%, #9400d3 25%, #00bfff 50%, #ff1493 75%, #9400d3 100%);
+  background-size: 400% 400%;
+  animation: myspaceGlitter 8s ease infinite;
+}
+@keyframes earlyfbPoke {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+.earlyfb-poke-pulse {
+  animation: earlyfbPoke 1.8s ease-in-out infinite;
+}
+@keyframes pixelCrtFlicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.85; }
+  94% { opacity: 1; }
+}
+.pixel-crt-flicker {
+  animation: pixelCrtFlicker 4s step-end infinite;
+}
+@keyframes bwPrintJitter {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(0.3px, -0.2px); }
+  50% { transform: translate(-0.2px, 0.3px); }
+  75% { transform: translate(0.2px, 0.2px); }
+}
+.bw-print-shake {
+  animation: bwPrintJitter 0.15s linear infinite;
+}
+@keyframes anaglyphDrift {
+  0%, 100% { text-shadow: 2px 0 #f00, -2px 0 #00f; }
+  50% { text-shadow: 3px 0 #f00, -3px 0 #00f; }
+}
+.anaglyph-drift {
+  animation: anaglyphDrift 2.5s ease-in-out infinite;
+}
+@keyframes weekendDisco {
+  0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+  50% { filter: hue-rotate(40deg) brightness(1.08); }
+}
+.weekend-disco-lights {
+  animation: weekendDisco 5s ease-in-out infinite;
+}
+@keyframes mondayAlarm {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-2px, 1px) rotate(-0.5deg); }
+  40% { transform: translate(2px, -1px) rotate(0.5deg); }
+  60% { transform: translate(-1px, -2px) rotate(-0.3deg); }
+  80% { transform: translate(1px, 2px) rotate(0.3deg); }
+}
+.monday-alarm-vibrate {
+  animation: mondayAlarm 0.4s ease-in-out infinite;
+}
+@keyframes drunkWobble {
+  0%, 100% { transform: rotate(0deg) translate(0, 0); }
+  25% { transform: rotate(0.8deg) translate(4px, -2px); }
+  50% { transform: rotate(-0.6deg) translate(-3px, 3px); }
+  75% { transform: rotate(0.5deg) translate(2px, 2px); }
+}
+.drunk-screen-wobble {
+  animation: drunkWobble 3.2s ease-in-out infinite;
+}
+@keyframes drunkSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.drunk-spin-slow {
+  animation: drunkSpin 18s linear infinite;
+}
+@keyframes hangoverBlinds {
+  0%, 100% { opacity: 0.12; }
+  50% { opacity: 0.22; }
+}
+.hangover-blinds {
+  animation: hangoverBlinds 6s ease-in-out infinite;
+}
+@keyframes hangoverThrob {
+  0%, 100% { filter: brightness(0.92); }
+  50% { filter: brightness(1.02); }
+}
+.hangover-throb {
+  animation: hangoverThrob 4s ease-in-out infinite;
+}
+@keyframes poorFlicker {
+  0%, 100% { opacity: 1; }
+  48% { opacity: 1; }
+  49% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+.poor-broken-flicker {
+  animation: poorFlicker 5s step-end infinite;
+}
+@keyframes richGoldShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.rich-gold-shimmer {
+  background: linear-gradient(105deg, #d4af37 0%, #fff8dc 35%, #d4af37 70%, #b8860b 100%);
+  background-size: 200% 200%;
+  animation: richGoldShimmer 6s ease infinite;
+}
+@keyframes richTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.rich-ticker-gold-inner {
+  display: inline-block;
+  white-space: nowrap;
+  animation: richTicker 50s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .xbox2-bg-grid-drift,
+  .xbox2-bg-aurora,
+  .xbox2-bg-halo,
   .xbox2-bg-sweep,
   .xbox2-chrome-shimmer,
   .xbox2-pulse-dot,
@@ -581,8 +3236,244 @@ body {
   .wii-channel-float,
   .wii-letter-wobble,
   .wii-star-spin,
-  .wii-pointer-bob {
+  .wii-pointer-bob,
+  .ness-psych-bg,
+  .ness-hp-fill,
+  .ness-menu-active,
+  .ness-smash-badge,
+  .ness-blink-cursor,
+  .ness-typewriter,
+  .mk-clouds,
+  .mk-coin-pop,
+  .mk-star,
+  .german-wave-overlay,
+  .german-marquee-inner,
+  .german-tor-badge,
+  .german-ball-sway,
+  .queen-crown-float,
+  .queen-wax-seal,
+  .exec-shine,
+  .exec-stamp-rotate,
+  .exec-gold-glow,
+  .exec-wobble,
+  .exec-blink-tie,
+  .punk-skull-spin,
+  .punk-flyer-wobble,
+  .punk-stripe-drift,
+  .altered-hue-slow,
+  .altered-tunnel,
+  .altered-jitter,
+  .shibuya-marquee-up,
+  .shibuya-ad-tilt,
+  .shibuya-flash,
+  .shibuya-marquee-left,
+  .shibuya-popup-blink,
+  .ebay-urgent,
+  .amazon-tape-move,
+  .amazon-prime-glow,
+  .amazon-smile-bounce,
+  .scammer-blink,
+  .scammer-shimmer-btn,
+  .scammer-shimmer-text,
+  .scammer-popup-wiggle,
+  .scammer-marquee,
+  .scammer-matrix-col,
+  .pizza-spin,
+  .pizza-spin-reverse,
+  .pizza-cheese-shimmer,
+  .pizza-topping-bob,
+  .pizza-oven-glow,
+  .pizza-heat-bar,
+  .pizza-oven-door,
+  .pizza-steam-layer::before,
+  .pizza-steam-layer::after,
+  .pizza-bar-rise,
+  .baby-mobile-spin,
+  .baby-cloud-1,
+  .baby-cloud-2,
+  .baby-cloud-3,
+  .baby-wobble-card,
+  .baby-bounce-emoji,
+  .baby-star-twinkle,
+  .baby-block-stack,
+  .grand-article-drift,
+  .grand-wood-shine,
+  .grand-masthead,
+  .tetris-fall,
+  .tetris-piece-lock,
+  .tetris-next-glow,
+  .tetris-marquee,
+  .tetris-grid-drift,
+  .tetris-header-pulse,
+  .tetris-playfield-anim::before,
+  .tetris-playfield-anim::after,
+  .tetris-mini-well-inner,
+  .tetris-well-row,
+  .tetris-well-rows,
+  .tetris-hud-pop,
+  button.tetris-row:hover,
+  .tetris-empty-block,
+  .smurf-spores::before,
+  .smurf-spores::after,
+  .smurf-float-emoji,
+  .smurf-letter-picked,
+  .princess-sparkle,
+  .princess-crown-bob,
+  .princess-scroll-glow,
+  .god-glow-text,
+  .god-halo-spin,
+  .cowboy-sun-pulse,
+  .cowboy-dust,
+  .hobbit-door-glow,
+  .hobbit-smoke::before,
+  .hobbit-envelope-open,
+  .vador-breathe,
+  .vador-helmet-ring,
+  .dubai-gold-sky,
+  .dubai-palm-sway,
+  .dubai-sparkle,
+  .dubai-ticker-inner,
+  .sakura-petal,
+  .sakura-river-flow,
+  .flower-bob,
+  .flower-pollen,
+  .karen-shake-soft,
+  .karen-siren-ring,
+  .karen-marquee,
+  .road-stripe-scroll,
+  .road-hud-pulse,
+  .road-rumble,
+  .velvet-shimmer,
+  .champagne-bubble,
+  .vault-dial-teeth,
+  .bank-laser,
+  .cash-stack-bob,
+  .nft-spin-slow,
+  .nft-glitch-hover,
+  .nft-floor-marquee,
+  .nft-hex-pulse,
+  .deal-ticker-inner,
+  .deal-price-flash:hover,
+  .deal-modal-pop,
+  .shy-float-slow,
+  .shy-fade-in,
+  .shy-fade-in-delay-1,
+  .shy-fade-in-delay-2,
+  .shy-fade-in-delay-3,
+  .shy-fade-in-delay-4,
+  .shy-modal-rise,
+  .elder-dial-glow,
+  .elder-vinyl-spin,
+  .elder-news-scroll,
+  .first-net-blink,
+  .first-guestbook-marquee,
+  .insomnia-twinkle,
+  .insomnia-row-drift,
+  .insomnia-modal-glow,
+  .insomnia-float-ui,
+  .meditation-breath-orb,
+  .meditation-fade-stagger,
+  .apoc-crt-flicker,
+  .apoc-blink,
+  .apoc-glitch-border,
+  .celebration-confetti-piece,
+  .celebration-bounce-banner,
+  .celebration-card-pop,
+  .celebration-wiggle,
+  .celebration-modal-pop,
+  .oldschool-geocities-marquee,
+  .myspace-glitter-bg,
+  .earlyfb-poke-pulse,
+  .pixel-crt-flicker,
+  .bw-print-shake,
+  .anaglyph-drift,
+  .weekend-disco-lights,
+  .monday-alarm-vibrate,
+  .drunk-screen-wobble,
+  .drunk-spin-slow,
+  .hangover-blinds,
+  .hangover-throb,
+  .poor-broken-flicker,
+  .rich-gold-shimmer,
+  .rich-ticker-gold-inner {
     animation: none !important;
+  }
+  .oh-thumb-glow,
+  .oh-card-nudge,
+  .oh-fab-ring,
+  .oh-modal-slide,
+  .wr-ticket-flip,
+  .wr-clock-sway,
+  .wr-mag-tilt,
+  .wr-row-fade,
+  .paper-curl,
+  .paper-ink-settle,
+  .paper-modal-flip,
+  .challenge-pulse-bg,
+  .challenge-digit-shake,
+  .challenge-row-pop,
+  .challenge-modal-shake,
+  .boss-radar-sweep::after,
+  .snooze-card-bob,
+  .snooze-modal-wiggle,
+  .zero-confetti,
+  .zero-glow-ring,
+  .zero-row-sparkle,
+  .zero-modal-rise,
+  .sombrero-papel-drift,
+  .sombrero-maraca,
+  .cowgirl-lasso-spin,
+  .cowgirl-boot-tap,
+  .dom-stud-glint,
+  .dom-chain-shimmer,
+  .pineapple-bob,
+  .pineapple-split-pulse,
+  .dog-tail-wag,
+  .dog-ball-bounce,
+  .cat-yarn-spin,
+  .cat-paw-knead,
+  .pet-reading-bob,
+  .dog-sniff-line,
+  .dino-meteor,
+  .dino-leaf-sway,
+  .dino-amber-glow,
+  .duck-speech-pop,
+  .duck-tantrum,
+  .swiss-alpine-float,
+  .swiss-hole,
+  .swiss-emmental-shimmer,
+  .trader-flash-pulse,
+  .trader-ticker-inner,
+  .fm-wave-overlay,
+  .fm-vu-segment,
+  .fm-on-air-badge,
+  .fm-deck-reel,
+  .dev-cursor-blink,
+  .dev-branch-pulse,
+  .marley-vinyl,
+  .marley-card-rise,
+  .marley-bob-soft,
+  .marley-eq-bar,
+  .oldschool-geocities-marquee,
+  .myspace-glitter-bg,
+  .earlyfb-poke-pulse,
+  .pixel-crt-flicker,
+  .bw-print-shake,
+  .anaglyph-drift,
+  .weekend-disco-lights,
+  .monday-alarm-vibrate,
+  .drunk-screen-wobble,
+  .drunk-spin-slow,
+  .hangover-blinds,
+  .hangover-throb,
+  .poor-broken-flicker,
+  .rich-gold-shimmer,
+  .rich-ticker-gold-inner {
+    animation: none !important;
+  }
+  .duck-comic-panel:hover,
+  .dino-stomp-card:hover {
+    transform: none !important;
   }
 }
 
