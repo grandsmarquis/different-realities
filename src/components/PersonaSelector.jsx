@@ -1262,7 +1262,10 @@ export default function PersonaSelector({ onSelectPersona }) {
             who are you?
           </h1>
           <p className="text-sm tracking-widest text-neutral-500">
-            The same inbox. {personas.length} completely different worlds.
+             In the age of AI, it's sometime faster to code something than search for it. We explore how the same data would look through the eyes of different people. An experiment by <a href="https://infiniwa.comr" target="_blank" className="text-blue-500 hover:text-blue-400">Infiniwa</a>.
+          </p>
+          <p className="text-sm tracking-widest text-neutral-500 mt-5">
+            The same inbox. {personas.length} different worlds.
           </p>
         </div>
 
@@ -1275,7 +1278,7 @@ export default function PersonaSelector({ onSelectPersona }) {
             type="search"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Name, vibe, or id…"
+            placeholder="Name, vibe, or description..."
             autoComplete="off"
             className="input input-bordered w-full border-neutral-700 bg-neutral-900 text-neutral-100 placeholder:text-neutral-600 focus:border-neutral-500 focus:outline-none"
           />
