@@ -1254,23 +1254,29 @@ export default function PersonaSelector({ onSelectPersona }) {
   }, [search])
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-neutral-950 pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(2.5rem,env(safe-area-inset-bottom))]">
-      <div className="mx-auto flex w-full max-w-[1300px] flex-col items-center px-4 sm:px-6">
+    <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-neutral-950 pt-[max(2rem,env(safe-area-inset-top)+0.75rem)] pb-[max(3.5rem,env(safe-area-inset-bottom)+1.25rem)]">
+      <div className="mx-auto flex w-full max-w-[1300px] flex-col items-center gap-10 px-5 sm:px-8 lg:px-10">
         {/* Title */}
-        <div className="mb-8 w-full text-center">
-          <h1 className="mb-2 font-serif font-light tracking-[0.2rem] text-white" style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)' }}>
+        <div className="w-full max-w-2xl text-center sm:max-w-3xl">
+          <h1 className="mb-4 font-serif font-light tracking-[0.2rem] text-white sm:mb-5" style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)' }}>
             who are you?
           </h1>
-          <p className="text-sm tracking-widest text-neutral-500">
-             In the age of AI, it's sometime faster to code something than search for it. We explore how the same data would look through the eyes of different people. An experiment by <a href="https://infiniwa.comr" target="_blank" className="text-blue-500 hover:text-blue-400">Infiniwa</a>.
-          </p>
-          <p className="text-sm tracking-widest text-neutral-500 mt-5">
-            The same inbox. {personas.length} different worlds.
-          </p>
+          <div className="space-y-5 text-sm leading-relaxed tracking-widest text-neutral-500 sm:space-y-6">
+            <p>
+              In the age of AI, it&apos;s sometime faster to code something than search for it. We explore how the same data would look through the eyes of different people. An experiment by{' '}
+              <a href="https://infiniwa.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400">
+                Infiniwa
+              </a>
+              .
+            </p>
+            <p>
+              The same inbox. {personas.length} different visions
+            </p>
+          </div>
         </div>
 
-        <div className="mb-6 w-full max-w-md">
-          <label htmlFor={searchId} className="label py-1">
+        <div className="w-full max-w-md">
+          <label htmlFor={searchId} className="label mb-1 block py-0">
             <span className="label-text text-xs tracking-widest text-neutral-500">Search personas</span>
           </label>
           <input
@@ -1285,9 +1291,9 @@ export default function PersonaSelector({ onSelectPersona }) {
         </div>
 
         {/* Persona cards grid */}
-        <div className="flex w-full flex-wrap justify-center gap-3">
+        <div className="flex w-full flex-wrap justify-center gap-4 sm:gap-5">
           {filteredPersonas.length === 0 ? (
-            <p className="py-12 text-center text-sm tracking-wide text-neutral-500">
+            <p className="py-16 text-center text-sm tracking-wide text-neutral-500">
               No personas match “{search.trim()}”.
             </p>
           ) : null}
@@ -1353,7 +1359,7 @@ export default function PersonaSelector({ onSelectPersona }) {
           })}
         </div>
 
-        <p className="mt-8 text-center text-[0.7rem] tracking-widest text-neutral-700">
+        <p className="text-center text-[0.7rem] tracking-widest text-neutral-700">
           same data ·{' '}
           {search.trim()
             ? `${filteredPersonas.length} of ${personas.length} realities`
