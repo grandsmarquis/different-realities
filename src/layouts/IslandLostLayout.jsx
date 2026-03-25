@@ -9,7 +9,7 @@ export default function IslandLostLayout({ onSwitchPersona }) {
   const { selectedEmail, setSelectedEmail } = usePersona()
 
   return (
-    <div className="island-wave-bg relative min-h-dvh bg-gradient-to-b from-sky-400 via-amber-200 to-amber-100 text-amber-950">
+    <div className="island-wave-bg relative min-h-dvh text-amber-950">
       <div className="island-palm-sway pointer-events-none absolute -left-4 bottom-0 text-[min(28vw,180px)] leading-none opacity-25 select-none" aria-hidden>🌴</div>
       <div className="island-palm-sway-reverse pointer-events-none absolute -right-8 bottom-0 scale-x-[-1] text-[min(24vw,160px)] leading-none opacity-20 select-none" aria-hidden>🌴</div>
       <div className="pointer-events-none absolute left-1/2 top-[12%] -translate-x-1/2 text-6xl opacity-30" aria-hidden>🏝️</div>

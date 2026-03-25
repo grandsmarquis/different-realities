@@ -3222,6 +3222,153 @@ button.tetris-row:hover:not([aria-current="true"]) {
   animation: richTicker 50s linear infinite;
 }
 
+/* Doctor, student, island, offline, lottery, athlete */
+@keyframes doctorEcgDash {
+  to { stroke-dashoffset: -48; }
+}
+.doctor-clinic-bg {
+  background: linear-gradient(165deg, #ecfdf5 0%, #f0fdfa 45%, #e2e8f0 100%);
+}
+.doctor-ecg-strip {
+  overflow: hidden;
+}
+.doctor-ecg-line path {
+  stroke-dasharray: 14 10;
+  animation: doctorEcgDash 1.4s linear infinite;
+}
+
+@keyframes studentWobble {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(0.12deg); }
+}
+.student-desk-wobble {
+  animation: studentWobble 5s ease-in-out infinite;
+}
+.student-cracked-frame {
+  box-shadow:
+    inset 0 0 0 1px rgba(251, 191, 36, 0.12),
+    0 0 40px rgba(0, 0, 0, 0.35);
+}
+@keyframes studentCoin {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+.student-coin-jar {
+  animation: studentCoin 2.8s ease-in-out infinite;
+}
+
+@keyframes islandWaveBg {
+  0%, 100% { background-position: 0% 40%; }
+  50% { background-position: 100% 60%; }
+}
+.island-wave-bg {
+  background-image: linear-gradient(to bottom, #7dd3fc, #fde68a, #fef9c7);
+  background-size: 220% 220%;
+  animation: islandWaveBg 14s ease-in-out infinite;
+}
+@keyframes palmSway {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+.island-palm-sway {
+  animation: palmSway 5.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.island-palm-sway-reverse {
+  animation: palmSway 7s ease-in-out infinite reverse;
+  transform-origin: bottom center;
+}
+@keyframes islandSos {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.3); }
+  50% { box-shadow: 0 0 28px 6px rgba(217, 119, 6, 0.2); }
+}
+.island-sos-glow {
+  animation: islandSos 3.2s ease-in-out infinite;
+}
+
+@keyframes offlineCrt {
+  0%, 100% { opacity: 1; }
+  94% { opacity: 1; }
+  95% { opacity: 0.92; }
+  96% { opacity: 1; }
+}
+.offline-crt-flicker {
+  animation: offlineCrt 5s step-end infinite;
+}
+@keyframes offlineBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.offline-blink-banner {
+  animation: offlineBlink 1.1s step-end infinite;
+}
+
+@keyframes lotterySparkleBg {
+  0%, 100% { background-position: 0% 50%, 0% 30%, 100% 70%; }
+  50% { background-position: 50% 50%, 100% 50%, 0% 50%; }
+}
+.lottery-sparkle-bg {
+  background-image:
+    linear-gradient(to bottom, #2e1065 0%, #581c87 35%, #713f12 100%),
+    radial-gradient(ellipse at 25% 20%, rgba(250, 204, 21, 0.22) 0%, transparent 45%),
+    radial-gradient(ellipse at 75% 80%, rgba(192, 132, 252, 0.14) 0%, transparent 40%);
+  background-size: 100% 100%, 140% 140%, 140% 140%;
+  animation: lotterySparkleBg 10s ease-in-out infinite;
+}
+@keyframes lotteryConfettiDrift {
+  from { background-position: 0 0, 12px 8px; }
+  to { background-position: 80px 120px, 100px 140px; }
+}
+.lottery-confetti {
+  background-image:
+    radial-gradient(circle, rgba(253, 224, 71, 0.5) 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(244, 114, 182, 0.35) 1px, transparent 1px);
+  background-size: 28px 28px, 20px 20px;
+  animation: lotteryConfettiDrift 22s linear infinite;
+}
+@keyframes lotteryBubbleUp {
+  0% { transform: translateY(0) scale(1); opacity: 0.45; }
+  100% { transform: translateY(-100px) scale(1.8); opacity: 0; }
+}
+.lottery-bubble-champagne {
+  animation: lotteryBubbleUp 3.2s ease-out infinite;
+}
+.lottery-bubble-champagne-delay {
+  animation: lotteryBubbleUp 3.8s ease-out infinite;
+  animation-delay: 1s;
+}
+@keyframes lotteryTitleShine {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 12px rgba(250, 204, 21, 0.2)); }
+  50% { filter: brightness(1.12) drop-shadow(0 0 20px rgba(250, 204, 21, 0.35)); }
+}
+.lottery-title-shine {
+  animation: lotteryTitleShine 3.5s ease-in-out infinite;
+}
+
+@keyframes athleteTrackShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.athlete-track-bg {
+  background-image: linear-gradient(135deg, #ea580c 0%, #b91c1c 45%, #881337 100%);
+  background-size: 200% 200%;
+  animation: athleteTrackShift 20s ease-in-out infinite;
+}
+@keyframes athleteHr {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+.athlete-hr-pulse {
+  animation: athleteHr 0.85s ease-in-out infinite;
+}
+@keyframes athleteLane {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+.athlete-lane-slide {
+  animation: athleteLane 2.8s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .xbox2-bg-grid-drift,
   .xbox2-bg-aurora,
@@ -3395,6 +3542,23 @@ button.tetris-row:hover:not([aria-current="true"]) {
   .hangover-throb,
   .poor-broken-flicker,
   .rich-gold-shimmer,
+  .doctor-ecg-line path,
+  .student-desk-wobble,
+  .student-coin-jar,
+  .island-wave-bg,
+  .island-palm-sway,
+  .island-palm-sway-reverse,
+  .island-sos-glow,
+  .offline-crt-flicker,
+  .offline-blink-banner,
+  .lottery-sparkle-bg,
+  .lottery-confetti,
+  .lottery-bubble-champagne,
+  .lottery-bubble-champagne-delay,
+  .lottery-title-shine,
+  .athlete-track-bg,
+  .athlete-hr-pulse,
+  .athlete-lane-slide,
   .rich-ticker-gold-inner {
     animation: none !important;
   }
@@ -3468,6 +3632,23 @@ button.tetris-row:hover:not([aria-current="true"]) {
   .hangover-throb,
   .poor-broken-flicker,
   .rich-gold-shimmer,
+  .doctor-ecg-line path,
+  .student-desk-wobble,
+  .student-coin-jar,
+  .island-wave-bg,
+  .island-palm-sway,
+  .island-palm-sway-reverse,
+  .island-sos-glow,
+  .offline-crt-flicker,
+  .offline-blink-banner,
+  .lottery-sparkle-bg,
+  .lottery-confetti,
+  .lottery-bubble-champagne,
+  .lottery-bubble-champagne-delay,
+  .lottery-title-shine,
+  .athlete-track-bg,
+  .athlete-hr-pulse,
+  .athlete-lane-slide,
   .rich-ticker-gold-inner {
     animation: none !important;
   }

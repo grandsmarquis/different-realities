@@ -49,8 +49,8 @@ function PersonaRoute() {
       <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pb-11 [scrollbar-gutter:stable]">
         <Layout onSwitchPersona={() => navigate('/')} />
       </div>
-      <footer className="pointer-events-none fixed bottom-0 left-0 right-0 z-[100] flex w-full flex-row flex-wrap items-center justify-between gap-x-3 gap-y-1 border-t border-base-content/10 bg-base-300/90 px-3 py-1.5 text-base-content backdrop-blur-sm min-h-0">
-        <div className="flex items-center gap-0.5 pointer-events-auto">
+      <footer className="pointer-events-none fixed bottom-0 left-0 right-0 z-[100] flex w-full min-h-0 flex-row flex-wrap items-center gap-x-2 gap-y-1 border-t border-base-content/10 bg-base-300/90 px-3 py-1.5 text-base-content backdrop-blur-sm">
+        <div className="flex min-w-0 flex-1 items-center justify-start gap-0.5 pointer-events-auto">
           <button
             type="button"
             className="btn btn-xs btn-square btn-ghost"
@@ -72,7 +72,10 @@ function PersonaRoute() {
             </svg>
           </button>
         </div>
-        <p className="pointer-events-auto m-0 text-[10px] leading-tight opacity-80">
+        <p className="pointer-events-none m-0 min-w-0 max-w-[min(50vw,14rem)] flex-1 truncate text-center text-xs font-medium leading-tight opacity-90 sm:max-w-none">
+          {activePersona.label}
+        </p>
+        <p className="pointer-events-auto m-0 flex min-w-0 flex-1 justify-end text-[10px] leading-tight opacity-80">
           <a
             href="https://infiniwa.com"
             target="_blank"

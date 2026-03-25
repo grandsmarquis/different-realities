@@ -9,7 +9,7 @@ export default function LotteryWinnerLayout({ onSwitchPersona }) {
   const { selectedEmail, setSelectedEmail } = usePersona()
 
   return (
-    <div className="lottery-sparkle-bg relative min-h-dvh overflow-x-hidden bg-gradient-to-b from-violet-950 via-amber-950 to-yellow-900 text-amber-50">
+    <div className="lottery-sparkle-bg relative min-h-dvh overflow-x-hidden text-amber-50">
       <div className="lottery-confetti pointer-events-none absolute inset-0 opacity-40" aria-hidden />
       <div className="lottery-bubble-champagne pointer-events-none absolute bottom-20 left-[10%] h-3 w-3 rounded-full bg-amber-200/30" aria-hidden />
       <div className="lottery-bubble-champagne-delay pointer-events-none absolute bottom-32 left-[20%] h-2 w-2 rounded-full bg-yellow-100/25" aria-hidden />

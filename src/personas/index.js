@@ -129,6 +129,12 @@ import youAreDrunk from './youAreDrunk'
 import youAreHangover from './youAreHangover'
 import youArePoor from './youArePoor'
 import youAreRich from './youAreRich'
+import doctor from './doctor'
+import brokeStudent from './brokeStudent'
+import islandLost from './islandLost'
+import noInternet from './noInternet'
+import lotteryWinner from './lotteryWinner'
+import athlete from './athlete'
 
 export const personas = [
   grandmother, teenager, office, hipster, french,
@@ -154,6 +160,7 @@ export const personas = [
   gasPricesRising, bitcoinCrashing, bitcoinMooning,   sectGuruInbox, chineseRestaurantOwner, nflProPlayer,
   oldschoolInternet, myspaceCom, earlyFacebook, pixelArt, blackAndWhite, redAndBlue,
   itsTheWeekend, ohShitItsMonday, youAreDrunk, youAreHangover, youArePoor, youAreRich,
+  doctor, brokeStudent, islandLost, noInternet, lotteryWinner, athlete,
 ]
 
 export const personaMap = Object.fromEntries(personas.map(p => [p.id, p]))

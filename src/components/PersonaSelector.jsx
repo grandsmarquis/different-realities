@@ -625,6 +625,36 @@ const personaColors = {
     accent: '#d4af37',
     text: '#fafaf9',
   },
+  doctor: {
+    bg: 'linear-gradient(165deg, #ecfdf5 0%, #ccfbf1 50%, #e2e8f0 100%)',
+    accent: '#0d9488',
+    text: '#0f172a',
+  },
+  brokeStudent: {
+    bg: 'linear-gradient(165deg, #431407 0%, #292524 50%, #1c1917 100%)',
+    accent: '#fb923c',
+    text: '#ffedd5',
+  },
+  islandLost: {
+    bg: 'linear-gradient(180deg, #7dd3fc 0%, #fde68a 55%, #fcd34d 100%)',
+    accent: '#ea580c',
+    text: '#422006',
+  },
+  noInternet: {
+    bg: 'linear-gradient(180deg, #c0c0c0 0%, #a8a8a8 100%)',
+    accent: '#000080',
+    text: '#1a1a1a',
+  },
+  lotteryWinner: {
+    bg: 'linear-gradient(165deg, #2e1065 0%, #4c1d95 40%, #831843 100%)',
+    accent: '#fbbf24',
+    text: '#fef3c7',
+  },
+  athlete: {
+    bg: 'linear-gradient(135deg, #ea580c 0%, #b91c1c 50%, #7c2d12 100%)',
+    accent: '#a3e635',
+    text: '#ffffff',
+  },
 }
 
 const personaFonts = {
@@ -759,6 +789,12 @@ const personaFonts = {
   youAreHangover: "'Instrument Serif', serif",
   youArePoor: "'Courier Prime', monospace",
   youAreRich: "'Playfair Display', serif",
+  doctor: "'Libre Baskerville', serif",
+  brokeStudent: "'Outfit', sans-serif",
+  islandLost: "'Gelasio', serif",
+  noInternet: "'VT323', monospace",
+  lotteryWinner: "'Playfair Display', serif",
+  athlete: "'Bebas Neue', sans-serif",
 }
 
 export default function PersonaSelector({ onSelectPersona }) {

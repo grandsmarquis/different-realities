@@ -9,7 +9,7 @@ export default function AthleteLayout({ onSwitchPersona }) {
   const { selectedEmail, setSelectedEmail } = usePersona()
 
   return (
-    <div className="athlete-track-bg relative min-h-dvh overflow-x-hidden bg-gradient-to-br from-orange-600 via-red-700 to-rose-950 text-white">
+    <div className="athlete-track-bg relative min-h-dvh overflow-x-hidden text-white">
       <div className="pointer-events-none absolute inset-0 opacity-[0.12]" style={{
         backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 48px, rgba(255,255,255,0.15) 48px, rgba(255,255,255,0.15) 50px)',
       }} aria-hidden />
