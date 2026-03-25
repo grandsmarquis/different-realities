@@ -136,6 +136,133 @@ body {
   pointer-events: none;
 }
 
+/* Deep sea submarine scene */
+@keyframes submarineSonarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.submarine-sonar-sweep {
+  position: fixed;
+  bottom: -45vh;
+  left: 50%;
+  width: 220vmax;
+  height: 220vmax;
+  margin-left: -110vmax;
+  z-index: 0;
+  background: conic-gradient(
+    from 0deg at 50% 100%,
+    transparent 0deg,
+    transparent 326deg,
+    color-mix(in srgb, var(--accent) 12%, transparent) 342deg,
+    color-mix(in srgb, var(--accent) 22%, transparent) 352deg,
+    transparent 360deg
+  );
+  animation: submarineSonarSweep 16s linear infinite;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+@keyframes submarineBubbleRise {
+  0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+  6% { opacity: 0.45; }
+  92% { opacity: 0.35; }
+  100% { transform: translateY(-110vh) translateX(var(--bubble-drift, 12px)) scale(1); opacity: 0; }
+}
+.submarine-bubble {
+  position: fixed;
+  bottom: -2vh;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background: radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 62%);
+  animation: submarineBubbleRise var(--bubble-dur, 16s) ease-in infinite;
+  animation-delay: var(--bubble-delay, 0s);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes submarineFishSwim {
+  0% { transform: translateX(105vw) translateY(0) scaleX(-1); }
+  100% { transform: translateX(-35vw) translateY(18px) scaleX(-1); }
+}
+@keyframes submarineFishSwimRev {
+  0% { transform: translateX(-35vw) translateY(0); }
+  100% { transform: translateX(105vw) translateY(-12px); }
+}
+.submarine-fish {
+  position: fixed;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  opacity: 0.14;
+  animation: submarineFishSwim var(--fish-dur, 42s) linear infinite;
+  animation-delay: var(--fish-delay, 0s);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(0.4px);
+}
+.submarine-fish-rev {
+  animation-name: submarineFishSwimRev;
+}
+
+@keyframes submarineMegafauna {
+  0% { transform: translateX(-95vw) scale(0.9); opacity: 0; }
+  15% { opacity: 0.11; }
+  85% { opacity: 0.09; }
+  100% { transform: translateX(95vw) scale(1.15); opacity: 0; }
+}
+.submarine-megafauna {
+  position: fixed;
+  top: 38%;
+  left: 0;
+  width: min(100vw, 520px);
+  height: min(42vh, 280px);
+  margin-left: -10%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse 80% 55% at 50% 50%, rgba(0, 20, 35, 0.85) 0%, transparent 72%);
+  animation: submarineMegafauna 88s linear infinite;
+  animation-delay: -20s;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes submarineDepthFlicker {
+  0%, 100% { opacity: 1; }
+  48% { opacity: 1; }
+  50% { opacity: 0.82; }
+  52% { opacity: 1; }
+}
+.submarine-depth-readout {
+  animation: submarineDepthFlicker 5.5s ease-in-out infinite;
+}
+
+@keyframes submarinePortholeShimmer {
+  0% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent), 0 0 28px color-mix(in srgb, var(--accent) 8%, transparent); }
+  100% { box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 48px color-mix(in srgb, var(--accent) 14%, transparent); }
+}
+.submarine-porthole {
+  border-radius: clamp(1.25rem, 4vw, 2.5rem);
+  animation: submarinePortholeShimmer 4s ease-in-out infinite alternate;
+}
+
+@keyframes submarineSceneHue {
+  0% { filter: hue-rotate(-3deg) saturate(1); }
+  100% { filter: hue-rotate(5deg) saturate(1.06); }
+}
+.submarine-scene-hue {
+  animation: submarineSceneHue 14s ease-in-out infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .submarine-sonar-sweep,
+  .submarine-bubble,
+  .submarine-fish,
+  .submarine-fish-rev,
+  .submarine-megafauna,
+  .submarine-depth-readout,
+  .submarine-porthole,
+  .submarine-scene-hue {
+    animation: none !important;
+  }
+}
+
 @keyframes futureScan {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
