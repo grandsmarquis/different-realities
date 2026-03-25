@@ -1,7 +1,7 @@
 import MedievalLayout from '../layouts/MedievalLayout'
 const medieval = {
-  id: 'medieval', label: 'Medieval Scribe', emoji: '📜',
-  description: 'By quill and candlelight.',
+  id: 'medieval', label: 'Middle Ages', emoji: '🏰',
+  description: 'Illuminated manuscript inbox, candlelight, and town-crier news.',
   fonts: ['UnifrakturMaguntia', 'IM+Fell+English:ital@0;1'],
   cssVars: {
     '--bg': '#f4e4b0', '--bg2': '#eddfa0', '--text': '#2c1008', '--text2': '#6b3818',

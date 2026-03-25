@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { emails } from '../data/emails'
 
 export const PersonaContext = createContext(null)
 
@@ -10,12 +9,7 @@ export function PersonaProvider({ children }) {
   useEffect(() => {
     if (!activePersona) return
 
-    // Modal, overlay, or full-page email view: start with nothing selected
-    if (activePersona.emailSelectionInModal) {
-      setSelectedEmail(null)
-    } else {
-      setSelectedEmail(emails[0] ?? null)
-    }
+    setSelectedEmail(null)
 
     // Apply CSS vars to :root
     const root = document.documentElement

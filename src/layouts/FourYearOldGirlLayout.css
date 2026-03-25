@@ -1,0 +1,146 @@
+/* Four-year-old playroom — scoped under .fyo-page */
+
+.fyo-page {
+  --fyo-pink: #ff8dc7;
+  --fyo-lilac: #c4a7ff;
+  --fyo-mint: #7ee8c5;
+  --fyo-sun: #ffe066;
+  --fyo-sky: #7dd3fc;
+}
+
+@keyframes fyo-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--fyo-rot, 0deg));
+  }
+  50% {
+    transform: translateY(-12px) rotate(calc(var(--fyo-rot, 0deg) + 3deg));
+  }
+}
+
+@keyframes fyo-wiggle {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes fyo-sparkle {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes fyo-rainbow-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fyo-bounce-in {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  45% {
+    transform: translateY(-8px) scale(1.04);
+  }
+}
+
+@keyframes fyo-cloud-drift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(18px);
+  }
+}
+
+.fyo-animate-float {
+  animation: fyo-float 4.2s ease-in-out infinite;
+}
+
+.fyo-animate-wiggle {
+  animation: fyo-wiggle 2.8s ease-in-out infinite;
+}
+
+.fyo-animate-sparkle {
+  animation: fyo-sparkle 2s ease-in-out infinite;
+}
+
+.fyo-animate-bounce {
+  animation: fyo-bounce-in 2.4s ease-in-out infinite;
+}
+
+.fyo-rainbow-bar {
+  background: linear-gradient(
+    90deg,
+    #ff8dc7,
+    #c4a7ff,
+    #7dd3fc,
+    #7ee8c5,
+    #ffe066,
+    #ff8dc7
+  );
+  background-size: 200% 100%;
+  animation: fyo-rainbow-shift 8s ease infinite;
+}
+
+.fyo-cloud-drift {
+  animation: fyo-cloud-drift 12s ease-in-out infinite alternate;
+}
+
+.fyo-sticker {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.fyo-sticker:hover {
+  transform: scale(1.03) rotate(0deg) !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.9),
+    8px 12px 28px rgba(196, 167, 255, 0.35);
+}
+
+.fyo-mail-btn {
+  transition: transform 0.18s ease;
+}
+
+.fyo-mail-btn:hover {
+  transform: scale(1.04) rotate(0deg) !important;
+}
+
+.fyo-mail-btn:active {
+  transform: scale(0.98) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fyo-animate-float,
+  .fyo-animate-wiggle,
+  .fyo-animate-sparkle,
+  .fyo-animate-bounce,
+  .fyo-rainbow-bar,
+  .fyo-cloud-drift {
+    animation: none !important;
+  }
+
+  .fyo-rainbow-bar {
+    background-position: 50% 50%;
+  }
+}

@@ -1,215 +1,327 @@
-import { useEffect, useState } from 'react'
 import { usePersona } from '../context/PersonaContext'
 import { emails } from '../data/emails'
 import { weather } from '../data/weather'
 import { news } from '../data/news'
 import { stocks } from '../data/stocks'
+import { LineChart, Line, ResponsiveContainer, Tooltip } from 'recharts'
 
-function MiniSpark({ series, stroke }) {
-  if (!series?.length) return null
-  const min = Math.min(...series)
-  const max = Math.max(...series)
-  const w = 96
-  const h = 30
-  const p = 2
-  const r = max - min || 1
-  const pts = series.map((v, i) => {
-    const x = p + (i / (series.length - 1)) * (w - 2 * p)
-    const y = p + (1 - (v - min) / r) * (h - 2 * p)
-    return `${x},${y}`
-  }).join(' ')
+function sparkStroke(pct) {
+  return pct >= 0 ? 'var(--accent3)' : 'var(--accent)'
+}
+
+function NewsMarquee() {
+  const line = news.map((n) => `${n.emoji} ${n.title}`).join('   ·   ')
   return (
-    <svg width={w} height={h} aria-hidden className="shrink-0">
-      <polyline fill="none" stroke={stroke} strokeWidth="1.5" points={pts} />
-    </svg>
+    <div className="cno-marquee-wrap border-y border-red-900/60 bg-black/70 py-2" style={{ fontFamily: 'var(--font-main)' }}>
+      <div className="cno-marquee-track flex gap-20 whitespace-nowrap text-sm text-amber-100/95">
+        <span>{line}   ·   </span>
+        <span aria-hidden>{line}   ·   </span>
+      </div>
+    </div>
   )
 }
 
-const specials = ['今日特价 · 宫保鸡丁', '新鲜到货 · 小笼包', '老板推荐 · 炒饭', '外卖高峰 · 请稍等']
+function WeatherWindow() {
+  return (
+    <div
+      className="relative overflow-hidden rounded-lg border-4 border-amber-900/80 p-4 shadow-[inset_0_0_0_2px_rgba(251,191,36,0.15)]"
+      style={{
+        background: 'linear-gradient(180deg, #1e293b 0%, #0f172a 100%)',
+        boxShadow: '0 0 24px rgba(251, 191, 36, 0.12)',
+      }}
+    >
+      <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-amber-500/10 blur-2xl" aria-hidden />
+      <p className="text-center text-[0.65rem] font-bold uppercase tracking-[0.35em] text-amber-400/90" style={{ fontFamily: 'var(--font-ui)' }}>
+        窗外天气 · Sidewalk board
+      </p>
+      <div className="mt-3 flex items-center gap-4">
+        <span className="cno-weather-bob text-5xl drop-shadow-lg">{weather.icon}</span>
+        <div>
+          <p className="text-3xl font-bold leading-none text-amber-50">{weather.temp}°</p>
+          <p className="text-sm text-slate-300">{weather.condition}</p>
+          <p className="mt-1 text-xs text-slate-500">
+            {weather.city} · 风 {weather.wind} km/h · 湿度 {weather.humidity}%
+          </p>
+        </div>
+      </div>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {weather.forecast.map((d) => (
+          <div
+            key={d.day}
+            className="flex flex-1 min-w-[3.25rem] flex-col items-center rounded border border-slate-700 bg-slate-900/80 py-1.5"
+          >
+            <span className="text-[0.6rem] text-slate-500">{d.day}</span>
+            <span className="text-lg leading-none">{d.icon}</span>
+            <span className="text-[0.65rem] text-amber-200/90">{d.high}°</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function StockTile({ s }) {
+  const data = s.series.map((v, i) => ({ v, i }))
+  const up = s.changePct >= 0
+  return (
+    <div
+      className="rounded border-2 border-slate-800 bg-slate-950/90 p-2 shadow-[3px_3px_0_rgba(0,0,0,0.5)]"
+      style={{ borderColor: up ? 'rgba(34,197,94,0.35)' : 'rgba(255,45,45,0.35)' }}
+    >
+      <div className="flex items-start justify-between gap-1">
+        <div>
+          <p className="font-bold tracking-wide text-amber-100" style={{ fontFamily: 'var(--font-ui)' }}>
+            {s.ticker}
+          </p>
+          <p className="text-[0.6rem] leading-tight text-slate-500 line-clamp-1">{s.name}</p>
+        </div>
+        <span className="text-lg">{up ? '📈' : '📉'}</span>
+      </div>
+      <p className={`mt-1 font-mono text-sm font-bold ${up ? 'text-emerald-400' : 'text-red-400'}`}>
+        {s.currency}
+        {s.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+        <span className="ml-1 text-xs opacity-90">
+          {up ? '↑' : '↓'}
+          {Math.abs(s.changePct).toFixed(2)}%
+        </span>
+      </p>
+      <div className="mt-1 h-10 w-full opacity-90">
+        <ResponsiveContainer width="100%" height={40} debounce={50}>
+          <LineChart data={data}>
+            <Line type="monotone" dataKey="v" stroke={sparkStroke(s.changePct)} strokeWidth={1.5} dot={false} isAnimationActive={false} />
+            <Tooltip
+              formatter={(v) => [`${s.currency}${Number(v).toFixed(2)}`, '']}
+              contentStyle={{
+                background: '#0f172a',
+                border: '1px solid #334155',
+                borderRadius: 6,
+                fontSize: 11,
+                color: '#fefce8',
+              }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  )
+}
+
+function MenuItem({ email, onPick }) {
+  const unread = !email.read
+  const yuan = (8 + (email.id % 7) * 6).toFixed(0)
+  return (
+    <button
+      type="button"
+      onClick={() => onPick(email)}
+      className="w-full border-b border-red-950/50 py-3 pl-2 pr-3 text-left transition-colors hover:bg-red-950/25"
+    >
+      <div className="flex gap-3">
+        <span
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded border-2 border-amber-700/50 bg-amber-950/40 text-lg"
+          aria-hidden
+        >
+          {email.from.avatar}
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0">
+            <span className="text-amber-600/90" style={{ fontFamily: 'var(--font-ui)' }}>
+              No.{email.id}
+            </span>
+            {unread && (
+              <span className="badge badge-error badge-xs border-0 bg-red-600 text-[0.6rem] text-white">新单</span>
+            )}
+            <span className="ml-auto font-mono text-amber-200/80">¥{yuan}</span>
+          </div>
+          <p
+            className={`mt-0.5 line-clamp-2 text-sm leading-snug ${unread ? 'font-semibold text-amber-50' : 'text-slate-300'}`}
+            style={{ fontFamily: 'var(--font-main)' }}
+          >
+            {email.subject}
+          </p>
+          <p className="mt-0.5 line-clamp-1 text-xs text-slate-500">{email.preview}</p>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+function ReceiptModal({ email, onClose }) {
+  if (!email) return null
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: 'rgba(7, 9, 15, 0.88)', backdropFilter: 'blur(8px)' }}
+      onClick={onClose}
+      role="presentation"
+    >
+      <div
+        className="cno-receipt relative max-h-[88vh] w-full max-w-md overflow-y-auto border-2 border-dashed border-slate-600 bg-[#faf6ef] p-6 text-slate-800 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cno-receipt-title"
+      >
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-8 opacity-40"
+          style={{
+            background: 'repeating-linear-gradient(90deg, transparent, transparent 6px, #cbd5e1 6px, #cbd5e1 7px)',
+          }}
+          aria-hidden
+        />
+        <button
+          type="button"
+          onClick={onClose}
+          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 border border-slate-400 text-slate-600"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <p className="text-center text-xs font-bold uppercase tracking-[0.4em] text-red-800/80">金龍軒 · 留言条</p>
+        <h2 id="cno-receipt-title" className="mt-2 text-center text-2xl font-bold text-red-950" style={{ fontFamily: 'var(--font-display)' }}>
+          {email.subject}
+        </h2>
+        <p className="mt-1 text-center text-sm text-slate-600">
+          {email.from.name} · {email.date} {email.time}
+        </p>
+        <div className="my-4 border-t-2 border-dotted border-slate-400" />
+        <div className="space-y-3 whitespace-pre-wrap font-mono text-sm leading-relaxed text-slate-800">
+          {email.body}
+        </div>
+        <div className="my-5 border-t-2 border-dotted border-slate-400" />
+        <p className="text-center text-xs text-slate-500">谢谢惠顾 · Thank you · 欢迎再来</p>
+        <div className="mt-4 flex justify-center gap-2 text-2xl opacity-70" aria-hidden>
+          🥢🍚🥢
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function ChineseRestaurantOwnerLayout({ onSwitchPersona }) {
   const { selectedEmail, setSelectedEmail } = usePersona()
-  const [specialIdx, setSpecialIdx] = useState(0)
-
-  useEffect(() => {
-    const t = setInterval(() => setSpecialIdx(i => (i + 1) % specials.length), 3200)
-    return () => clearInterval(t)
-  }, [])
+  const unreadCount = emails.filter((e) => !e.read).length
 
   return (
     <div
-      className="relative min-h-dvh overflow-x-hidden pb-8"
+      className="relative min-h-screen overflow-x-hidden pb-10"
       style={{
-        background: 'linear-gradient(165deg, #450a0a 0%, #1c1917 40%, #0c0a09 100%)',
-        color: 'var(--text)',
         fontFamily: 'var(--font-main)',
+        color: 'var(--text)',
+        background: 'radial-gradient(ellipse 120% 80% at 50% -20%, #3f1d1d 0%, var(--bg) 45%, #020617 100%)',
       }}
     >
-      <style>{`
-        @keyframes cnLantern {
-          0%, 100% { transform: rotate(-4deg); }
-          50% { transform: rotate(4deg); }
-        }
-        @keyframes cnSteam {
-          0% { opacity: 0.5; transform: translateY(0) scaleX(1); }
-          100% { opacity: 0; transform: translateY(-36px) scaleX(1.3); }
-        }
-        @keyframes cnLazySusan {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        .cn-lantern { animation: cnLantern 3s ease-in-out infinite; transform-origin: top center; }
-        .cn-steam span {
-          position: absolute;
-          width: 12px;
-          height: 24px;
-          left: 50%;
-          bottom: 100%;
-          margin-left: -6px;
-          background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent);
-          border-radius: 50%;
-          animation: cnSteam 2.2s ease-out infinite;
-        }
-        .cn-steam span:nth-child(2) { animation-delay: 0.5s; margin-left: 4px; }
-        .cn-steam span:nth-child(3) { animation-delay: 1s; margin-left: -14px; }
-        .cn-lazy-border {
-          position: relative;
-        }
-        .cn-lazy-border::before {
-          content: '';
-          position: absolute;
-          inset: -3px;
-          border-radius: 9999px;
-          background: conic-gradient(from 0deg, #dc2626, #fbbf24, #dc2626, #fbbf24, #dc2626);
-          animation: cnLazySusan 20s linear infinite;
-          opacity: 0.35;
-          z-index: 0;
-        }
-      `}</style>
+      <div className="pointer-events-none fixed inset-0 opacity-[0.12]" aria-hidden style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23fbbf24' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+      }} />
 
-      <div className="pointer-events-none absolute left-[6%] top-16 text-5xl opacity-90 cn-lantern" aria-hidden>
+      <div className="pointer-events-none absolute left-[4%] top-24 text-5xl cno-lantern opacity-90" aria-hidden>
         🏮
       </div>
-      <div className="pointer-events-none absolute right-[8%] top-20 text-5xl opacity-90 cn-lantern" style={{ animationDelay: '0.5s' }} aria-hidden>
+      <div className="pointer-events-none absolute right-[5%] top-32 text-5xl cno-lantern-delay opacity-90" aria-hidden>
         🏮
       </div>
 
-      <header className="relative z-10 border-b-4 border-amber-600/50 px-4 py-6" style={{ background: 'linear-gradient(90deg, #7f1d1d 0%, #991b1b 50%, #7f1d1d 100%)' }}>
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <div className="cn-steam relative text-5xl">🥡</div>
-            <div>
-              <p className="m-0 text-[10px] font-bold uppercase tracking-[0.35em] text-amber-200">Family kitchen · since forever</p>
-              <h1 className="m-0 text-2xl font-bold text-amber-50 md:text-4xl" style={{ fontFamily: 'var(--font-display)' }}>
-                Chinese restaurant owner
-              </h1>
-              <p key={specialIdx} className="m-0 mt-2 text-sm text-amber-200/90 transition-opacity">
-                {specials[specialIdx]}
-              </p>
-            </div>
+      <header className="relative z-10 px-4 pb-2 pt-8 sm:px-8">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-end justify-between gap-6">
+          <div>
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.5em] text-red-400/80" style={{ fontFamily: 'var(--font-ui)' }}>
+              Open late · 外卖 OK
+            </p>
+            <h1
+              className="cno-neon-title mt-1 text-4xl leading-none text-amber-100 sm:text-6xl"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              金龍軒
+            </h1>
+            <p className="mt-1 text-lg text-amber-200/90 tracking-[0.2em]" style={{ fontFamily: 'var(--font-ui)' }}>
+              GOLDEN WOK · 老板台面
+            </p>
+            <p className="mt-2 max-w-md text-xs text-slate-500">
+              {unreadCount} 条新留言 · 同一套邮箱，换一副夜市脾气
+            </p>
           </div>
-          <button type="button" className="btn btn-sm border-amber-400 bg-amber-500 text-stone-900 hover:bg-amber-400" onClick={onSwitchPersona}>
-            打烊 Close shop
-          </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="cno-steam relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-amber-700/40 bg-red-950/50 text-3xl">
+              🥡
+              <span className="cno-steam-wisp absolute bottom-full" style={{ left: '38%' }} aria-hidden />
+              <span className="cno-steam-wisp cno-steam-wisp-2 absolute bottom-full" style={{ left: '62%' }} aria-hidden />
+            </div>
+            <button
+              type="button"
+              onClick={onSwitchPersona}
+              className="btn border-amber-600/50 bg-amber-500/90 text-stone-900 hover:bg-amber-400"
+              style={{ fontFamily: 'var(--font-ui)' }}
+            >
+              打烊收摊
+            </button>
+          </div>
         </div>
       </header>
 
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-5 p-4 lg:grid-cols-12">
-        <aside className="lg:col-span-3">
-          <div className="cn-lazy-border relative mb-3 rounded-full px-4 py-2 text-center">
-            <div className="relative z-10 rounded-full border-2 border-amber-500/60 bg-stone-900/90 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-amber-200">
-              Lazy Susan · inbox
-            </div>
-          </div>
-          <div className="space-y-2">
-            {emails.map(e => {
-              const on = selectedEmail?.id === e.id
-              return (
-                <button
-                  key={e.id}
-                  type="button"
-                  onClick={() => setSelectedEmail(e)}
-                  className="w-full rounded-xl border-2 p-3 text-left shadow-lg transition-transform hover:scale-[1.02]"
-                  style={{
-                    borderColor: on ? '#fbbf24' : '#78350f',
-                    background: on ? 'linear-gradient(135deg, #422006 0%, #1c1917 100%)' : 'rgba(12,10,9,0.85)',
-                    boxShadow: on ? '0 0 24px rgba(251,191,36,0.2)' : undefined,
-                  }}
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-lg">{e.from.avatar}</span>
-                    {!e.read && <span className="badge badge-error badge-xs">新 NEW</span>}
-                  </div>
-                  <p className={`m-0 mt-1 line-clamp-2 text-xs ${on || !e.read ? 'font-bold text-amber-50' : 'text-stone-400'}`}>{e.subject}</p>
-                  <p className="m-0 text-[10px] text-amber-700/80">{e.from.name}</p>
-                </button>
-              )
-            })}
-          </div>
-        </aside>
-
-        <main className="min-h-[260px] lg:col-span-6">
-          {selectedEmail ? (
-            <div className="rounded-xl border-4 border-double p-5 md:p-7" style={{ borderColor: '#b45309', background: 'repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(180,83,9,0.06) 28px, rgba(180,83,9,0.06) 29px), linear-gradient(180deg, #1c1917 0%, #0c0a09 100%)' }}>
-              <div className="flex flex-wrap items-center gap-2 text-[10px] uppercase">
-                <span className="rounded bg-red-800 px-2 py-0.5 text-amber-100">订单 MSG #{selectedEmail.id}</span>
-                <span className="text-stone-500">{selectedEmail.date}</span>
-              </div>
-              <h2 className="m-0 mt-4 text-xl font-bold text-amber-50 md:text-2xl" style={{ fontFamily: 'var(--font-display)' }}>
-                {selectedEmail.subject}
-              </h2>
-              <p className="m-0 mt-2 text-sm text-amber-200/80">来自 {selectedEmail.from.name}</p>
-              <div className="mt-5 max-h-[min(48vh,400px)] overflow-y-auto border-l-4 border-amber-600 pl-4 text-sm leading-relaxed whitespace-pre-wrap text-stone-200">
-                {selectedEmail.body}
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2 text-center text-xs text-amber-700/90">
-                <span className="rounded border border-amber-800/50 bg-stone-900/80 px-3 py-1">谢谢 Thank you</span>
-                <span className="rounded border border-amber-800/50 bg-stone-900/80 px-3 py-1">欢迎再来</span>
-              </div>
-              <button type="button" className="btn btn-ghost btn-sm mt-3 text-amber-400" onClick={() => setSelectedEmail(null)}>
-                ← 返回转盘
-              </button>
-            </div>
-          ) : (
-            <div className="flex min-h-[260px] flex-col items-center justify-center rounded-xl border-2 border-dashed border-amber-900 p-8">
-              <p className="text-6xl">🥢</p>
-              <p className="mt-4 text-center font-semibold text-amber-200">转一下转盘 — 点一封信打开。</p>
-              <p className="mt-1 text-center text-xs text-stone-500">Fortune not included. Extra spicy available.</p>
-            </div>
-          )}
-        </main>
-
-        <aside className="space-y-3 lg:col-span-3">
-          <div className="rounded-xl border-2 border-red-800 bg-gradient-to-b from-red-950/80 to-stone-950 p-4 text-center">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-amber-300">天气 · Weather</p>
-            <p className="text-4xl">{weather.icon}</p>
-            <p className="font-bold text-amber-50">{weather.condition}</p>
-            <p className="text-xs text-stone-400">
-              {weather.city} {weather.temp}° · 风 {weather.wind}
-            </p>
-          </div>
-          <div className="rounded-xl border border-amber-900/60 bg-stone-950/90 p-3">
-            <p className="mb-2 text-center text-[10px] font-bold uppercase text-amber-500">行情 · Market board</p>
-            {stocks.map(s => (
-              <div key={s.ticker} className="mb-2 flex items-center justify-between gap-1 border-b border-stone-800 pb-2 text-xs">
-                <span className="font-bold text-amber-100">{s.ticker}</span>
-                <span className={s.changePct >= 0 ? 'text-lime-400' : 'text-red-400'}>
-                  {s.changePct >= 0 ? '涨' : '跌'} {Math.abs(s.changePct)}%
-                </span>
-                <MiniSpark series={s.series} stroke={s.changePct >= 0 ? '#84cc16' : '#f87171'} />
-              </div>
-            ))}
-          </div>
-          <div className="rounded-lg border border-red-950 bg-black/40 p-3 text-xs">
-            <p className="mb-2 text-[10px] font-bold uppercase text-amber-600">电视新闻 · TV crawl</p>
-            {news.slice(0, 4).map(n => (
-              <p key={n.id} className="mb-2 border-l-2 border-amber-700 pl-2 leading-snug text-stone-300">
-                {n.emoji} {n.title}
-              </p>
-            ))}
-          </div>
-        </aside>
+      <div className="relative z-10 mt-2">
+        <NewsMarquee />
       </div>
+
+      <main className="relative z-10 mx-auto max-w-6xl px-4 py-6 sm:px-8">
+        <div className="grid gap-6 lg:grid-cols-12">
+          <section className="lg:col-span-8">
+            <div
+              className="overflow-hidden rounded-lg border-4 border-amber-800/70 shadow-[0_0_40px_rgba(220,38,38,0.12)]"
+              style={{
+                background: 'linear-gradient(180deg, #1c1410 0%, #0c0a09 55%, #090706 100%)',
+                boxShadow: 'inset 0 1px 0 rgba(251,191,36,0.08), 0 12px 40px rgba(0,0,0,0.5)',
+              }}
+            >
+              <div
+                className="border-b-4 border-red-900/80 px-4 py-3 sm:px-6"
+                style={{ background: 'linear-gradient(90deg, #7f1d1d 0%, #991b1b 45%, #7f1d1d 100%)' }}
+              >
+                <p className="text-[0.65rem] font-bold uppercase tracking-[0.35em] text-amber-200/90">Wall menu · 墙上的单</p>
+                <p className="text-sm text-amber-50/95">点一条「菜名」打开完整留言 — 价格乱写的，别当真</p>
+              </div>
+              <div className="px-2 sm:px-4">
+                {emails.map((email) => (
+                  <MenuItem key={email.id} email={email} onPick={setSelectedEmail} />
+                ))}
+              </div>
+              <div className="border-t border-red-950/60 px-4 py-3 text-center text-[0.65rem] text-slate-500">
+                本店支持想象辣度 · Extra spicy in your dreams only
+              </div>
+            </div>
+          </section>
+
+          <aside className="space-y-4 lg:col-span-4">
+            <WeatherWindow />
+            <div>
+              <p className="mb-2 text-center text-[0.65rem] font-bold uppercase tracking-[0.3em] text-amber-500/90" style={{ fontFamily: 'var(--font-ui)' }}>
+                隔壁股市 · Side-dish tickers
+              </p>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-1">
+                {stocks.map((s) => (
+                  <StockTile key={s.ticker} s={s} />
+                ))}
+              </div>
+            </div>
+            <div className="rounded-lg border border-slate-800 bg-slate-950/80 p-4">
+              <p className="mb-3 text-center text-[0.65rem] font-bold uppercase tracking-widest text-red-400/90">电视摘要 · Headlines</p>
+              <ul className="space-y-3">
+                {news.map((n) => (
+                  <li key={n.id} className="flex gap-2 border-l-2 border-amber-700/50 pl-3 text-sm leading-snug text-slate-300">
+                    <span className="shrink-0">{n.emoji}</span>
+                    <span>
+                      <span className="text-xs uppercase text-red-400/80">{n.category}</span>
+                      <br />
+                      {n.title}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </main>
+
+      <ReceiptModal email={selectedEmail} onClose={() => setSelectedEmail(null)} />
     </div>
   )
 }

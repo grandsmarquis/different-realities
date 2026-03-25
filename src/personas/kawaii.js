@@ -2,9 +2,9 @@ import KawaiiLayout from '../layouts/KawaiiLayout'
 
 const kawaii = {
   id: 'kawaii',
-  label: 'Kawaii girl',
-  emoji: '🎀',
-  description: 'Pastel overload · sparkles forever',
+  label: 'The web is kawaii',
+  emoji: '🌈',
+  description: 'Pastel browser · floating sparkles · stamp mail · fluffy everything',
   fonts: ['Zen+Maru+Gothic:wght@400;500;700', 'Nunito:wght@400;600;700;800'],
   cssVars: {
     '--bg': '#fff5fb',

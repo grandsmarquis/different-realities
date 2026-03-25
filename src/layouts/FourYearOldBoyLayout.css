@@ -1,0 +1,106 @@
+/* Four-year-old playroom — motion and decor */
+
+@keyframes fyo-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--fyo-tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--fyo-tilt, 0deg));
+  }
+}
+
+@keyframes fyo-wiggle {
+  0%,
+  100% {
+    transform: rotate(-2deg);
+  }
+  50% {
+    transform: rotate(2deg);
+  }
+}
+
+@keyframes fyo-choochoo {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fyo-spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fyo-twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fyo-rug-pan {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 48px 32px, 0 0;
+  }
+}
+
+.fyo-bob {
+  animation: fyo-bob 2.8s ease-in-out infinite;
+}
+
+.fyo-bob-delay {
+  animation: fyo-bob 3.2s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.fyo-wiggle-soft {
+  animation: fyo-wiggle 2.5s ease-in-out infinite;
+}
+
+.fyo-train-track {
+  animation: fyo-choochoo 22s linear infinite;
+}
+
+.fyo-star-twinkle {
+  animation: fyo-twinkle 2.4s ease-in-out infinite;
+}
+
+.fyo-rug {
+  animation: fyo-rug-pan 80s linear infinite;
+}
+
+.fyo-lego-stud {
+  box-shadow:
+    inset 0 -4px 0 rgba(0, 0, 0, 0.12),
+    0 6px 0 rgba(0, 0, 0, 0.08);
+}
+
+.fyo-card-lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.fyo-card-lift:hover {
+  transform: translateY(-4px) scale(1.02) rotate(0deg) !important;
+  box-shadow: 0 12px 24px rgba(45, 52, 54, 0.18);
+}
+
+.fyo-sun-rays {
+  animation: fyo-spin-slow 48s linear infinite;
+}

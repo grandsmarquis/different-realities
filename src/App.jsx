@@ -46,10 +46,10 @@ function PersonaRoute() {
 
   return (
     <div className="persona-transition relative flex h-dvh max-h-dvh flex-col overflow-hidden">
-      <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pb-11 [scrollbar-gutter:stable]">
+      <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]">
         <Layout onSwitchPersona={() => navigate('/')} />
       </div>
-      <footer className="pointer-events-none fixed bottom-0 left-0 right-0 z-[100] flex w-full min-h-0 flex-row flex-wrap items-center gap-x-2 gap-y-1 border-t border-base-content/10 bg-base-300/90 px-3 py-1.5 text-base-content backdrop-blur-sm">
+      <footer className="pointer-events-none z-[100] flex w-full shrink-0 flex-row flex-wrap items-center gap-x-2 gap-y-1 border-t border-base-content/10 bg-base-300/90 px-3 pt-1.5 pb-[calc(0.375rem+env(safe-area-inset-bottom,0px))] text-base-content backdrop-blur-sm">
         <div className="flex min-w-0 flex-1 items-center justify-start gap-0.5 pointer-events-auto">
           <button
             type="button"
