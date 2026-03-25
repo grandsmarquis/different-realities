@@ -2,8 +2,7 @@ export const news = [
   {
     id: 1,
     title: "EU agrees on landmark AI regulation framework for 2026",
-    title_fr: "L'UE adopte un cadre réglementaire historique sur l'IA pour 2026",
-    source: "Le Monde",
+    source: "Politico",
     category: "Tech",
     time: "2h ago",
     emoji: "🤖",
@@ -11,8 +10,7 @@ export const news = [
   {
     id: 2,
     title: "Paris Saint-Germain wins 3–1 against Bayern Munich in Champions League",
-    title_fr: "Le PSG s'impose 3-1 face au Bayern Munich en Ligue des Champions",
-    source: "L'Équipe",
+    source: "ESPN",
     category: "Sport",
     time: "4h ago",
     emoji: "⚽",
@@ -20,7 +18,6 @@ export const news = [
   {
     id: 3,
     title: "Tesla unveils its fully autonomous robotaxi fleet in Austin",
-    title_fr: "Tesla dévoile sa flotte de robotaxis entièrement autonomes à Austin",
     source: "The Verge",
     category: "Tech",
     time: "5h ago",
@@ -29,8 +26,7 @@ export const news = [
   {
     id: 4,
     title: "Record spring heatwave hits Southern Europe — 28°C forecast for next week",
-    title_fr: "Vague de chaleur printanière record en Europe du Sud — 28°C prévus la semaine prochaine",
-    source: "Météo-France",
+    source: "BBC Weather",
     category: "Climate",
     time: "6h ago",
     emoji: "🌡️",
@@ -38,7 +34,6 @@ export const news = [
   {
     id: 5,
     title: "Cannes Film Festival 2026 lineup announced — 22 films in competition",
-    title_fr: "La sélection officielle du Festival de Cannes 2026 dévoilée — 22 films en compétition",
     source: "Variety",
     category: "Culture",
     time: "8h ago",
@@ -47,7 +42,6 @@ export const news = [
   {
     id: 6,
     title: "Global chip shortage eases as TSMC opens new Taiwan facility",
-    title_fr: "La pénurie mondiale de puces s'atténue avec la nouvelle usine TSMC à Taïwan",
     source: "Reuters",
     category: "Economy",
     time: "10h ago",

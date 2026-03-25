@@ -185,7 +185,7 @@ function NewsPanel({ onClose }) {
         {news.map((n, i) => (
           <div key={n.id} style={{ paddingBottom: '0.75rem', marginBottom: '0.75rem', borderBottom: i < news.length - 1 ? '1px solid var(--border)' : 'none' }}>
             <span style={{ fontSize: '0.6rem', letterSpacing: '0.1rem', color: '#ED2939', textTransform: 'uppercase', fontWeight: 600 }}>{n.category}</span>
-            <p style={{ fontFamily: 'var(--font-main)', fontSize: '0.78rem', color: 'var(--text)', lineHeight: 1.4, marginTop: '0.2rem' }}>{n.title_fr}</p>
+            <p style={{ fontFamily: 'var(--font-main)', fontSize: '0.78rem', color: 'var(--text)', lineHeight: 1.4, marginTop: '0.2rem' }}>{n.title}</p>
             <p style={{ fontSize: '0.65rem', color: 'var(--text2)', marginTop: '0.2rem', fontStyle: 'italic' }}>{n.source} · {n.time}</p>
           </div>
         ))}
