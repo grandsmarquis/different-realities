@@ -16,6 +16,8 @@ import analyst from './analyst'
 import child from './child'
 import win98 from './win98'
 import vista from './vista'
+import xbox360 from './xbox360'
+import wii from './wii'
 import space from './space'
 import medieval from './medieval'
 import pirate from './pirate'
@@ -45,7 +47,7 @@ export const personas = [
   grandmother, teenager, office, hipster, french,
   kawaii, casino, cyberpunk, retro, conspiracy,
   zen, startup, academic, privacy, analyst, child,
-  win98, vista,
+  win98, vista, xbox360, wii,
   space, medieval, pirate, graffiti, circus, safari,
   mythology, vinyl, bonsai, sumo, alien, productivity, pilot,
   yacht, tattoo, barista, submarine, futureAi, alienGuide, scuba,

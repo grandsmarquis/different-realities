@@ -387,3 +387,202 @@ body {
   background-size: 24px 24px;
   animation: pirateMapDrift 48s linear infinite;
 }
+
+/* Xbox 360–inspired layout (v2) */
+.xbox2-bg-grid {
+  opacity: 0.05;
+  background-image:
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px),
+    linear-gradient(var(--accent) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+@keyframes xbox2Sweep {
+  0% {
+    opacity: 0.55;
+    transform: translateX(-8%) scale(1.08);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translateX(6%) scale(1.08);
+  }
+}
+.xbox2-bg-sweep {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    color-mix(in srgb, var(--accent) 7%, transparent) 42%,
+    transparent 68%
+  );
+  animation: xbox2Sweep 22s ease-in-out infinite alternate;
+}
+
+.xbox2-topbar {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 55%, var(--bg)) 0%, var(--bg) 100%);
+  border-color: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.xbox2-nav-edge {
+  border-color: color-mix(in srgb, var(--text) 10%, transparent);
+}
+
+.xbox2-row-active {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.xbox2-reader {
+  background: linear-gradient(185deg, color-mix(in srgb, var(--card) 92%, var(--accent)) 0%, var(--card) 28%);
+}
+
+.xbox2-reader-chrome {
+  background: linear-gradient(90deg, var(--accent2), var(--accent), var(--accent2));
+}
+
+@keyframes xbox2Chrome {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.2);
+  }
+}
+.xbox2-chrome-shimmer {
+  animation: xbox2Chrome 2.8s ease-in-out infinite;
+}
+
+@keyframes xbox2Dot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  50% {
+    opacity: 0.88;
+    box-shadow: 0 0 14px 2px color-mix(in srgb, var(--accent) 40%, transparent);
+  }
+}
+.xbox2-pulse-dot {
+  animation: xbox2Dot 2.2s ease-in-out infinite;
+}
+
+@keyframes xbox2Marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.xbox2-marquee-animate {
+  animation: xbox2Marquee 38s linear infinite;
+}
+
+.xbox2-ticker-bar {
+  background: color-mix(in srgb, var(--bg) 88%, var(--card));
+}
+
+.xbox2-empty {
+  background: color-mix(in srgb, var(--card) 35%, transparent);
+}
+
+/* Wii-inspired layout */
+.wii-sky {
+  background: linear-gradient(185deg, #9fd9ff 0%, #d4f0ff 42%, #eef9ff 100%);
+}
+.wii-clouds {
+  background:
+    radial-gradient(ellipse 70% 45% at 18% 12%, rgba(255, 255, 255, 0.95), transparent 58%),
+    radial-gradient(ellipse 55% 38% at 72% 8%, rgba(255, 255, 255, 0.88), transparent 55%),
+    radial-gradient(ellipse 65% 40% at 48% 6%, rgba(255, 255, 255, 0.9), transparent 52%);
+  opacity: 0.88;
+  animation: wiiCloudShift 50s ease-in-out infinite alternate;
+}
+@keyframes wiiCloudShift {
+  from { transform: translateX(-1.5%) translateY(0); }
+  to { transform: translateX(1.5%) translateY(-0.8%); }
+}
+
+@keyframes wiiTwinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.75); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+.wii-sparkle {
+  animation: wiiTwinkle 2.6s ease-in-out infinite;
+  color: #fff;
+  text-shadow: 0 0 10px #fff, 0 0 2px #bae6fd;
+}
+
+.wii-header-bar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(224, 242, 254, 0.92) 100%);
+  backdrop-filter: blur(10px);
+}
+
+@keyframes wiiWaggle {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(7deg); }
+}
+.wii-waggle {
+  animation: wiiWaggle 2.8s ease-in-out infinite;
+  transform-origin: 50% 70%;
+}
+
+@keyframes wiiChannelBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.wii-channel-float {
+  animation: wiiChannelBob 3.4s ease-in-out infinite;
+}
+
+@keyframes wiiLetterTilt {
+  0%, 100% { transform: rotate(0deg); }
+  33% { transform: rotate(0.35deg); }
+  66% { transform: rotate(-0.35deg); }
+}
+.wii-letter-wobble {
+  animation: wiiLetterTilt 6s ease-in-out infinite;
+}
+
+@keyframes wiiStarSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.wii-star-spin {
+  display: inline-block;
+  animation: wiiStarSpin 10s linear infinite;
+}
+
+@keyframes wiiPointerBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.wii-pointer-bob {
+  animation: wiiPointerBob 1.8s ease-in-out infinite;
+}
+
+.wii-glossy-card {
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.96) 0%, rgba(224, 242, 254, 0.88) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 8px 24px rgba(14, 116, 184, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xbox2-bg-sweep,
+  .xbox2-chrome-shimmer,
+  .xbox2-pulse-dot,
+  .xbox2-marquee-animate,
+  .wii-clouds,
+  .wii-sparkle,
+  .wii-waggle,
+  .wii-channel-float,
+  .wii-letter-wobble,
+  .wii-star-spin,
+  .wii-pointer-bob {
+    animation: none !important;
+  }
+}
+

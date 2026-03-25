@@ -55,6 +55,16 @@ const personaColors = {
     accent: '#000080',
     text: '#ffffff',
   },
+  xbox360: {
+    bg: 'linear-gradient(165deg, #050805 0%, #0f1a0c 45%, #050805 100%)',
+    accent: '#9bf00b',
+    text: '#dfffd0',
+  },
+  wii: {
+    bg: 'linear-gradient(185deg, #7ec8f5 0%, #c8ecff 50%, #e8f7ff 100%)',
+    accent: '#0ea5e9',
+    text: '#0c4a6e',
+  },
   vista: {
     bg: 'linear-gradient(160deg, #0a1628 0%, #162b55 50%, #0a1628 100%)',
     accent: '#4fb3e8',
@@ -200,6 +210,8 @@ const personaFonts = {
   analyst: "'Roboto', sans-serif",
   child: "'Caveat', 'Schoolbell', cursive",
   win98: "'Tahoma', 'Arial', sans-serif",
+  xbox360: "'Orbitron', 'Exo 2', sans-serif",
+  wii: "'Fredoka', 'Nunito', sans-serif",
   vista: "'Segoe UI', 'Nunito', sans-serif",
   space: "'Space Mono', monospace",
   medieval: "'UnifrakturMaguntia', cursive",
