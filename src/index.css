@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff;
+  --bg2: #f3f4f6;
+  --text: #111827;
+  --text2: #6b7280;
+  --accent: #3b82f6;
+  --accent2: #1d4ed8;
+  --border: #e5e7eb;
+  --card: #ffffff;
+  --font-main: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-main);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.persona-transition {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Teenager neon glow utility */
+.neon-text {
+  text-shadow: 0 0 8px currentColor, 0 0 20px currentColor;
+}
+
+.neon-border {
+  box-shadow: 0 0 8px var(--accent), 0 0 20px var(--accent);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* Kawaii layout */
+@keyframes kawaiiFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(12px, -16px) scale(1.05); }
+}
+
+.kawaii-float {
+  animation: kawaiiFloat 9s ease-in-out infinite;
+}
+
+.kawaii-float-delay {
+  animation: kawaiiFloat 11s ease-in-out infinite;
+  animation-delay: 1.2s;
+}
+
+@keyframes kawaiiStampWiggle {
+  0%, 100% { transform: rotate(var(--email-tilt, 0deg)) scale(1); }
+  33% { transform: rotate(calc(var(--email-tilt, 0deg) + 3deg)) scale(1.02) translateY(-3px); }
+  66% { transform: rotate(calc(var(--email-tilt, 0deg) - 2deg)) scale(1.02) translateY(-1px); }
+}
+
+.kawaii-stamp:hover {
+  animation: kawaiiStampWiggle 0.45s ease-in-out infinite;
+}
