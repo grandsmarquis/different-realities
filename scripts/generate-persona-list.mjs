@@ -67,9 +67,21 @@ function resolveOrder() {
 
 function main() {
   const order = resolveOrder()
+  // If new persona files exist but are missing from the previously generated list,
+  // append them at the end so they still become selectable.
+  const dirLoadKeys = fs
+    .readdirSync(personasDir)
+    .filter((f) => f.endsWith('.js') && !['index.js', 'personaList.js'].includes(f))
+    .map((f) => path.basename(f, '.js'))
+
+  const missing = dirLoadKeys
+    .filter((k) => !order.includes(k))
+    .sort((a, b) => a.localeCompare(b))
+
+  const finalOrder = order.concat(missing)
   const rows = []
 
-  for (const loadKey of order) {
+  for (const loadKey of finalOrder) {
     const filePath = path.join(personasDir, `${loadKey}.js`)
     if (!fs.existsSync(filePath)) {
       throw new Error(`Missing persona file for ${loadKey}: ${filePath}`)
