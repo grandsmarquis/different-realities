@@ -1485,7 +1485,7 @@ export default function PersonaSelector({ onSelectPersona }) {
           </h1>
           <div className="space-y-5 text-sm leading-relaxed tracking-widest text-neutral-500 sm:space-y-6">
             <p>
-              In the age of AI, creating interfaces is sometimes faster than searching for them. In the space of 6 hours, AI coded this {personas.length} mini websites for 20$. The goal is to show how the same data  would look through the eyes of different people. An experiment by{' '}
+              In the age of AI, creating interfaces is sometimes faster than searching for them. In the space of 6 hours, AI coded this {personas.length} mini websites for 20$. The goal is to show how the exact same data (mail inbox, weather, news, stocks) would look through the eyes of different people and devices. An experiment by{' '}
               <a href="https://infiniwa.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-400">
                 Infiniwa
               </a>
