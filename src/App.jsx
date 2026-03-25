@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Routes, Route, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Routes, Route, Navigate, useNavigate, useParams, useLocation } from 'react-router-dom'
 import { PersonaProvider, usePersona } from './context/PersonaContext'
 import PersonaSelector from './components/PersonaSelector'
 import { loadPersona, personaMap, personas } from './personas'
@@ -164,6 +164,19 @@ function PersonaRoute() {
 }
 
 function AppRoutes() {
+  const location = useLocation()
+  const skipPlausibleInitial = useRef(true)
+
+  useEffect(() => {
+    if (skipPlausibleInitial.current) {
+      skipPlausibleInitial.current = false
+      return
+    }
+    if (typeof window.plausible === 'function') {
+      window.plausible('pageview')
+    }
+  }, [location.pathname, location.search, location.hash])
+
   return (
     <Routes>
       <Route path="/" element={<HomeRoute />} />
