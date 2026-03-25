@@ -60,6 +60,126 @@ const personaColors = {
     accent: '#4fb3e8',
     text: '#ffffff',
   },
+  space: {
+    bg: 'linear-gradient(160deg, #030b1a 0%, #050f22 60%, #020810 100%)',
+    accent: '#00d4ff',
+    text: '#e8a040',
+  },
+  medieval: {
+    bg: 'linear-gradient(160deg, #edd88a 0%, #c8a040 50%, #f0d880 100%)',
+    accent: '#8b1a1a',
+    text: '#2c1008',
+  },
+  pirate: {
+    bg: 'linear-gradient(165deg, #c8a06a 0%, #8b6030 60%, #d4b878 100%)',
+    accent: '#8b1a00',
+    text: '#1a0800',
+  },
+  graffiti: {
+    bg: 'linear-gradient(145deg, #111111 0%, #1e1e1e 50%, #1a1a1a 100%)',
+    accent: '#ff2d55',
+    text: '#ffffff',
+  },
+  circus: {
+    bg: 'linear-gradient(160deg, #1a0808 0%, #0f0505 50%, #1a0808 100%)',
+    accent: '#ffd700',
+    text: '#ffd700',
+  },
+  safari: {
+    bg: 'linear-gradient(160deg, #f5e4b8 0%, #ead8a0 60%, #f5e4b8 100%)',
+    accent: '#8b4513',
+    text: '#2c1800',
+  },
+  mythology: {
+    bg: 'linear-gradient(160deg, #080512 0%, #0d0a1c 50%, #08051a 100%)',
+    accent: '#c8a855',
+    text: '#e8d5a3',
+  },
+  vinyl: {
+    bg: 'linear-gradient(160deg, #1a1210 0%, #221a16 50%, #1a1210 100%)',
+    accent: '#c87941',
+    text: '#e8d5a8',
+  },
+  bonsai: {
+    bg: 'linear-gradient(160deg, #f0f4ea 0%, #e4ecda 60%, #f0f4ea 100%)',
+    accent: '#3d6b2a',
+    text: '#1a2a10',
+  },
+  sumo: {
+    bg: 'linear-gradient(160deg, #faf5e4 0%, #f0e8cc 50%, #faf5e4 100%)',
+    accent: '#cc0000',
+    text: '#0a0000',
+  },
+  alien: {
+    bg: 'linear-gradient(160deg, #010d0a 0%, #020f0c 50%, #010d0a 100%)',
+    accent: '#00ffcc',
+    text: '#7fff9e',
+  },
+  productivity: {
+    bg: 'linear-gradient(160deg, #fafaf8 0%, #f0f0ec 50%, #fafaf8 100%)',
+    accent: '#ef4444',
+    text: '#1a1a16',
+  },
+  pilot: {
+    bg: 'linear-gradient(160deg, #000000 0%, #040404 50%, #000000 100%)',
+    accent: '#ffa500',
+    text: '#00d0aa',
+  },
+  yacht: {
+    bg: 'linear-gradient(165deg, #061018 0%, #0c2840 50%, #061018 100%)',
+    accent: '#c9a962',
+    text: '#e8f4fc',
+  },
+  tattoo: {
+    bg: 'linear-gradient(160deg, #0d0c0b 0%, #1a1210 50%, #0d0c0b 100%)',
+    accent: '#c45c26',
+    text: '#f4e4c1',
+  },
+  barista: {
+    bg: 'linear-gradient(165deg, #1c1410 0%, #2a1f18 50%, #1c1410 100%)',
+    accent: '#c4a574',
+    text: '#f5ebe0',
+  },
+  submarine: {
+    bg: 'linear-gradient(160deg, #020810 0%, #051820 50%, #020810 100%)',
+    accent: '#00ffaa',
+    text: '#7dffc8',
+  },
+  futureAi: {
+    bg: 'linear-gradient(145deg, #050014 0%, #1a0066 40%, #050014 100%)',
+    accent: '#00f0ff',
+    text: '#e8f0ff',
+  },
+  alienGuide: {
+    bg: 'linear-gradient(160deg, #0a0f12 0%, #0d2a22 50%, #0a0f12 100%)',
+    accent: '#ff00aa',
+    text: '#c8fff0',
+  },
+  scuba: {
+    bg: 'linear-gradient(180deg, #023e8a 0%, #032a3a 50%, #001219 100%)',
+    accent: '#ff9f1c',
+    text: '#e0f7ff',
+  },
+  luxuryRealtor: {
+    bg: 'linear-gradient(160deg, #0f0e0c 0%, #2a2418 50%, #0f0e0c 100%)',
+    accent: '#d4af37',
+    text: '#faf6ef',
+  },
+  homeless: {
+    bg: 'linear-gradient(160deg, #2a2620 0%, #3d362c 50%, #2a2620 100%)',
+    accent: '#c9a227',
+    text: '#ebe6dc',
+  },
+  asmr: {
+    bg: 'linear-gradient(165deg, #1a1528 0%, #2d2540 50%, #1a1528 100%)',
+    accent: '#e8b4f8',
+    text: '#f0e8ff',
+  },
+  hypebeast: {
+    bg: 'linear-gradient(160deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%)',
+    accent: '#ff3b30',
+    text: '#ffffff',
+  },
 }
 
 const personaFonts = {
@@ -81,9 +201,33 @@ const personaFonts = {
   child: "'Caveat', 'Schoolbell', cursive",
   win98: "'Tahoma', 'Arial', sans-serif",
   vista: "'Segoe UI', 'Nunito', sans-serif",
+  space: "'Space Mono', monospace",
+  medieval: "'UnifrakturMaguntia', cursive",
+  pirate: "'Pirata One', cursive",
+  graffiti: "'Permanent Marker', cursive",
+  circus: "'Lilita One', cursive",
+  safari: "'Teko', sans-serif",
+  mythology: "'Cinzel Decorative', serif",
+  vinyl: "'Abril Fatface', serif",
+  bonsai: "'Josefin Sans', sans-serif",
+  sumo: "'Noto Serif JP', serif",
+  alien: "'Syncopate', sans-serif",
+  productivity: "'Rubik', sans-serif",
+  pilot: "'B612', sans-serif",
+  yacht: "'Cinzel', serif",
+  tattoo: "'Bebas Neue', sans-serif",
+  barista: "'DM Serif Display', serif",
+  submarine: "'Share Tech Mono', monospace",
+  futureAi: "'Rajdhani', sans-serif",
+  alienGuide: "'Audiowide', sans-serif",
+  scuba: "'Outfit', sans-serif",
+  luxuryRealtor: "'Playfair Display', serif",
+  homeless: "'Newsreader', serif",
+  asmr: "'Comfortaa', sans-serif",
+  hypebeast: "'Archivo Black', sans-serif",
 }
 
-export default function PersonaSelector({ onSelect }) {
+export default function PersonaSelector({ onSelectPersona }) {
   const [hoveredId, setHoveredId] = useState(null)
 
   return (
@@ -102,15 +246,14 @@ export default function PersonaSelector({ onSelect }) {
       </div>
 
       {/* Persona cards grid */}
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem', maxWidth: 1100, width: '100%' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.75rem', maxWidth: 1300, width: '100%' }}>
         {personas.map(persona => {
           const colors = personaColors[persona.id] || { bg: '#1a1a1a', accent: '#888', text: '#fff' }
           const isHovered = hoveredId === persona.id
-          const isGradient = typeof colors.bg === 'string' && colors.bg.includes('gradient')
           return (
             <button
               key={persona.id}
-              onClick={() => onSelect(persona)}
+              onClick={() => onSelectPersona(persona)}
               onMouseEnter={() => setHoveredId(persona.id)}
               onMouseLeave={() => setHoveredId(null)}
               style={{

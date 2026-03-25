@@ -18,6 +18,7 @@ const conspiracy = {
     '--font-main': "'Courier Prime', monospace",
     '--font-display': "'Special Elite', cursive",
   },
+  emailSelectionInModal: true,
   Layout: ConspiracyTheoristLayout,
 }
 

@@ -19,6 +19,7 @@ const child = {
     '--font-main': "'Caveat', cursive",
     '--font-display': "'Schoolbell', cursive",
   },
+  emailSelectionInModal: true,
   Layout: ChildCrayonsLayout,
 }
 

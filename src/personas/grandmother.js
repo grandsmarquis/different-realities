@@ -18,6 +18,7 @@ const grandmother = {
     '--font-main': "'Lora', serif",
     '--font-display': "'Playfair Display', serif",
   },
+  emailSelectionInModal: true,
   Layout: GrandmotherLayout,
 }
 

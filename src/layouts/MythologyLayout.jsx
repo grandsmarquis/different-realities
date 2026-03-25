@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
-import emails from '../data/emails'
-import weather from '../data/weather'
-import news from '../data/news'
-import stocks from '../data/stocks'
+import { emails } from '../data/emails'
+import { weather } from '../data/weather'
+import { news } from '../data/news'
+import { stocks } from '../data/stocks'
 
-const myth = t => ({ work:'A Decree from the Council', personal:'A Messenger's Errand', finance:'The Prophecy of Wealth', promo:'A Herald's Proclamation', newsletter:'The Chronicler's Scroll' }[t] || 'A Tale Untold')
+const myth = t => ({ work:'A Decree from the Council', personal:"A Messenger's Errand", finance:'The Prophecy of Wealth', promo:"A Herald's Proclamation", newsletter:"The Chronicler's Scroll" }[t] || 'A Tale Untold')
 const gods = ['Zeus', 'Hera', 'Apollo', 'Athena', 'Poseidon', 'Ares', 'Artemis', 'Hermes', 'Hephaestus']
 const toGodName = (name) => gods[name.length % gods.length]
 
@@ -59,7 +59,7 @@ export default function MythologyLayout({ onSwitchPersona }) {
                 {e.subject}
               </div>
               <div className="text-xs italic opacity-60">
-                Sent by {toGodName(e.from)}, God of {e.tag === 'work' ? 'Commerce' : e.tag === 'personal' ? 'Kinship' : 'Fortune'} · {e.date}
+                Sent by {toGodName(e.from.name)}, God of {e.tag === 'work' ? 'Commerce' : e.tag === 'personal' ? 'Kinship' : 'Fortune'} · {e.date}
               </div>
             </div>
           ))}
@@ -75,7 +75,7 @@ export default function MythologyLayout({ onSwitchPersona }) {
                   {selectedEmail.subject}
                 </h2>
                 <div className="text-sm italic opacity-70">
-                  Bearing the seal of {toGodName(selectedEmail.from)}, dispatched on {selectedEmail.date}
+                  Bearing the seal of {toGodName(selectedEmail.from.name)}, dispatched on {selectedEmail.date}
                 </div>
               </div>
 
@@ -117,9 +117,9 @@ export default function MythologyLayout({ onSwitchPersona }) {
             <div className="text-xs tracking-widest mb-2 opacity-60">⚡ THE ORACLE SPEAKS</div>
             <div className="text-4xl mb-2">{weather.icon}</div>
             <div className="font-bold" style={{ fontFamily: 'var(--font-display)' }}>{weather.condition}</div>
-            <div className="text-xs opacity-60 mt-1">{weather.temperature}° · Winds of {weather.windSpeed}</div>
+            <div className="text-xs opacity-60 mt-1">{weather.temp}° · Winds of {weather.wind}</div>
             <div className="text-xs italic opacity-50 mt-2 leading-relaxed">
-              "The Fates decree: {weather.description}"
+              "The Fates decree: {weather.condition}"
             </div>
           </div>
 
@@ -127,10 +127,10 @@ export default function MythologyLayout({ onSwitchPersona }) {
           <div className="border rounded p-4" style={{ borderColor: 'var(--border)' }}>
             <div className="text-xs tracking-widest mb-2 opacity-60 text-center">THE FATE OF KINGDOMS</div>
             {stocks.map(s => (
-              <div key={s.symbol} className="flex justify-between py-1.5 border-b text-sm" style={{ borderColor: 'var(--border)' }}>
+              <div key={s.ticker} className="flex justify-between py-1.5 border-b text-sm" style={{ borderColor: 'var(--border)' }}>
                 <span className="italic opacity-80">{s.name.split(' ')[0]}</span>
-                <span style={{ color: s.change >= 0 ? '#80c840' : '#c84040' }}>
-                  {s.change >= 0 ? '↑' : '↓'} {Math.abs(s.change)}%
+                <span style={{ color: s.changePct >= 0 ? '#80c840' : '#c84040' }}>
+                  {s.changePct >= 0 ? '↑' : '↓'} {Math.abs(s.changePct)}%
                 </span>
               </div>
             ))}

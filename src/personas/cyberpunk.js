@@ -19,6 +19,7 @@ const cyberpunk = {
     '--font-main': "'Share Tech Mono', monospace",
     '--font-display': "'Orbitron', sans-serif",
   },
+  emailSelectionInModal: true,
   Layout: CyberpunkHackerLayout,
 }
 

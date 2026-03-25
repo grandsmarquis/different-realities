@@ -18,6 +18,7 @@ const teenager = {
     '--font-main': "'Rajdhani', sans-serif",
     '--font-display': "'Bebas Neue', cursive",
   },
+  emailSelectionInModal: true,
   Layout: TeenagerLayout,
 }
 

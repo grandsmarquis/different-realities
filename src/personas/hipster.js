@@ -18,6 +18,8 @@ const hipster = {
     '--font-main': "'DM Sans', sans-serif",
     '--font-display': "'DM Sans', sans-serif",
   },
+  // Full-page editorial view replaces inbox when an email is open
+  emailSelectionInModal: true,
   Layout: HipsterLayout,
 }
 

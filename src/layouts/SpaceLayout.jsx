@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
-import emails from '../data/emails'
-import weather from '../data/weather'
-import news from '../data/news'
-import stocks from '../data/stocks'
+import { emails } from '../data/emails'
+import { weather } from '../data/weather'
+import { news } from '../data/news'
+import { stocks } from '../data/stocks'
 import { LineChart, Line, ResponsiveContainer } from 'recharts'
 
 const Panel = ({ title, children, className = '' }) => (
@@ -86,7 +86,7 @@ export default function SpaceLayout({ onSwitchPersona }) {
                   <span className="w-4 text-center opacity-50">{e.read ? '▪' : '▶'}</span>
                   <div className="min-w-0">
                     <div className="font-bold truncate" style={{ color: e.read ? 'var(--text2)' : 'var(--accent2)' }}>
-                      {e.from.split(' ')[0].toUpperCase()}
+                      {e.from.name.split(' ')[0].toUpperCase()}
                     </div>
                     <div className="truncate opacity-70">{e.subject}</div>
                     <div className="opacity-40 truncate">{e.preview}</div>
@@ -98,11 +98,11 @@ export default function SpaceLayout({ onSwitchPersona }) {
         </Panel>
 
         {/* MAIN DISPLAY */}
-        <Panel title={selectedEmail ? `COMMS_DECRYPT :: ${selectedEmail.from.toUpperCase()}` : 'MAIN DISPLAY — SELECT COMMS'} className="row-span-2">
+        <Panel title={selectedEmail ? `COMMS_DECRYPT :: ${selectedEmail.from.name.toUpperCase()}` : 'MAIN DISPLAY — SELECT COMMS'} className="row-span-2">
           {selectedEmail ? (
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-1 text-xs">
-                {[['ORIGIN', selectedEmail.from], ['DATE', selectedEmail.date], ['TAG', selectedEmail.tag], ['STATUS', selectedEmail.read ? 'READ' : 'UNREAD']].map(([k,v]) => (
+                {[['ORIGIN', selectedEmail.from.name], ['DATE', selectedEmail.date], ['TAG', selectedEmail.tag], ['STATUS', selectedEmail.read ? 'READ' : 'UNREAD']].map(([k,v]) => (
                   <div key={k} className="border px-2 py-1" style={{ borderColor: 'var(--border)' }}>
                     <div className="opacity-50 mb-0.5">{k}</div>
                     <div style={{ color: 'var(--accent2)' }}>{v}</div>
@@ -131,9 +131,9 @@ export default function SpaceLayout({ onSwitchPersona }) {
         <Panel title="ATMOSPHERIC TELEMETRY">
           <div className="grid grid-cols-2 gap-2">
             {[
-              ['TEMP', `${weather.temperature}°C`, 'var(--accent2)'],
+              ['TEMP', `${weather.temp}°C`, 'var(--accent2)'],
               ['HUM', `${weather.humidity}%`, 'var(--accent)'],
-              ['WIND', `${weather.windSpeed}kph`, 'var(--accent3)'],
+              ['WIND', `${weather.wind}kph`, 'var(--accent3)'],
               ['VIS', weather.condition, 'var(--text)'],
             ].map(([k,v,c]) => (
               <div key={k} className="border p-2 text-center" style={{ borderColor: 'var(--border)' }}>
@@ -161,17 +161,17 @@ export default function SpaceLayout({ onSwitchPersona }) {
           </div>
           <div className="mt-2 space-y-1">
             {stocks.map(s => (
-              <div key={s.symbol} className="flex items-center gap-2 py-1 border-b" style={{ borderColor: 'var(--border)' }}>
-                <span className="font-bold w-12" style={{ color: 'var(--accent)', fontFamily: 'var(--font-display)' }}>{s.symbol}</span>
+              <div key={s.ticker} className="flex items-center gap-2 py-1 border-b" style={{ borderColor: 'var(--border)' }}>
+                <span className="font-bold w-12" style={{ color: 'var(--accent)', fontFamily: 'var(--font-display)' }}>{s.ticker}</span>
                 <div className="flex-1 h-6">
                   <ResponsiveContainer width="100%" height="100%" debounce={50}>
-                    <LineChart data={s.sparkline.map((v,i) => ({ v, i }))}>
-                      <Line dataKey="v" dot={false} stroke={s.change >= 0 ? 'var(--accent3)' : '#ff4444'} strokeWidth={1.5} isAnimationActive={false} />
+                    <LineChart data={s.series.map((v,i) => ({ v, i }))}>
+                      <Line dataKey="v" dot={false} stroke={s.changePct >= 0 ? 'var(--accent3)' : '#ff4444'} strokeWidth={1.5} isAnimationActive={false} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
-                <span className="w-10 text-right" style={{ color: s.change >= 0 ? 'var(--accent3)' : '#ff4444' }}>
-                  {s.change >= 0 ? '+' : ''}{s.change}%
+                <span className="w-10 text-right" style={{ color: s.changePct >= 0 ? 'var(--accent3)' : '#ff4444' }}>
+                  {s.changePct >= 0 ? '+' : ''}{s.changePct}%
                 </span>
               </div>
             ))}

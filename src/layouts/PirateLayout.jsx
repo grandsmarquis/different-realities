@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
-import emails from '../data/emails'
-import weather from '../data/weather'
-import news from '../data/news'
-import stocks from '../data/stocks'
+import { emails } from '../data/emails'
+import { weather } from '../data/weather'
+import { news } from '../data/news'
+import { stocks } from '../data/stocks'
 
 const CompassRose = () => (
   <div className="absolute top-4 right-4 w-20 h-20 opacity-20 select-none pointer-events-none" style={{ color: 'var(--accent)' }}>
@@ -34,7 +34,7 @@ export default function PirateLayout({ onSwitchPersona }) {
           S.S. ELECTRONIC CORRESPONDENCE
         </h1>
         <div className="text-sm italic opacity-70 mt-1">
-          Lat: {weather.temperature}°N · Wind: {weather.windSpeed}kts {weather.windDirection} · Condition: {weather.condition}
+          Lat: {weather.temp}°N · Wind: {weather.wind}kts {'NW'} · Condition: {weather.condition}
         </div>
         <button onClick={onSwitchPersona} className="absolute bottom-4 left-8 text-xs italic opacity-60 hover:opacity-100">
           ⚓ Change Course
@@ -62,7 +62,7 @@ export default function PirateLayout({ onSwitchPersona }) {
               </div>
               <div className="text-xs opacity-60 mb-0.5" style={{ color: 'var(--accent)' }}>{tagLabel(e.tag)}</div>
               <div className="font-bold text-sm truncate" style={{ color: e.read ? 'var(--text2)' : 'var(--text)' }}>{e.subject}</div>
-              <div className="text-xs italic opacity-60 truncate">From {e.from}</div>
+              <div className="text-xs italic opacity-60 truncate">From {e.from.name}</div>
             </div>
           ))}
         </div>
@@ -81,7 +81,7 @@ export default function PirateLayout({ onSwitchPersona }) {
                   <div className="text-xs opacity-50 mb-1">— {tagLabel(selectedEmail.tag)} —</div>
                   <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>{selectedEmail.subject}</h2>
                   <div className="text-sm italic opacity-70 mt-1">
-                    Received from {selectedEmail.from} · {selectedEmail.date}
+                    Received from {selectedEmail.from.name} · {selectedEmail.date}
                   </div>
                 </div>
                 <p className="leading-relaxed italic">{selectedEmail.body}</p>
@@ -113,8 +113,8 @@ export default function PirateLayout({ onSwitchPersona }) {
             </div>
             <div className="text-2xl text-center mb-1">{weather.icon}</div>
             <div className="text-center text-sm font-bold">{weather.condition}</div>
-            <div className="text-xs opacity-70 text-center">{weather.temperature}° · {weather.windSpeed}kts</div>
-            <div className="text-xs italic opacity-50 mt-1 text-center">"{weather.description}"</div>
+            <div className="text-xs opacity-70 text-center">{weather.temp}° · {weather.wind}kts</div>
+            <div className="text-xs italic opacity-50 mt-1 text-center">"{weather.condition}"</div>
           </div>
 
           {/* Plunder ledger */}
@@ -123,10 +123,10 @@ export default function PirateLayout({ onSwitchPersona }) {
               💰 PLUNDER LEDGER
             </div>
             {stocks.map(s => (
-              <div key={s.symbol} className="flex justify-between py-1 text-xs border-b" style={{ borderColor: 'var(--border)' }}>
-                <span className="italic">{s.symbol}</span>
-                <span style={{ color: s.change >= 0 ? 'var(--accent3)' : 'var(--accent)' }}>
-                  {s.change >= 0 ? '▲' : '▼'} {Math.abs(s.change)}%
+              <div key={s.ticker} className="flex justify-between py-1 text-xs border-b" style={{ borderColor: 'var(--border)' }}>
+                <span className="italic">{s.ticker}</span>
+                <span style={{ color: s.changePct >= 0 ? 'var(--accent3)' : 'var(--accent)' }}>
+                  {s.changePct >= 0 ? '▲' : '▼'} {Math.abs(s.changePct)}%
                 </span>
               </div>
             ))}

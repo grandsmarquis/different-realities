@@ -18,6 +18,8 @@ const zen = {
     '--font-main': "'Noto Serif', serif",
     '--font-display': "'Noto Serif JP', serif",
   },
+  // Full-page reading mode: inbox list hidden while an email is selected
+  emailSelectionInModal: true,
   Layout: ZenMonkLayout,
 }
 

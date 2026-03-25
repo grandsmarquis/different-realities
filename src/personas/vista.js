@@ -19,6 +19,7 @@ const vista = {
     '--font-main': "'Nunito', 'Segoe UI', sans-serif",
     '--font-display': "'Nunito', 'Segoe UI', sans-serif",
   },
+  emailSelectionInModal: true,
   Layout: VistaLayout,
 }
 

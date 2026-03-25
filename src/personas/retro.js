@@ -18,6 +18,7 @@ const retro = {
     '--font-main': "'VT323', monospace",
     '--font-display': "'Press Start 2P', monospace",
   },
+  emailSelectionInModal: true,
   Layout: RetroInternetLayout,
 }
 

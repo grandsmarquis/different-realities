@@ -20,6 +20,7 @@ const kawaii = {
     '--font-main': "'Nunito', sans-serif",
     '--font-display': "'Zen Maru Gothic', sans-serif",
   },
+  emailSelectionInModal: true,
   Layout: KawaiiLayout,
 }
 

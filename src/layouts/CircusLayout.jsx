@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
-import emails from '../data/emails'
-import weather from '../data/weather'
-import news from '../data/news'
-import stocks from '../data/stocks'
+import { emails } from '../data/emails'
+import { weather } from '../data/weather'
+import { news } from '../data/news'
+import { stocks } from '../data/stocks'
 
 const actNum = n => ['I','II','III','IV','V','VI','VII','VIII','IX','X'][n] || String(n+1)
 const tagAct = t => ({ work:'THE OFFICE ACT', personal:'A PERSONAL AFFAIR', finance:'THE MONEY TRICK', promo:'THE GRAND ADVERTISEMENT', newsletter:'THE WEEKLY CHRONICLE' }[t] || 'THE UNKNOWN ACT')
@@ -65,7 +65,7 @@ export default function CircusLayout({ onSwitchPersona }) {
                 </div>
                 <div className="font-bold text-sm truncate" style={{ color: e.read ? '#7a5020' : '#ffd700' }}>{e.subject}</div>
                 <div className="text-xs opacity-50 italic mt-0.5">{tagAct(e.tag)}</div>
-                <div className="text-xs opacity-40">{e.from} · {e.date}</div>
+                <div className="text-xs opacity-40">{e.from.name} · {e.date}</div>
               </div>
             </Spotlight>
           ))}
@@ -81,12 +81,12 @@ export default function CircusLayout({ onSwitchPersona }) {
                 <h2 className="text-3xl font-bold mb-1" style={{ fontFamily: 'var(--font-display)', color: '#ffd700' }}>
                   {selectedEmail.subject}
                 </h2>
-                <div className="text-sm italic opacity-70">{tagAct(selectedEmail.tag)} · Featuring: {selectedEmail.from}</div>
+                <div className="text-sm italic opacity-70">{tagAct(selectedEmail.tag)} · Featuring: {selectedEmail.from.name}</div>
               </div>
               {/* Performance content */}
               <div className="max-w-2xl mx-auto border-2 rounded-lg p-6" style={{ borderColor: '#5c2020', background: '#120606' }}>
                 <div className="grid grid-cols-3 gap-3 mb-4 text-xs text-center">
-                  {[['PERFORMER', selectedEmail.from], ['DATE', selectedEmail.date], ['CATEGORY', selectedEmail.tag]].map(([k,v]) => (
+                  {[['PERFORMER', selectedEmail.from.name], ['DATE', selectedEmail.date], ['CATEGORY', selectedEmail.tag]].map(([k,v]) => (
                     <div key={k} className="border rounded p-2" style={{ borderColor: '#5c2020' }}>
                       <div className="opacity-50 mb-1">{k}</div>
                       <div style={{ color: '#cc0000' }} className="font-bold truncate">{v}</div>
@@ -119,17 +119,17 @@ export default function CircusLayout({ onSwitchPersona }) {
             <div className="text-xs tracking-widest mb-2 opacity-60">SHOW CONDITIONS</div>
             <div className="text-3xl mb-1">{weather.icon}</div>
             <div className="font-bold text-sm">{weather.condition}</div>
-            <div className="text-xs opacity-60">{weather.temperature}° · Wind {weather.windSpeed}kph</div>
+            <div className="text-xs opacity-60">{weather.temp}° · Wind {weather.wind}kph</div>
           </div>
 
           {/* Stocks as "box office" */}
           <div className="border rounded p-3" style={{ borderColor: '#5c2020' }}>
             <div className="text-xs tracking-widest mb-2 opacity-60 text-center">🎟 BOX OFFICE</div>
             {stocks.map(s => (
-              <div key={s.symbol} className="flex justify-between py-1 text-xs border-b" style={{ borderColor: '#2a0a0a' }}>
-                <span className="italic opacity-80">{s.symbol}</span>
-                <span className="font-bold" style={{ color: s.change >= 0 ? '#00ff88' : '#ff4444' }}>
-                  {s.change >= 0 ? '▲' : '▼'}{Math.abs(s.change)}%
+              <div key={s.ticker} className="flex justify-between py-1 text-xs border-b" style={{ borderColor: '#2a0a0a' }}>
+                <span className="italic opacity-80">{s.ticker}</span>
+                <span className="font-bold" style={{ color: s.changePct >= 0 ? '#00ff88' : '#ff4444' }}>
+                  {s.changePct >= 0 ? '▲' : '▼'}{Math.abs(s.changePct)}%
                 </span>
               </div>
             ))}

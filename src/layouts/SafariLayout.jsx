@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
-import emails from '../data/emails'
-import weather from '../data/weather'
-import news from '../data/news'
-import stocks from '../data/stocks'
+import { emails } from '../data/emails'
+import { weather } from '../data/weather'
+import { news } from '../data/news'
+import { stocks } from '../data/stocks'
 
 const tagSpecies = t => ({ work: 'ADMINISTRATIVE SPECIES', personal: 'PERSONAL CONTACT', finance: 'FINANCIAL PREDATOR', promo: 'COMMERCIAL INTRUSION', newsletter: 'PERIODICAL MIGRATION' }[t] || t)
 const urgency = e => e.read ? 'LOW' : 'HIGH'
@@ -35,7 +35,7 @@ export default function SafariLayout({ onSwitchPersona }) {
               INBOX WATCH REPORT
             </h1>
             <div className="text-xs opacity-80 mt-1" style={{ color: '#c8e098' }}>
-              {weather.condition} · {weather.temperature}°C · Vis: Excellent · Guide: G. Safari
+              {weather.condition} · {weather.temp}°C · Vis: Excellent · Guide: G. Safari
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -66,7 +66,7 @@ export default function SafariLayout({ onSwitchPersona }) {
                 <span className="text-xs opacity-50">{e.date}</span>
               </div>
               <div className="font-bold text-sm truncate" style={{ color: 'var(--text)' }}>{e.subject}</div>
-              <div className="text-xs opacity-60 mt-0.5">{tagSpecies(e.tag)} · From: {e.from}</div>
+              <div className="text-xs opacity-60 mt-0.5">{tagSpecies(e.tag)} · From: {e.from.name}</div>
               <div className="text-xs italic opacity-40 truncate mt-0.5">{e.preview}</div>
             </div>
           ))}
@@ -96,7 +96,7 @@ export default function SafariLayout({ onSwitchPersona }) {
                 <div className="p-5">
                   {/* Metadata grid */}
                   <div className="grid grid-cols-2 gap-3 mb-4 text-xs">
-                    {[['SUBJECT ID', selectedEmail.from], ['DATE/TIME', selectedEmail.date], ['SPECIES', tagSpecies(selectedEmail.tag)], ['STATUS', selectedEmail.read ? 'Previously Sighted' : 'First Contact']].map(([k,v]) => (
+                    {[['SUBJECT ID', selectedEmail.from.name], ['DATE/TIME', selectedEmail.date], ['SPECIES', tagSpecies(selectedEmail.tag)], ['STATUS', selectedEmail.read ? 'Previously Sighted' : 'First Contact']].map(([k,v]) => (
                       <div key={k} className="border rounded p-2" style={{ borderColor: 'var(--border)', background: 'var(--bg2)' }}>
                         <div className="font-bold opacity-50 mb-0.5">{k}</div>
                         <div>{v}</div>
@@ -132,9 +132,9 @@ export default function SafariLayout({ onSwitchPersona }) {
             <div className="font-bold text-xs mb-2 tracking-wider" style={{ color: 'var(--accent)' }}>⚠ FIELD CONDITIONS</div>
             <div className="text-3xl text-center mb-1">{weather.icon}</div>
             <div className="text-center font-bold text-sm">{weather.condition}</div>
-            <div className="text-xs opacity-60 text-center">{weather.temperature}°C · Humidity {weather.humidity}%</div>
-            <div className="text-xs opacity-60 text-center">Wind: {weather.windSpeed}kph {weather.windDirection}</div>
-            <div className="mt-2 text-xs italic opacity-50 text-center leading-tight">{weather.description}</div>
+            <div className="text-xs opacity-60 text-center">{weather.temp}°C · Humidity {weather.humidity}%</div>
+            <div className="text-xs opacity-60 text-center">Wind: {weather.wind}kph {'NW'}</div>
+            <div className="mt-2 text-xs italic opacity-50 text-center leading-tight">{weather.condition}</div>
           </div>
 
           {/* News as civilisation dispatches */}
@@ -152,9 +152,9 @@ export default function SafariLayout({ onSwitchPersona }) {
           <div className="border rounded p-3" style={{ borderColor: 'var(--border)' }}>
             <div className="font-bold text-xs mb-2 tracking-wider opacity-60">SUPPLY COSTS</div>
             {stocks.map(s => (
-              <div key={s.symbol} className="flex justify-between text-xs py-0.5">
-                <span className="opacity-70">{s.symbol}</span>
-                <span style={{ color: s.change >= 0 ? 'var(--accent2)' : '#cc4400' }}>{s.change >= 0 ? '+' : ''}{s.change}%</span>
+              <div key={s.ticker} className="flex justify-between text-xs py-0.5">
+                <span className="opacity-70">{s.ticker}</span>
+                <span style={{ color: s.changePct >= 0 ? 'var(--accent2)' : '#cc4400' }}>{s.changePct >= 0 ? '+' : ''}{s.changePct}%</span>
               </div>
             ))}
           </div>

@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
-import emails from '../data/emails'
-import weather from '../data/weather'
-import news from '../data/news'
-import stocks from '../data/stocks'
+import { emails } from '../data/emails'
+import { weather } from '../data/weather'
+import { news } from '../data/news'
+import { stocks } from '../data/stocks'
 
 const Corner = ({ pos }) => {
   const base = 'absolute w-12 h-12 pointer-events-none'
@@ -57,7 +57,7 @@ export default function MedievalLayout({ onSwitchPersona }) {
                 <div className="text-center border-b pb-3 mb-4" style={{ borderColor: 'var(--border)' }}>
                   <div className="text-xs tracking-widest opacity-60 mb-1">— {tagLabel(selectedEmail.tag)} —</div>
                   <h2 className="text-xl font-bold" style={{ fontFamily: 'var(--font-display)', color: 'var(--accent)' }}>{selectedEmail.subject}</h2>
-                  <div className="text-sm italic opacity-70 mt-1">From: {selectedEmail.from} · {selectedEmail.date}</div>
+                  <div className="text-sm italic opacity-70 mt-1">From: {selectedEmail.from.name} · {selectedEmail.date}</div>
                 </div>
                 <p className="leading-relaxed text-sm">
                   <DropCap char={selectedEmail.body[0]} />
@@ -84,7 +84,7 @@ export default function MedievalLayout({ onSwitchPersona }) {
                     <div className="font-bold mb-1" style={{ fontFamily: 'var(--font-display)', color: e.read ? 'var(--text2)' : 'var(--text)' }}>
                       {e.subject}
                     </div>
-                    <div className="text-sm italic opacity-60">By the hand of {e.from} · {e.preview}</div>
+                    <div className="text-sm italic opacity-60">By the hand of {e.from.name} · {e.preview}</div>
                   </div>
                 ))}
               </div>
@@ -98,9 +98,9 @@ export default function MedievalLayout({ onSwitchPersona }) {
               <div className="text-xs tracking-widest opacity-60 text-center mb-2">✦ CELESTIAL OBSERVATIONS ✦</div>
               <div className="text-center text-3xl mb-2">{weather.icon}</div>
               <div className="text-center font-bold" style={{ fontFamily: 'var(--font-display)' }}>{weather.condition}</div>
-              <div className="text-center text-sm opacity-70">{weather.temperature}° · Wind from the {weather.windDirection}</div>
+              <div className="text-center text-sm opacity-70">{weather.temp}° · Wind from the {'NW'}</div>
               <div className="text-xs italic opacity-50 mt-2 text-center leading-relaxed">
-                "The heavens speak in {weather.condition.toLowerCase()}, and the wind bringeth {weather.windSpeed} leagues of measure."
+                "The heavens speak in {weather.condition.toLowerCase()}, and the wind bringeth {weather.wind} leagues of measure."
               </div>
             </div>
 
@@ -108,10 +108,10 @@ export default function MedievalLayout({ onSwitchPersona }) {
             <div className="border-2 p-4 rounded" style={{ borderColor: 'var(--border)', background: 'var(--card)' }}>
               <div className="text-xs tracking-widest opacity-60 text-center mb-2">✦ MARKET OF WARES ✦</div>
               {stocks.map(s => (
-                <div key={s.symbol} className="flex justify-between py-1 border-b text-sm" style={{ borderColor: 'var(--border)' }}>
+                <div key={s.ticker} className="flex justify-between py-1 border-b text-sm" style={{ borderColor: 'var(--border)' }}>
                   <span className="italic">{s.name.split(' ')[0]} Guild</span>
-                  <span style={{ color: s.change >= 0 ? 'var(--accent3)' : 'var(--accent)' }} className="font-bold">
-                    {s.change >= 0 ? '↑' : '↓'} {Math.abs(s.change)}%
+                  <span style={{ color: s.changePct >= 0 ? 'var(--accent3)' : 'var(--accent)' }} className="font-bold">
+                    {s.changePct >= 0 ? '↑' : '↓'} {Math.abs(s.changePct)}%
                   </span>
                 </div>
               ))}

@@ -20,6 +20,7 @@ const casino = {
     '--font-main': "'Oswald', sans-serif",
     '--font-display': "'Limelight', cursive",
   },
+  emailSelectionInModal: true,
   Layout: CasinoLayout,
 }
 

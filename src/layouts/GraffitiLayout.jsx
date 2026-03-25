@@ -1,9 +1,9 @@
 import { useContext, useState } from 'react'
 import { PersonaContext } from '../context/PersonaContext'
-import emails from '../data/emails'
-import weather from '../data/weather'
-import news from '../data/news'
-import stocks from '../data/stocks'
+import { emails } from '../data/emails'
+import { weather } from '../data/weather'
+import { news } from '../data/news'
+import { stocks } from '../data/stocks'
 
 const tagColor = t => ({ work: '#00d4ff', personal: '#ff2d55', finance: '#ffe033', promo: '#00ff88', newsletter: '#ff6600' }[t] || '#ffffff')
 
@@ -74,7 +74,7 @@ export default function GraffitiLayout({ onSwitchPersona }) {
               <div className="font-bold text-sm truncate" style={{ color: tagColor(e.tag), fontFamily: 'var(--font-display)' }}>
                 {e.subject}
               </div>
-              <div className="text-xs opacity-50 truncate mt-0.5" style={{ color: '#aaa' }}>{e.from} · {e.date}</div>
+              <div className="text-xs opacity-50 truncate mt-0.5" style={{ color: '#aaa' }}>{e.from.name} · {e.date}</div>
             </div>
           ))}
         </div>
@@ -91,7 +91,7 @@ export default function GraffitiLayout({ onSwitchPersona }) {
               <div className="mb-4 pb-4 border-b" style={{ borderColor: '#333' }}>
                 <SprayText size="text-3xl" color={tagColor(selectedEmail.tag)}>{selectedEmail.subject}</SprayText>
                 <div className="mt-1 text-xs opacity-60" style={{ color: '#aaa', fontFamily: 'var(--font-main)' }}>
-                  FROM: {selectedEmail.from.toUpperCase()} · {selectedEmail.date} · {selectedEmail.tag.toUpperCase()}
+                  FROM: {selectedEmail.from.name.toUpperCase()} · {selectedEmail.date} · {selectedEmail.tag.toUpperCase()}
                 </div>
               </div>
               <p className="text-sm leading-relaxed" style={{ color: '#ddd', fontFamily: 'var(--font-main)' }}>
@@ -114,17 +114,17 @@ export default function GraffitiLayout({ onSwitchPersona }) {
           <div className="p-3 rounded-xl" style={{ background: '#ffe033', transform: 'rotate(-2deg)' }}>
             <div className="font-bold text-xs" style={{ color: '#000', fontFamily: 'var(--font-display)' }}>WEATHER</div>
             <div className="text-2xl text-center">{weather.icon}</div>
-            <div className="text-xs text-center font-bold" style={{ color: '#000' }}>{weather.temperature}° {weather.condition}</div>
-            <div className="text-xs text-center opacity-60" style={{ color: '#000' }}>{weather.windSpeed}kph</div>
+            <div className="text-xs text-center font-bold" style={{ color: '#000' }}>{weather.temp}° {weather.condition}</div>
+            <div className="text-xs text-center opacity-60" style={{ color: '#000' }}>{weather.wind}kph</div>
           </div>
 
           {/* Stocks sticker */}
           <div className="p-3 rounded-xl" style={{ background: '#ff2d55', transform: 'rotate(1.5deg)' }}>
             <div className="font-bold text-xs mb-1" style={{ color: '#fff', fontFamily: 'var(--font-display)' }}>THE HUSTLE</div>
             {stocks.slice(0,3).map(s => (
-              <div key={s.symbol} className="flex justify-between text-xs" style={{ color: '#fff' }}>
-                <span>{s.symbol}</span>
-                <span className="font-bold">{s.change > 0 ? '▲' : '▼'}{Math.abs(s.change)}%</span>
+              <div key={s.ticker} className="flex justify-between text-xs" style={{ color: '#fff' }}>
+                <span>{s.ticker}</span>
+                <span className="font-bold">{s.changePct > 0 ? '▲' : '▼'}{Math.abs(s.changePct)}%</span>
               </div>
             ))}
           </div>
